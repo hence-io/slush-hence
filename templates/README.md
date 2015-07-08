@@ -1,0 +1,3 @@
+# Hence Component
+## <%= compFullname %>
+<%= compDescription %>

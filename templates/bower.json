@@ -1,0 +1,28 @@
+{
+  "name": "<%= compName %>",
+  "version": "<%=compVersion %>",
+  "authors": [
+    "<%= authorName %> <%= authorEmail %>"
+  ],
+  "description": "<%= compDescription %>",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer"
+  ],
+  "main": "<%= compFullname %>.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/<%= userName %>/seed-element/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
