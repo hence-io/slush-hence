@@ -17,7 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../comp/<%= compName %>.html">
+    <link rel="import" href="../src/<%= compName %>.html">
   </head>
   <body>
 
@@ -35,9 +35,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
 
         test('says hello', function() {
-          assert.equal(myEl.sayHello(), '<%= compName %> says, Hello World!');
+          assert.equal(component.sayHello(), '<%= compName %> says, Hello World!');
 
-          var greetings = myEl.sayHello('greetings Earthlings');
+          var greetings = component.sayHello('greetings Earthlings');
           assert.equal(greetings, '<%= compName %> says, greetings Earthlings');
         });
 

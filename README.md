@@ -2,7 +2,6 @@
 
 > 
 
-
 ## Getting Started
 
 Install `slush-hence-comp` globally:
@@ -13,16 +12,10 @@ $ npm install -g slush-hence-comp
 
 ### Usage
 
-Create a new folder for your project:
+Run the generator, and it will create a new folder with you component's full name '[prefix]-[type]-[name]' i.e. 'hence-comp-model-user'
 
 ```bash
-$ mkdir my-slush-hence-comp
-```
-
-Run the generator from within the new folder:
-
-```bash
-$ cd my-slush-hence-comp && slush hence-comp
+$ slush hence-comp 
 ```
 
 ## Getting To Know Slush

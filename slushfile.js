@@ -13,7 +13,7 @@ var gulp     = require('gulp'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
     rename   = require('gulp-rename'),
-    _        = require('underscore.string'),
+    S        = require('string'),
     inquirer = require('inquirer'),
     path     = require('path');
 
@@ -49,16 +49,23 @@ var defaults = (function () {
 
   return {
     currentDir: workingDirName,
+    compPrefix: 'hence-comp',
     compName: 'new-el',
     userName: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
-    compTypes: ['schema', 'model', 'ui', 'service']
+    compTypes: ['schema', 'model', 'ui', 'service'],
+    compDescription: 'An element providing a starting point for your own reusable Polymer elements.'
   };
 })();
 
 gulp.task('default', function (done) {
   var prompts = [
+    {
+      name: 'compPrefix',
+      message: 'What would you like to prefix the component with?',
+      default: defaults.compPrefix
+    },
     {
       type: 'list',
       name: 'compType',
@@ -67,11 +74,12 @@ gulp.task('default', function (done) {
     },
     {
       name: 'compName',
-      message: 'What is the name of your new component? The final name will be generated as "hence-comp-[type]-[name]"',
+      message: 'What is the name of your new component? The final name will be generated as "[prefix]-[type]-[name]"',
       default: defaults.compName
     }, {
       name: 'compDescription',
-      message: 'What is the description?'
+      message: 'What is the description?',
+      default: defaults.compDescription
     }, {
       name: 'compVersion',
       message: 'What is the version of your project?',
@@ -100,7 +108,8 @@ gulp.task('default', function (done) {
       if (!answers.moveon) {
         return done();
       }
-      answers.compNameSlug = _.slugify(answers.compName);
+      answers.compNameSlug = S(answers.compName).slugify().s;
+
 
       //checkBoolean(answers.doCheck);
 
@@ -108,7 +117,8 @@ gulp.task('default', function (done) {
 
       files.push(__dirname + '/templates/**');
 
-      answers.compFullname = 'hence-comp-' + answers.compType + '-' + answers.compNameSlug;
+      answers.compFullname = [answers.compPrefix, answers.compType,answers.compNameSlug].join('-');
+      answers.compNameCamel = S(answers.compFullname).camelize().s;
       answers.compName = answers.compFullname;
       var destDir = './' + answers.compFullname;
       gulp.src(files)

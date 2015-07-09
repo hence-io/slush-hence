@@ -2,7 +2,7 @@
   "name": "<%= compName %>",
   "version": "<%=compVersion %>",
   "authors": [
-    "<%= authorName %> <%= authorEmail %>"
+    "<%= authorName %> <<%= authorEmail %>>"
   ],
   "description": "<%= compDescription %>",
   "keywords": [
@@ -10,19 +10,17 @@
     "web-components",
     "polymer"
   ],
-  "main": "<%= compFullname %>.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<%= userName %>/seed-element/",
+  "main": "dist/<%= compFullname %>.html",
+  "homepage": "https://github.com/<%= userName %>/<%= compName %>/",
   "ignore": [
     "/.*",
-    "/test/",
-    "/demo/"
+    "/comp/gulp/",
+    "/comp/test/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "*"
   }
 }
