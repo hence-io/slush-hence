@@ -17,7 +17,7 @@ var gulp     = require('gulp'),
     inquirer = require('inquirer'),
     path     = require('path');
 
-function format (string) {
+function format(string) {
   var username = string.toLowerCase();
   return username.replace(/\s/g, '');
 }
@@ -55,7 +55,20 @@ var defaults = (function () {
     authorName: user.name || '',
     authorEmail: user.email || '',
     compTypes: ['schema', 'model', 'ui', 'service'],
-    compDescription: 'An element providing a starting point for your own reusable Polymer elements.'
+    compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
+    options: [
+      {name: 'eslint', checked: true},
+      {name: 'jsdocs', checked: true},
+      new inquirer.Separator(),
+      {name: 'scsslint', checked: true},
+      {name: 'sassdocs', checked: true},
+      new inquirer.Separator(),
+      {name: 'karma unit testing', checked: true},
+      {name: 'wct component testing', checked: true},
+      new inquirer.Separator(),
+      {name: 'include editorconfig', checked: true},
+    ],
+    folderOption: ['Make a subfolder "[prefix]-[type]-[name]" for it', 'Create it the current folder']
   };
 })();
 
@@ -63,40 +76,50 @@ gulp.task('default', function (done) {
   var prompts = [
     {
       name: 'compPrefix',
-      message: 'What would you like to prefix the component with?',
+      message: '"[prefix]-[type]-[name]" What would you like to prefix the component with?',
       default: defaults.compPrefix
     },
     {
       type: 'list',
       name: 'compType',
-      message: 'What type of component do you want to create?',
+      message: '"[prefix]-[type]-[name]" What type of component do you want to create?',
       choices: defaults.compTypes,
       default: "ui"
     },
     {
       name: 'compName',
-      message: 'What is the name of your new component? The final name will be generated as "[prefix]-[type]-[name]"',
+      message: '"[prefix]-[type]-[name]" What is the name of your new component?',
       default: defaults.compName
     }, {
       name: 'compDescription',
-      message: 'What is the description?',
+      message: 'Describe your new component:',
       default: defaults.compDescription
     }, {
       name: 'compVersion',
-      message: 'What is the version of your project?',
+      message: 'Starting version of your project?',
       default: '0.1.0'
     }, {
       name: 'authorName',
-      message: 'What is the author name?',
+      message: 'What is your name?',
       default: defaults.authorName
     }, {
       name: 'authorEmail',
-      message: 'What is the author email?',
+      message: 'What is your email?',
       default: defaults.authorEmail
     }, {
       name: 'userName',
-      message: 'What is the github username?',
+      message: 'What is your github username?',
       default: defaults.userName
+    }, {
+      type: 'checkbox',
+      name: 'options',
+      message: 'Select your development options:',
+      choices: defaults.options
+    }, {
+      type: 'list',
+      name: 'folderOption',
+      message: 'Where do you want these files generated?',
+      choices: defaults.folderOption
     }, {
       type: 'confirm',
       name: 'moveon',
@@ -118,10 +141,16 @@ gulp.task('default', function (done) {
 
       files.push(__dirname + '/templates/**');
 
-      answers.compFullname = [answers.compPrefix, answers.compType,answers.compNameSlug].join('-');
+      answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
       answers.compNameCamel = S(answers.compFullname).camelize().s;
       answers.compName = answers.compFullname;
+
       var destDir = './' + answers.compFullname;
+
+      if (answers.folderOption === defaults.folderOption[1]) {
+        destDir = './';
+      }
+
       gulp.src(files)
         .pipe(template(answers))
         .pipe(rename(function (file) {
