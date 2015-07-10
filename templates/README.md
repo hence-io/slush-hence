@@ -24,36 +24,22 @@ Then, go ahead and download the element's dependencies:
 
     npm i && bower i
 
-## Playing With Your Element
+## Available Gulp Commands
 
-### Serving the files
-```gulp``` to serve and watch files, compiling and joining js as es6 modules/browserify with maps, and scss joining with maps. Linting is also done on the fly to ensure you're aware of issues sooner rather than later.
+```$ gulp```
+Will compile assets, serve your web component with live reload, transpile es6, and lint your js/scss all while watching your src files
 
-### Build
-```gulp build``` outputs the compiled needed files to /dist
+```$ gulp build```
+Will compile your component for consumption, exporting it to a /dist folder
 
-### Creating Documentation
-```npm run docs``` generates js/scss documentation from code comments
+```$ gulp test```
+Will execute the wct test tool to perform selenium tests on your web component
 
-### Testing
-```npm run test``` runs karam and executes the unit tests one time
-```npm run test:watch``` runs karam and executes the unit tests on the fly with watchers (both the scr folder and unit tests)
+```$ gulp test:karma```  
+Will execute es6 unit testing on your web component's script files
 
-### web-component-tester
+```$ gulp test:karma-watch```  
+Will execute the karma tests and set a watcher on the component and test script files
 
-The tests are compatible with [web-component-tester](https://github.com/Polymer/web-component-tester).
-Install it via:
-
-    npm install -g web-component-tester
-
-Then, you can run your tests on _all_ of your local browsers via:
-
-    wct
-
-#### WCT Tips
-
-`wct -l chrome` will only run tests in chrome.
-
-`wct -p` will keep the browsers alive after test runs (refresh to re-run).
-
-`wct test/some-file.html` will test only the files you specify.
+### Inspired By
+[https://github.com/alexweber/es6-jspm-gulp-boilerplate](https://github.com/alexweber/es6-jspm-gulp-boilerplate)

@@ -1,4 +1,0 @@
-v<%= compVersion %>:
-  date: 2015-7-7
-  changes:
-    - Initial release.
