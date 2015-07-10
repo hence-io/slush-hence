@@ -15,7 +15,7 @@ All development takes place leveraging the files in the /src & /test folders.
 
 ## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
+Element dependencies are managed via NPM & [Bower](http://bower.io/). You can
 install that via:
 
     npm install -g bower
