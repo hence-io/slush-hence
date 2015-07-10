@@ -1,9 +1,10 @@
 import Component from '../src/index.js';
-var comp;
 
 describe('ES6 component Tests - <%= compName %>', () => {
+  let component;
+
   beforeEach(() => {
-    comp = new Component();
+    component = new Component();
   });
 
   afterEach(() => {
@@ -15,7 +16,7 @@ describe('ES6 component Tests - <%= compName %>', () => {
   });
 
   it('should sayHello', () => {
-    expect(component.sayHello()).to.equal('<%= compName %> says Hello World!');
+    expect(component.sayHello()).to.equal('<%= compName %> says, Hello World!');
   });
 
   it('should have a polymer config', () => {

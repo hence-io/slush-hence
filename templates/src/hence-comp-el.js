@@ -81,7 +81,7 @@ class <%= compNameCamel %> {
    * @return {string} The full greeting.
    */
   sayHello(greeting ='Hello World!') {
-    return '<%= compName %> says ' + greeting;
+    return '<%= compName %> says, ' + greeting;
   }
 
   /*********************************************************************************************************************

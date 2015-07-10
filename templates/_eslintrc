@@ -29,10 +29,7 @@
     "no-throw-literal": 2,
     "no-void": 2,
     "no-undef": 0,
-    "new-cap": {
-      "newIsCap": true,
-      "capIsNew": false
-    },
+    "new-cap": [true,false],
     "wrap-iife": [
       2,
       "inside"

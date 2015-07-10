@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Tue Jul 07 2015 09:35:08 GMT-0400 (EDT)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -16,8 +16,20 @@ module.exports = function(config) {
       'chai-as-promised',
       'sinon-chai'
     ],
+
     plugins: [
-      'karma-browserify'
+      "karma-babel-preprocessor",
+      "karma-browserify",
+      "karma-chai",
+      "karma-chai-as-promised",
+      "karma-chrome-launcher",
+      "karma-firefox-launcher",
+      "karma-mocha",
+      "karma-mocha-reporter",
+      "karma-sinon-chai",
+      "browserify",
+      "babelify",
+      "watchify"
     ],
 
 
@@ -29,8 +41,7 @@ module.exports = function(config) {
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
