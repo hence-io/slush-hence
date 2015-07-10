@@ -1,6 +1,8 @@
 # Hence.io Component Stack
 ## <%= compFullname %>
 
+> 
+
 <%= compDescription %>
 
 ## Using this component

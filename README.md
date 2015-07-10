@@ -1,4 +1,4 @@
-# Slush Hence-comp [![Build Status](https://secure.travis-ci.org/hence-io/slush-hence-comp.png?branch=master)](https://travis-ci.org/Sean/slush-hence-comp) [![NPM version](https://badge-me.herokuapp.com/api/npm/slush-hence-comp.png)](http://badges.enytc.com/for/npm/slush-hence-comp)
+# Slush Hence Comp Generator
 
 > 
 
