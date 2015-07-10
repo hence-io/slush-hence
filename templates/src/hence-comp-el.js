@@ -12,7 +12,7 @@ class <%= compNameCamel %> {
    * Initialize the component
    * @constructor
    */
-  constructor () {
+  constructor() {
     /**
      * <%= compNameCamel %> Properties
      * @type {{greeting: {type: String, value: string}}}
@@ -23,7 +23,7 @@ class <%= compNameCamel %> {
        */
       greeting: {
         type: String,
-        value: "Hello!"
+        value: 'Hello!'
       }
     };
   }
@@ -80,9 +80,8 @@ class <%= compNameCamel %> {
    * @param {string} greeting A positive greeting.
    * @return {string} The full greeting.
    */
-  sayHello(greeting) {
-    let response = greeting || 'Hello World!';
-    return '<%= compName %> says ' + response;
+  sayHello(greeting ='Hello World!') {
+    return '<%= compName %> says ' + greeting;
   }
 
   /*********************************************************************************************************************
@@ -93,8 +92,12 @@ class <%= compNameCamel %> {
    * Snap the component into Polymer
    * @static
    */
-  static PolymerInit() {
-    return Polymer(new <%= compNameCamel %>().polymerOptions());
+  static polymerInit() {
+    let Polymer = window.Polymer || null;
+
+    if (Polymer) {
+      Polymer(new <%= compNameCamel %>().polymerOptions());
+    }
   }
 
   /**
@@ -105,7 +108,7 @@ class <%= compNameCamel %> {
    */
   polymerOptions() {
     return {
-      is: "<%= compName %>",
+      is: '<%= compName %>',
       // The element's properties
       properties: this.properties,
       // Element Lifecycle

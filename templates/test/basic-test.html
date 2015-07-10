@@ -17,21 +17,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../src/<%= compName %>.html">
+    <link rel="import" href="../dist/<%= compName %>.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <<%= compName %>></<%= compName %>>
+    <<%= compName %> greeting="test greeting"></<%= compName %>>
 
     <script>
       var myEl = document.querySelector('<%= compName %>');
 
       suite('<<%= compName %>>', function() {
 
-        test('defines the "author" property', function() {
-          assert.equal(myEl.author.name, 'Dimitri Glazkov');
-          assert.equal(myEl.author.image, 'http://addyosmani.com/blog/wp-content/uploads/2013/04/unicorn.jpg');
+        test('says hello', function() {
+          assert.equal(component.greeting, 'test greeting');
         });
 
         test('says hello', function() {
@@ -39,14 +38,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           var greetings = component.sayHello('greetings Earthlings');
           assert.equal(greetings, '<%= compName %> says, greetings Earthlings');
-        });
-
-        test('fires lasers', function(done) {
-          myEl.addEventListener('<%= compName %>-lasers', function(event) {
-            assert.equal(event.detail.sound, 'Pew pew!');
-            done();
-          });
-          myEl.fireLasers();
         });
 
       });

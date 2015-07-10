@@ -13,10 +13,10 @@ gulp.task('js',['lintjs'], function () {
   return browserify(global.paths.mainjs, {debug: true})
     .transform(babelify)
     .bundle().on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    .pipe(source('<%= compName %>.js'))
+    .pipe(source(global.comp.name+'.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
     //.pipe(uglify())
     .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest(global.paths.tmp + '/js'));
+    .pipe(gulp.dest(global.paths.tmp + 'js'));
 });

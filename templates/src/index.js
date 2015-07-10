@@ -1,5 +1,5 @@
 'use strict';
 
 import <%=compNameCamel%> from './<%= compName %>';
-<%=compNameCamel%>.PolymerInit();
+<%=compNameCamel%>.polymerInit();
 export default <%=compNameCamel%>;

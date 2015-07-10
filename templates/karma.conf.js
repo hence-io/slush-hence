@@ -16,11 +16,14 @@ module.exports = function(config) {
       'chai-as-promised',
       'sinon-chai'
     ],
+    plugins: [
+      'karma-browserify'
+    ],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'src/js/**/*.js',
+      'src/**/*.js',
       'test/**/*.js'
     ],
 

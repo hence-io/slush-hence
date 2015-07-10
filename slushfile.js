@@ -50,7 +50,7 @@ var defaults = (function () {
   return {
     currentDir: workingDirName,
     compPrefix: 'hence-comp',
-    compName: 'new-el',
+    compName: 'sample',
     userName: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
@@ -70,7 +70,8 @@ gulp.task('default', function (done) {
       type: 'list',
       name: 'compType',
       message: 'What type of component do you want to create?',
-      choices: defaults.compTypes
+      choices: defaults.compTypes,
+      default: "ui"
     },
     {
       name: 'compName',

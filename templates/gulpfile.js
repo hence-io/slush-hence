@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var requireDir = require('require-dir');
 
 var srcDir = './src/';
+global.comp = {
+  name: '<%= compName %>'
+};
+
 // Specify paths & globbing patterns for tasks.
 global.paths = {
   // HTML sources.
@@ -21,9 +25,9 @@ global.paths = {
   // Compiled CSS folder.
   'css': srcDir+'css',
   // Distribution folder.
-  'dist': './dist',
+  'dist': './dist/',
   // Temp folder.
-  'tmp': './.tmp'
+  'tmp': './.tmp/'
 };
 
 // Require all tasks in the 'gulp' folder.

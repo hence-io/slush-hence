@@ -5,8 +5,8 @@ var del = require('del');
 
 // Empty the build dir.
 gulp.task('clean', function (done) {
-  del([global.paths.dist + '/*'], done);
+  del([global.paths.dist + '*'], done);
 });
 gulp.task('clean-tmp', function (done) {
-  del([global.paths.tmp + '/*'], done);
+  del([global.paths.tmp + '*'], done);
 });
