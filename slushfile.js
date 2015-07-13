@@ -8,7 +8,8 @@
 
 'use strict';
 
-var gulp     = require('gulp'),
+var _        = require('lodash'),
+    gulp     = require('gulp'),
     install  = require('gulp-install'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
@@ -25,6 +26,16 @@ function format(string) {
 var checkBoolean = function (v) {
   var isTrue = v === true || v === "true" || v === "y" || v === "yes" || v === "Y" || v === "Yes" ? true : false;
   v = isTrue;
+};
+
+var options = {
+  'eslint': 'eslint',
+  'esdoc': 'esdoc',
+  'scsslint': 'scsslint',
+  'sassdocs': 'sassdocs',
+  'karma': 'karma unit testing',
+  'wct': 'wct component testing',
+  'editorconfig': 'include editorconfig'
 };
 
 var defaults = (function () {
@@ -57,16 +68,16 @@ var defaults = (function () {
     compTypes: ['schema', 'model', 'ui', 'service'],
     compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
     options: [
-      {name: 'eslint', checked: true},
-      {name: 'jsdocs', checked: true},
+      {name: options.eslint, checked: true},
+      {name: options.esdoc, checked: true},
       new inquirer.Separator(),
-      {name: 'scsslint', checked: true},
-      {name: 'sassdocs', checked: true},
+      {name: options.scsslint, checked: true},
+      {name: options.sassdocs, checked: true},
       new inquirer.Separator(),
-      {name: 'karma unit testing', checked: true},
-      {name: 'wct component testing', checked: true},
+      {name: options.karma, checked: true},
+      {name: options.wct, checked: true},
       new inquirer.Separator(),
-      {name: 'include editorconfig', checked: true},
+      {name: options.editorconfig, checked: true}
     ],
     folderOption: ['Make a subfolder "[prefix]-[type]-[name]" for it', 'Create it the current folder']
   };
@@ -139,7 +150,7 @@ gulp.task('default', function (done) {
 
       var files = [];
 
-      files.push(__dirname + '/templates/**');
+      files.push(__dirname + '/templates/component/**');
 
       answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
       answers.compNameCamel = S(answers.compFullname).camelize().s;
@@ -150,6 +161,97 @@ gulp.task('default', function (done) {
       if (answers.folderOption === defaults.folderOption[1]) {
         destDir = './';
       }
+
+      console.log(answers.options);
+
+      answers.npmDevPackages = {
+        "babelify": "^6.1.2",
+        "browser-sync": "^2.7.13",
+        "browserify": "^10.2.4",
+        "del": "^1.2.0",
+        "gulp": "^3.9.0",
+        "gulp-autoprefixer": "^2.3.1",
+        "gulp-babel": "^5.1.0",
+        "gulp-cached": "^1.1.0",
+        "gulp-concat": "^2.5.2",
+        "gulp-imagemin": "^2.2.1",
+        "gulp-minify-css": "^1.1.6",
+        "gulp-minify-html": "^1.0.3",
+        "gulp-rename": "^1.2.2",
+        "gulp-replace": "^0.5.3",
+        "gulp-sass": "^2.0.1",
+        "gulp-sourcemaps": "^1.5.2",
+        "gulp-uglify": "^1.2.0",
+        "gulp-util": "^3.0.6",
+        "imagemin-pngquant": "^4.1.0",
+        "require-dir": "^0.3.0",
+        "run-sequence": "^1.1.0",
+        "vinyl-buffer": "^1.0.0",
+        "vinyl-source-stream": "^1.1.0",
+      };
+
+      answers.options.forEach(function (opt) {
+        switch (opt) {
+          case options.eslint:
+            files.push(__dirname + '/templates/_eslintrc');
+            files.push(__dirname + '/templates/_eslintignore');
+            _.extend(answers.npmDevPackages, {
+              "babel-eslint": "^3.1.23",
+              "eslint": "^0.24.0",
+              "gulp-eslint": "^0.13.2",
+            });
+            break;
+          case options.esdoc:
+            files.push(__dirname + '/templates/_esdoc.json');
+            _.extend(answers.npmDevPackages, {
+              "esdoc": "^0.1.2",
+            });
+            break;
+          case options.scsslint:
+            files.push(__dirname + '/templates/_scss-lint.yml');
+            _.extend(answers.npmDevPackages, {
+              "gulp-scss-lint": "^0.2.0",
+            });
+            break;
+          case options.sassdocs:
+            files.push(__dirname + '/templates/_sassdocrc');
+            _.extend(answers.npmDevPackages, {
+              "sassdoc": "^2.1.15"
+            });
+            break;
+          case options.karma:
+            files.push(__dirname + '/templates/karma.conf.js');
+            _.extend(answers.npmDevPackages, {
+              "chai": "^3.0.0",
+              "chai-as-promised": "^5.1.0",
+              "karma": "^0.12.36",
+              "karma-babel-preprocessor": "^5.2.1",
+              "karma-browserify": "^4.2.1",
+              "karma-chai": "^0.1.0",
+              "karma-chai-as-promised": "^0.1.2",
+              "karma-chrome-launcher": "^0.1.12",
+              "karma-firefox-launcher": "^0.1.6",
+              "karma-mocha": "^0.1.10",
+              "karma-mocha-reporter": "^1.0.2",
+              "karma-sinon-chai": "^1.0.0",
+              "mocha": "^2.2.5",
+              "proxyquireify": "^2.1.0",
+              "watchify": "^3.2.3"
+            });
+            break;
+          case options.wct:
+            files.push(__dirname + '/templates/wct.conf.js');
+            _.extend(answers.npmDevPackages, {
+              "web-component-tester": "^3.2.0"
+            });
+            break;
+          case options.editorconfig:
+            files.push(__dirname + '/templates/_editorconfig');
+            break;
+        }
+      });
+
+      answers.npmDevPackages = JSON.stringify(answers.npmDevPackages);
 
       gulp.src(files)
         .pipe(template(answers))
@@ -162,7 +264,7 @@ gulp.task('default', function (done) {
         }))
         .pipe(conflict(destDir))
         .pipe(gulp.dest(destDir))
-        .pipe(install())
+        //.pipe(install())
         .on('end', function () {
           done();
         });
