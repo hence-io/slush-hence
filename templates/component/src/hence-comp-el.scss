@@ -1,5 +1,7 @@
-$dark-blue : #000080;
+<%= compName %> {
+  $dark-blue : #000080;
 
-.greeting {
-  color : $dark-blue;
+  .greeting {
+    color : $dark-blue;
+  }
 }

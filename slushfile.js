@@ -33,6 +33,7 @@ var options = {
   'esdoc': 'esdoc',
   'scsslint': 'scsslint',
   'sassdocs': 'sassdocs',
+  'kss': 'kss style guide',
   'karma': 'karma unit testing',
   'wct': 'wct component testing',
   'editorconfig': 'include editorconfig'
@@ -62,7 +63,7 @@ var defaults = (function () {
     currentDir: workingDirName,
     compPrefix: 'hence-comp',
     compName: 'sample',
-    userName: osUserName || format(user.name || ''),
+    githubUser: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
     compTypes: ['schema', 'model', 'ui', 'service'],
@@ -73,6 +74,7 @@ var defaults = (function () {
       new inquirer.Separator(),
       {name: options.scsslint, checked: true},
       {name: options.sassdocs, checked: true},
+      {name: options.kss, checked: true},
       new inquirer.Separator(),
       {name: options.karma, checked: true},
       {name: options.wct, checked: true},
@@ -118,9 +120,9 @@ gulp.task('default', function (done) {
       message: 'What is your email?',
       default: defaults.authorEmail
     }, {
-      name: 'userName',
+      name: 'githubUser',
       message: 'What is your github username?',
-      default: defaults.userName
+      default: defaults.githubUser
     }, {
       type: 'checkbox',
       name: 'options',
@@ -131,6 +133,10 @@ gulp.task('default', function (done) {
       name: 'folderOption',
       message: 'Where do you want these files generated?',
       choices: defaults.folderOption
+    }, {
+      type: 'confirm',
+      name: 'install',
+      message: 'Auto install npm/bower packages?'
     }, {
       type: 'confirm',
       name: 'moveon',
@@ -162,11 +168,12 @@ gulp.task('default', function (done) {
         destDir = './';
       }
 
-      console.log(answers.options);
+      //console.log(answers.options);
 
       answers.npmDevPackages = {
         "babelify": "^6.1.2",
         "browser-sync": "^2.7.13",
+        "bs-html-injector": "^2.0.4",
         "browserify": "^10.2.4",
         "del": "^1.2.0",
         "gulp": "^3.9.0",
@@ -219,6 +226,12 @@ gulp.task('default', function (done) {
               "sassdoc": "^2.1.15"
             });
             break;
+          case options.kss:
+            files.push(__dirname + '/templates/_sassdocrc');
+            _.extend(answers.npmDevPackages, {
+              "gulp-kss": "^0.0.2"
+            });
+            break;
           case options.karma:
             files.push(__dirname + '/templates/karma.conf.js');
             _.extend(answers.npmDevPackages, {
@@ -253,9 +266,14 @@ gulp.task('default', function (done) {
 
       answers.npmDevPackages = JSON.stringify(answers.npmDevPackages);
 
-      gulp.src(files)
+      var buildPipe = gulp.src(files)
         .pipe(template(answers))
         .pipe(rename(function (file) {
+          //console.log('file: '+JSON.stringify(file));
+          if(file.dirname[0] === '_') {
+            file.dirname = '.' + file.dirname.slice(1);
+          }
+
           if (file.basename[0] === '_') {
             file.basename = '.' + file.basename.slice(1);
           } else if (file.basename.indexOf('hence-comp-el') !== -1) {
@@ -263,10 +281,15 @@ gulp.task('default', function (done) {
           }
         }))
         .pipe(conflict(destDir))
-        .pipe(gulp.dest(destDir))
-        //.pipe(install())
-        .on('end', function () {
-          done();
-        });
+        .pipe(gulp.dest(destDir));
+
+      if (answers.install) {
+        buildPipe.pipe(install());
+      }
+
+      buildPipe.on('end', function () {
+        //execSync('npm install', { stdio: 'inherit' });
+        done();
+      });
     });
 });

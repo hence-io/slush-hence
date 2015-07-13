@@ -21,6 +21,7 @@ var imagemin = require('gulp-imagemin');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
+var gulpkss = require('gulp-kss');
 
 // JS
 var uglify = require('gulp-uglify');
@@ -60,6 +61,12 @@ gulp.task('buildsass', function () {
       suffix: '.min'
     }))
     .pipe(gulp.dest(global.paths.dist + 'css'));
+
+  gulp.src(global.paths.sass)
+    .pipe(gulpkss({
+      overview: global.paths.dist + 'css/styleguide.md'
+    }))
+    .pipe(gulp.dest(global.paths.dist + 'css/styleguide'));
 });
 
 // Build JS for distribution.

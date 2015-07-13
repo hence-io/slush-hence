@@ -1,4 +1,4 @@
-import Component from '../src/index.js';
+import Component from '../../src/index';
 
 describe('ES6 component Tests - <%= compName %>', () => {
   let component;

@@ -13,35 +13,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../dist/<%= compName %>.html">
+    <link rel="import" href="../../dist/<%= compName %>.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
     <<%= compName %> greeting="test greeting"></<%= compName %>>
 
-    <script>
-      var component = document.querySelector('<%= compName %>');
-
-      suite('<<%= compName %>>', function() {
-
-        test('says hello', function() {
-          assert.equal(component.greeting, 'test greeting');
-        });
-
-        test('says hello', function() {
-          assert.equal(component.sayHello(), '<%= compName %> says, Hello World!');
-
-          var greetings = component.sayHello('greetings Earthlings');
-          assert.equal(greetings, '<%= compName %> says, greetings Earthlings');
-        });
-
-      });
-    </script>
+    <script src="basic-test.js"></script>
 
   </body>
 </html>

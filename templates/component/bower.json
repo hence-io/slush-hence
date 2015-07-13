@@ -11,7 +11,7 @@
     "polymer"
   ],
   "main": "dist/<%= compFullname %>.html",
-  "homepage": "https://github.com/<%= userName %>/<%= compName %>/",
+  "homepage": "https://github.com/<%= githubUser %>/<%= compName %>/",
   "ignore": [
     "/.*",
     "/comp/gulp/",

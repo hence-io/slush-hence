@@ -5,6 +5,8 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var path = require('path');
 var util = require('gulp-util');
+var htmlInjector = require("bs-html-injector");
+
 
 // sass
 require('./sass')(browserSync);
@@ -13,6 +15,9 @@ require('./sass')(browserSync);
  * browserSync Tasks
  */
 gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
+  browserSync.use(htmlInjector, {
+    files: global.paths.html
+  });
   browserSync.init({
     server: {
       baseDir: [global.paths.bower, global.paths.tmp]
@@ -26,7 +31,7 @@ gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
 
 gulp.task('sass-watch', ['lintsass','sass']);
 gulp.task('js-watch', ['lintjs','js'], function () { return browserSync.reload(); });
-gulp.task('html-watch', ['html'], function () { return browserSync.reload(); });
+gulp.task('html-watch', ['html'], htmlInjector);
 
 /**
  * browserSync logging
