@@ -6,5 +6,5 @@
 	ignorecase = true
 	precomposeunicode = true
 [github]
-	user = <%= githubUser =>
-	email = <%= authorEmail =>
+	user = <%= githubUser %>
+	email = <%= authorEmail %>
