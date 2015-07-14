@@ -70,6 +70,7 @@ var defaults = (function () {
     authorEmail: user.email || '',
     compTypes: ['schema', 'model', 'ui', 'service'],
     compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
+    cssProcessors: {compass: 'Sass (Compass)', libSass: 'Sass (lib-sass)'},
     options: [
       {name: options.eslint, checked: true},
       {name: options.esdoc, checked: true},
@@ -91,62 +92,67 @@ gulp.task('default', function (done) {
   var prompts = [
     {
       name: 'compPrefix',
-      message: '"[prefix]-[type]-[name]" What would you like to prefix the component with?',
+      message: 'Name: "[prefix]-[type]-[name]" What would you like to prefix the component with?',
       "default": defaults.compPrefix
     },
     {
       type: 'list',
       name: 'compType',
-      message: '"[prefix]-[type]-[name]" What type of component do you want to create?',
+      message: 'Name: "[prefix]-[type]-[name]" What type of component do you want to create?',
       choices: defaults.compTypes,
       "default": "ui"
     },
     {
       name: 'compName',
-      message: '"[prefix]-[type]-[name]" What is the name of your new component?',
+      message: 'Name: "[prefix]-[type]-[name]" What is the name of your new component?',
       "default": defaults.compName
     }, {
       name: 'compDescription',
-      message: 'Describe your new component:',
+      message: 'Details: Describe your new component:',
       "default": defaults.compDescription
     }, {
       name: 'compVersion',
-      message: 'Starting version of your project?',
+      message: 'Details: Starting version of your project?',
       "default": '0.1.0'
     }, {
       name: 'authorName',
-      message: 'What is your name?',
+      message: 'Details: What is your name?',
       "default": defaults.authorName
     }, {
       name: 'authorEmail',
-      message: 'What is your email?',
+      message: 'Details: What is your email?',
       "default": defaults.authorEmail
     }, {
       name: 'githubUser',
-      message: 'What is your github username?',
+      message: 'Git: What is your github username?',
       "default": defaults.githubUser
     }, {
       type: 'confirm',
       name: 'git',
-      message: 'Initialize an empty git repo with your details?'
+      message: 'Git: Initialize an empty git repo with your details?'
+    }, {
+      type: 'list',
+      name: 'cssProcessor',
+      message: 'Configuration: Which css preprocessor do you wish to use?',
+      choices: _.values(defaults.cssProcessors)
     }, {
       type: 'checkbox',
       name: 'options',
-      message: 'Select your development options:',
+      message: 'Configuration: Select your development options you wish to enabled',
       choices: defaults.options
     }, {
       type: 'list',
       name: 'folderOption',
-      message: 'Where do you want these files generated?',
+      message: 'Configuration: Where do you want these files generated?',
       choices: defaults.folderOption
     }, {
       type: 'confirm',
       name: 'install',
-      message: 'Auto install npm/bower packages?'
+      message: 'Configuration: Auto install npm/bower packages?'
     }, {
       type: 'confirm',
       name: 'moveon',
-      message: 'Continue?'
+      message: 'Complete: Everything is set, generate this component now?'
     }
   ];
   //Ask
@@ -182,7 +188,7 @@ function processAnswers(answers) {
 
   //console.log(answers.options);
 
-  answers.npmDevPackages = {
+  var npmDevPackages = {
     "babelify": "^6.1.2",
     "browser-sync": "^2.7.13",
     "bs-html-injector": "^2.0.4",
@@ -198,7 +204,6 @@ function processAnswers(answers) {
     "gulp-minify-html": "^1.0.3",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",
-    "gulp-sass": "^2.0.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
@@ -209,12 +214,27 @@ function processAnswers(answers) {
     "vinyl-source-stream": "^1.1.0",
   };
 
+  switch (answers.cssProcessor) {
+    case defaults.cssProcessors.compass:
+      _.extend(npmDevPackages,{
+        "gulp-compass": "^2.1.0",
+      });
+      answers.cssProcessor = 'compass';
+      break;
+    case defaults.cssProcessors.libSass:
+      _.extend(npmDevPackages,{
+        "gulp-sass": "^2.0.1",
+      });
+      answers.cssProcessor = 'libSass';
+      break;
+  }
+
   answers.options.forEach(function (opt) {
     switch (opt) {
       case options.eslint:
         files.push(__dirname + '/templates/_eslintrc');
         files.push(__dirname + '/templates/_eslintignore');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "babel-eslint": "^3.1.23",
           "eslint": "^0.24.0",
           "gulp-eslint": "^0.13.2",
@@ -222,31 +242,31 @@ function processAnswers(answers) {
         break;
       case options.esdoc:
         files.push(__dirname + '/templates/_esdoc.json');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "esdoc": "^0.1.2",
         });
         break;
       case options.scsslint:
         files.push(__dirname + '/templates/_scss-lint.yml');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "gulp-scss-lint": "^0.2.0",
         });
         break;
       case options.sassdocs:
         files.push(__dirname + '/templates/_sassdocrc');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "sassdoc": "^2.1.15"
         });
         break;
       case options.kss:
         files.push(__dirname + '/templates/_sassdocrc');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "gulp-kss": "^0.0.2"
         });
         break;
       case options.karma:
         files.push(__dirname + '/templates/karma.conf.js');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "chai": "^3.0.0",
           "chai-as-promised": "^5.1.0",
           "karma": "^0.12.36",
@@ -266,7 +286,7 @@ function processAnswers(answers) {
         break;
       case options.wct:
         files.push(__dirname + '/templates/wct.conf.js');
-        _.extend(answers.npmDevPackages, {
+        _.extend(npmDevPackages, {
           "web-component-tester": "^3.2.0"
         });
         break;
@@ -276,7 +296,7 @@ function processAnswers(answers) {
     }
   });
 
-  answers.npmDevPackages = JSON.stringify(answers.npmDevPackages);
+  answers.npmDevPackages = JSON.stringify(npmDevPackages);
 
   return files;
 }

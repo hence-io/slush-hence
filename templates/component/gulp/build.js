@@ -18,8 +18,9 @@ var pngquant = require('imagemin-pngquant');
 var imagemin = require('gulp-imagemin');
 
 // Sass
-var autoprefixer = require('gulp-autoprefixer');
-var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');<% if(cssProcessor === 'libSass') { %>
+var sass = require('gulp-sass');<% } %><% if(cssProcessor === 'compass') { %>
+var compass = require('gulp-compass');<% } %>
 var minifyCss = require('gulp-minify-css');
 var gulpkss = require('gulp-kss');
 
@@ -52,8 +53,13 @@ gulp.task('build:serve', function (done) {
 // Build SASS for distribution.
 gulp.task('buildsass', function () {
   gulp.src(global.paths.sass)
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.init())<% if(cssProcessor === 'libSass') { %>
+    .pipe(sass().on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
+    .pipe(compass({
+      //config_file: './config.rb',
+      sass: global.paths.src,
+      require: ['susy', 'modular-scale']
+    }))<% } %>
     .pipe(concat(global.comp.name+'.css'))
     .pipe(autoprefixer())
     .pipe(minifyCss())

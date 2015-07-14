@@ -6,6 +6,7 @@ dist/
 .tmp/
 docs/
 node_modules/
+.sass-cache/
 npm-debug.log
 
 # IDE/text editors
