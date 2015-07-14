@@ -182,8 +182,8 @@ function processAnswers(answers) {
   answers.compNameCamel = S(answers.compFullname).camelize().s;
   answers.compName = answers.compFullname;
 
-  if (checkBoolean(answers.git)) {
-    files.push(__dirname + '/templates/_git/**');
+  if (!checkBoolean(answers.git)) {
+    files.push("!"+__dirname + '/templates/_git/**');
   }
 
   //console.log(answers.options);

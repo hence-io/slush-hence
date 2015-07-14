@@ -58,6 +58,7 @@ gulp.task('buildsass', function () {
     .pipe(compass({
       //config_file: './config.rb',
       sass: global.paths.src,
+      css: global.paths.tmp + 'css',
       require: ['susy', 'modular-scale']
     }))<% } %>
     .pipe(concat(global.comp.name+'.css'))

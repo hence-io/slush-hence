@@ -23,6 +23,7 @@ module.exports = function(browserSync) {
       .pipe(compass({
         //config_file: './config.rb',
         sass: global.paths.src,
+        css: global.paths.tmp + 'css',
         require: ['susy', 'modular-scale']
       }))<% } %>
       .pipe(concat('hence-comp-ui-sample.css'))
