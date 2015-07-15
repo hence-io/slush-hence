@@ -1,0 +1,1 @@
+{"ancestors":["Thing"],"comment":"","comment_plain":"","id":"Class","label":"Class","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL"},"specific_properties":[],"subtypes":[],"supertypes":["Thing"],"url":"http://schema.org/Class"}

@@ -1,0 +1,1 @@
+{"ancestors":["Thing","Intangible","Enumeration","PaymentMethod"],"comment":"","comment_plain":"","id":"CreditCard","label":"Credit Card","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL"},"specific_properties":[],"subtypes":[],"supertypes":["PaymentMethod"],"url":"http://schema.org/CreditCard"}

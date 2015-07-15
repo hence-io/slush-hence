@@ -1,0 +1,1 @@
+{"ancestors":["Thing","Intangible"],"comment":"","comment_plain":"","id":"Brand","label":"Brand","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL","logo":["URL","ImageObject"]},"specific_properties":["logo"],"subtypes":[],"supertypes":["Intangible"],"url":"http://schema.org/Brand"}

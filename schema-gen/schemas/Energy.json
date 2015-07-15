@@ -1,0 +1,1 @@
+{"ancestors":["Thing","Intangible","Quantity"],"comment":"","comment_plain":"","id":"Energy","label":"Energy","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL"},"specific_properties":[],"subtypes":[],"supertypes":["Quantity"],"url":"http://schema.org/Energy"}

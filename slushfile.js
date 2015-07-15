@@ -68,7 +68,7 @@ var defaults = (function () {
     githubUser: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
-    compTypes: ['schema', 'model', 'ui', 'service'],
+    compTypes: {schema: 'schema', model: 'model', ui: 'ui', service: 'service'},
     compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
     cssProcessors: {compass: 'Sass (Compass)', libSass: 'Sass (lib-sass)'},
     options: [
@@ -99,7 +99,7 @@ gulp.task('default', function (done) {
       type: 'list',
       name: 'compType',
       message: 'Name: "[prefix]-[type]-[name]" What type of component do you want to create?',
-      choices: defaults.compTypes,
+      choices: _.keys(defaults.compTypes),
       "default": "ui"
     },
     {
@@ -172,22 +172,6 @@ function processAnswers(answers) {
   }
   answers.compNameSlug = S(answers.compName).slugify().s;
 
-  //checkBoolean(answers.doCheck);
-
-  var files = [];
-
-  files.push(__dirname + '/templates/component/**');
-
-  answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
-  answers.compNameCamel = S(answers.compFullname).camelize().s;
-  answers.compName = answers.compFullname;
-
-  if (!checkBoolean(answers.git)) {
-    files.push("!"+__dirname + '/templates/_git/**');
-  }
-
-  //console.log(answers.options);
-
   var npmDevPackages = {
     "babelify": "^6.1.2",
     "browser-sync": "^2.7.13",
@@ -214,15 +198,45 @@ function processAnswers(answers) {
     "vinyl-source-stream": "^1.1.0",
   };
 
+  var files = [];
+
+  files.push(__dirname + '/templates/component/**');
+
+  answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
+  answers.compNameCamel = S(answers.compFullname).camelize().s;
+  answers.compName = answers.compFullname;
+
+  if (!checkBoolean(answers.git)) {
+    files.push("!" + __dirname + '/templates/_git/**');
+  }
+
+  files.push(__dirname + '/templates/type/' + answers.compType + '/**');
+
+  switch (answers.compType) {
+    case defaults.compTypes.schema:
+      _.extend(npmDevPackages, {
+        "schemas": "^1.0.0",
+      });
+      break;
+    case defaults.compTypes.model:
+      break;
+    case defaults.compTypes.ui:
+      break;
+    case defaults.compTypes.service:
+      break;
+  }
+
+  //console.log(answers.options);
+
   switch (answers.cssProcessor) {
     case defaults.cssProcessors.compass:
-      _.extend(npmDevPackages,{
+      _.extend(npmDevPackages, {
         "gulp-compass": "^2.1.0",
       });
       answers.cssProcessor = 'compass';
       break;
     case defaults.cssProcessors.libSass:
-      _.extend(npmDevPackages,{
+      _.extend(npmDevPackages, {
         "gulp-sass": "^2.0.1",
       });
       answers.cssProcessor = 'libSass';
@@ -311,7 +325,6 @@ function generateTemplate(files, answers) {
   var buildPipe = gulp.src(files)
     .pipe(template(answers))
     .pipe(rename(function (filepath) {
-
       if (filepath.dirname[0] === '_') {
         filepath.dirname = '.' + filepath.dirname.slice(1);
       }

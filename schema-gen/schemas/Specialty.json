@@ -1,0 +1,1 @@
+{"ancestors":["Thing","Intangible","Enumeration"],"comment":"","comment_plain":"","id":"Specialty","label":"Specialty","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL"},"specific_properties":[],"subtypes":["MedicalSpecialty"],"supertypes":["Enumeration"],"url":"http://schema.org/Specialty"}

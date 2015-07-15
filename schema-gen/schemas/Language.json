@@ -1,0 +1,1 @@
+{"ancestors":["Thing","Intangible"],"comment":"","comment_plain":"","id":"Language","label":"Language","properties":{"additionalType":"URL","alternateName":"Text","description":"Text","image":"URL","name":"Text","sameAs":"URL","url":"URL"},"specific_properties":[],"subtypes":[],"supertypes":["Intangible"],"url":"http://schema.org/Language"}
