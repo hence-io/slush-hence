@@ -11,6 +11,7 @@
 var _        = require('lodash'),
     gulp     = require('gulp'),
     gulpif   = require('gulp-if'),
+    git      = require('gulp-git'),
     install  = require('gulp-install'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
@@ -204,6 +205,7 @@ function processAnswers(answers) {
 
   answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
   answers.compNameCamel = S(answers.compFullname).camelize().s;
+  answers.compNameCamel = answers.compNameCamel[0].toUpperCase() + answers.compNameCamel.slice(1); // Can't use .capitalize() as it will lowercase the camel humps
   answers.compName = answers.compFullname;
 
   if (!checkBoolean(answers.git)) {
@@ -320,6 +322,11 @@ function generateTemplate(files, answers) {
 
   if (answers.folderOption === defaults.folderOption[1]) {
     destDir = './';
+  }
+
+  if (!checkBoolean(answers.git)) {
+    git.init({cwd: destDir}, function (err) {
+    });
   }
 
   var buildPipe = gulp.src(files)

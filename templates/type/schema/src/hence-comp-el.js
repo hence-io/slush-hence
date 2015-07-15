@@ -102,9 +102,9 @@ class <%= compNameCamel %> {
 
   /**
    * Configure this elements Polymer settings
-   * @returns {{is: string, properties: {greeting: {type: String, value: string}}, ready: henceCompSchemaNewEl.ready,
-   * attached: henceCompSchemaNewEl.attached, detached: henceCompSchemaNewEl.detached,
-   * sayHello: henceCompSchemaNewEl.sayHello, _doHiddenstuff: henceCompSchemaNewEl._doHiddenstuff}}
+   * @returns {{is: string, properties: {greeting: {type: String, value: string}}, ready: <%= compName %>.ready,
+   * attached: <%= compName %>.attached, detached: <%= compName %>.detached,
+   * sayHello: <%= compName %>.sayHello, _doHiddenstuff: <%= compName %>._doHiddenstuff}}
    */
   polymerOptions() {
     return {
