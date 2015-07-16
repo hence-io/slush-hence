@@ -119,9 +119,7 @@ let <%= compNameCamel %> = HenceComp({
    */
   attributeChanged(name, type) {
     let attr = this.getAttribute(name);
-
-    console.log(this.localName + '#' + this.id + ' attribute ' + name +
-      ' was changed to ' + attr + ' of type ' + type);
+    console.log(`${this.localName}#${this.id} attribute ${name} was changed to ${attr} of type ${type}`);
   },
 
   /*********************************************************************************************************************
