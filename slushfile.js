@@ -33,7 +33,7 @@ var checkBoolean = function (v) {
 
 var options = {
   'eslint': 'eslint',
-  'esdoc': 'esdoc',
+  'esdoc': 'es/js docs',
   'scsslint': 'scsslint',
   'sassdocs': 'sassdocs',
   'kss': 'kss style guide',
@@ -201,7 +201,7 @@ function processAnswers(answers) {
 
   var files = [];
 
-  files.push(__dirname + '/templates/component/**');
+  files.push(__dirname + '/templates/common/**');
 
   answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
   answers.compNameCamel = S(answers.compFullname).camelize().s;
@@ -258,8 +258,11 @@ function processAnswers(answers) {
         break;
       case options.esdoc:
         files.push(__dirname + '/templates/_esdoc.json');
+        files.push(__dirname + '/templates/_jsdoc.json');
         _.extend(npmDevPackages, {
           "esdoc": "^0.1.2",
+          "jsdoc": "^3.3.2",
+          "minami": "^1.1.0",
         });
         break;
       case options.scsslint:

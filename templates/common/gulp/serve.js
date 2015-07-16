@@ -19,6 +19,7 @@ gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
     files: global.paths.html
   });
   browserSync.init({
+    open: false,
     server: {
       baseDir: [global.paths.bower, global.paths.tmp]
     }

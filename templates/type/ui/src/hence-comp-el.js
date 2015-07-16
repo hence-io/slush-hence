@@ -1,12 +1,17 @@
 'use strict';
+/**
+ * @module <%= compName %>
+ */
+import console from 'console';
+import HenceComp from 'hence-comp';
 
-var polymerComp;
 let is = '<%= compName %>';
 
 /**
- * <%= compNameCamel %> Class
+ * <%= compNameCamel %> Component
+  * @constructor
  */
-let <%= compNameCamel %> = {
+let <%= compNameCamel %> = HenceComp({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
@@ -19,14 +24,11 @@ let <%= compNameCamel %> = {
   },
 
   /**
-   * https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html#custom-constructor
-   * The factoryImpl method is only invoked when you create an element using the constructor. The factoryImpl method is
-   * not called if the element is created from markup by the HTML parser, or if the element is created using
-   * document.createElement.
+   * The factoryImpl method is only invoked when you create an element using the constructor, this.createElement or
+   * it's binding functions. Instances hardcoded into html already will NOT execute this constructor. You've been
+   * warned.
    *
-   * The factoryImpl method is called after the element is initialized (local DOM created, default values set, and so
-   * on). See Ready callback and element initialization for more information.
-   * @constructor
+   * @param {Object} opts A set of options for configuring this component
    */
   factoryImpl(opts = {}) {
     if (opts.greeting) {
@@ -40,7 +42,7 @@ let <%= compNameCamel %> = {
 
   /**
    * When working with listeners, if their target element doesn’t exist on the DOM you get a very basic nonspecific
-   * error 'Uncaught TypeError: Invalid value used as weak map key’  Make sure to review the listeners you set up
+   * error 'Uncaught TypeError: Invalid value used as weak map key’!  Make sure to review the listeners you set up
    * against you DOM elements. By default listeners look for IDs on elements so ‘myButton.tap’ will watch click/touches
    * on a #myButton element in the component
    */
@@ -48,18 +50,22 @@ let <%= compNameCamel %> = {
     'spawn.tap': 'eventSpawnTap' // tap on a id="special" element
   },
 
+  /**
+   * @param {Event} e The event executing this function
+   */
   eventSpawnTap(e) {
-    console.log('eventSpawnTap', e);
+    // Update the property, using this.set to fire any expecting listeners
     this.set('greeting', 'Spawning moar!');
-    this.element.create({greeting: 'This'});
-    this.element.create({greeting: 'is'});
-    this.element.create({greeting: 'a'});
-    this.element.create({greeting: 'test'});
-    this.element.create({greeting: ', yo!'});
+
+    // Create a new component and attach it to the document
+    let el = this.createElement();
+    document.body.appendChild(el);
+
+    // Create a new component, automatically appending to a given target
+    this.appendElementTo({greeting: '... and moar!'}, document.getElementById('newStuff'));
   },
 
-
-/*********************************************************************************************************************
+  /*********************************************************************************************************************
    * Element DOM Hooks
    ********************************************************************************************************************/
 
@@ -69,7 +75,14 @@ let <%= compNameCamel %> = {
    * or kick off any processes the element wants to perform.
    */
   ready() {
+    // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
+    // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
 
+    // Access a local DOM element by ID using this.$
+    // this.$.greeting.textContent += ", has loaded!";
+
+    // Access a local DOM element by selector using this.$$('')
+    // this.$$('#greeting').textContent += ", has loaded!";
   },
 
   /**
@@ -78,6 +91,15 @@ let <%= compNameCamel %> = {
    * loading resources, etc).
    */
   attached() {
+    // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
+    // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
+
+    // Access a local DOM element by ID using this.$
+    // this.$.greeting.textContent += ", has loaded!";
+
+    // Access a local DOM element by selector using this.$$('')
+    // this.$$('#greeting').textContent += ", has loaded!";
+
     this.async(function() {
       // access sibling or parent elements here
     });
@@ -91,15 +113,20 @@ let <%= compNameCamel %> = {
 
   },
 
+  /**
+   * @param {String} name The name of the attribute
+   * @param {String} type The variable type of the attribute
+   */
   attributeChanged(name, type) {
+    let attr = this.getAttribute(name);
+
     console.log(this.localName + '#' + this.id + ' attribute ' + name +
-      ' was changed to ' + this.getAttribute(name) + ' of type ' + type);
+      ' was changed to ' + attr + ' of type ' + type);
   },
 
   /*********************************************************************************************************************
    * Element Behaviour
    ********************************************************************************************************************/
-
 
   /**
    * Does some secret magic!
@@ -112,43 +139,13 @@ let <%= compNameCamel %> = {
   /**
    * Sometimes it's just nice to say hi.
    *
-   * @param {string} greeting A positive greeting.
-   * @return {string} The full greeting.
+   * @param {String} greeting A positive greeting.
+   * @return {String} The full greeting.
    */
   sayHello(greeting ='Hello World!') {
     return '<%= compName %> says, ' + greeting;
-  },
-
-  /*********************************************************************************************************************
-   * Dynamic Element Controls
-   ********************************************************************************************************************/
-
-  /**
-   * A set of initialization and generating polymer helper functions
-   */
-  element: {
-    /**
-     * Binds this component to the DOM to be available for consumption
-     */
-    register() {
-      return polymerComp = Polymer(<%= compNameCamel %>);
-    },
-
-    /**
-     * Attach this element to the body, or target DOM tag
-     */
-    create(opts = {}, target = '') {
-      let el = new polymerComp(opts);
-
-      // if a target was provided, attempt to find it, else default to the document
-      target = target ? document.querySelector(target) || document.body : document.body;
-
-      target.appendChild(el);
-
-      return el;
-    }
   }
-};
+});
 
 export {is};
 export default <%= compNameCamel %>;

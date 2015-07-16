@@ -1,0 +1,27 @@
+{
+  "name": "<%= compName %>",
+  "author": "<%= authorName %> <<%= authorEmail %>>",
+  "version": "<%= compVersion %>",
+  "description": "<%= compDescription %>",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "gulp",
+    "docs": "npm run sassdocs && npm run jsdocs && npm run esdocs",
+    "esdocs": "esdoc -c .esdoc.json",
+    "sassdocs": "sassdoc src/scss",
+    "jsdocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  },
+  "browserify": {
+    "transform": [
+      ["babelify"]
+    ]
+  },
+  "devDependencies": <%= npmDevPackages %>,
+  "dependencies": {
+    "console": "^0.5.2",
+    "lodash": "^3.10.0",
+    "moment": "^2.10.3",
+    "string": "^3.3.0",
+    "hence-comp":"git://github.com/hence-io/hence-comp"
+  }
+}
