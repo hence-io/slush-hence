@@ -20,6 +20,10 @@ var _        = require('lodash'),
     inquirer = require('inquirer'),
     path     = require('path');
 
+_.templateSettings = {
+  interpolate: /<%=(.+?)%>/g
+};
+
 function format(string) {
   var username = string.toLowerCase();
   return username.replace(/\s/g, '');
@@ -333,7 +337,7 @@ function generateTemplate(files, answers) {
   }
 
   var buildPipe = gulp.src(files)
-    .pipe(template(answers))
+    .pipe(template(answers,_.templateSettings))
     .pipe(rename(function (filepath) {
       if (filepath.dirname[0] === '_') {
         filepath.dirname = '.' + filepath.dirname.slice(1);
