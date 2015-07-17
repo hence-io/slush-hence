@@ -2,7 +2,7 @@
 /**
  * @module <%= compName %>
  */
-import console from 'console';
+import console from 'consoler';
 import HenceComp from 'hence-comp';
 
 let is = '<%= compName %>';
