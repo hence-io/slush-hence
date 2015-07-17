@@ -1,5 +1,5 @@
 'use strict';
 
 import <%= compNameCamel %> from './<%= compName %>';
-<%= compNameCamel %>.registerElement();
+<%= compNameCamel %>.appendElementTo();
 export * from './<%= compName %>';

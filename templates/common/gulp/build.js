@@ -55,12 +55,7 @@ gulp.task('buildsass', function () {
   gulp.src(global.paths.sass)
     .pipe(sourcemaps.init())<% if(cssProcessor === 'libSass') { %>
     .pipe(sass().on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
-    .pipe(compass({
-      //config_file: './config.rb',
-      sass: global.paths.src,
-      css: global.paths.tmp + 'css',
-      require: ['susy', 'modular-scale']
-    }))<% } %>
+    .pipe(compass(global.compassOptions))<% } %>
     .pipe(concat(global.comp.name+'.css'))
     .pipe(autoprefixer())
     .pipe(minifyCss())
@@ -95,7 +90,7 @@ gulp.task('buildhtml', function () {
   gulp.src(global.paths.html)
     .pipe(replace(global.comp.name+'.css', global.comp.name+'.min.css'))
     .pipe(replace(global.comp.name+'.js', global.comp.name+'.min.js'))
-    //.pipe(replace('<script src="config.js"></script>', ''))
+    .pipe(replace('webcomponents-lite.js', 'webcomponents-lite.min.js'))
     //.pipe(replace("<script>System.import('./js/app')</script>", ''))
     //.pipe(minifyHtml())
     .pipe(gulp.dest(global.paths.dist));
