@@ -14,8 +14,7 @@ module.exports = function(browserSync) {
    */
   // Compile SASS with sourcemaps + livereload.
   gulp.task('sass',['lintsass'], function () {
-    return gulp.src(global.paths.sass)
-      .pipe(sourcemaps.init())<% if(cssProcessor === 'libSass') { %>
+    return gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
       .pipe(sass({
         errLogToConsole: true,
         outputStyle: 'expanded'

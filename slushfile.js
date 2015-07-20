@@ -205,7 +205,13 @@ function processAnswers(answers) {
 
   var files = [];
 
-  files.push(__dirname + '/templates/common/**');
+  var dirnames = {
+    common: __dirname + '/templates/common/',
+    type: __dirname + '/templates/type/',
+    optional: __dirname + '/templates/optional/'
+  };
+
+  files.push(dirnames.common + '**');
 
   answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
   answers.compNameCamel = S(answers.compFullname).camelize().s;
@@ -213,10 +219,10 @@ function processAnswers(answers) {
   answers.compName = answers.compFullname;
 
   if (!checkBoolean(answers.git)) {
-    files.push("!" + __dirname + '/templates/_git/**');
+    files.push("!" + dirnames.common + '_git/**');
   }
 
-  files.push(__dirname + '/templates/type/' + answers.compType + '/**');
+  files.push(dirnames.type + answers.compType + '/**');
 
   switch (answers.compType) {
     case defaults.compTypes.schema:
@@ -252,8 +258,8 @@ function processAnswers(answers) {
   answers.options.forEach(function (opt) {
     switch (opt) {
       case options.eslint:
-        files.push(__dirname + '/templates/_eslintrc');
-        files.push(__dirname + '/templates/_eslintignore');
+        files.push(dirnames.optional + '_eslintrc');
+        files.push(dirnames.optional + '_eslintignore');
         _.extend(npmDevPackages, {
           "babel-eslint": "^3.1.23",
           "eslint": "^0.24.0",
@@ -261,8 +267,8 @@ function processAnswers(answers) {
         });
         break;
       case options.esdoc:
-        files.push(__dirname + '/templates/_esdoc.json');
-        files.push(__dirname + '/templates/_jsdoc.json');
+        files.push(dirnames.optional + '_esdoc.json');
+        files.push(dirnames.optional + '_jsdoc.json');
         _.extend(npmDevPackages, {
           "esdoc": "^0.1.2",
           "jsdoc": "^3.3.2",
@@ -270,25 +276,25 @@ function processAnswers(answers) {
         });
         break;
       case options.scsslint:
-        files.push(__dirname + '/templates/_scss-lint.yml');
+        files.push(dirnames.optional + '_scss-lint.yml');
         _.extend(npmDevPackages, {
           "gulp-scss-lint": "^0.2.0",
         });
         break;
       case options.sassdocs:
-        files.push(__dirname + '/templates/_sassdocrc');
+        files.push(dirnames.optional + '_sassdocrc');
         _.extend(npmDevPackages, {
           "sassdoc": "^2.1.15"
         });
         break;
       case options.kss:
-        files.push(__dirname + '/templates/_sassdocrc');
+        files.push(dirnames.optional + '_sassdocrc');
         _.extend(npmDevPackages, {
           "gulp-kss": "^0.0.2"
         });
         break;
       case options.karma:
-        files.push(__dirname + '/templates/karma.conf.js');
+        files.push(dirnames.optional + 'karma.conf.js');
         _.extend(npmDevPackages, {
           "chai": "^3.0.0",
           "chai-as-promised": "^5.1.0",
@@ -298,9 +304,11 @@ function processAnswers(answers) {
           "karma-chai": "^0.1.0",
           "karma-chai-as-promised": "^0.1.2",
           "karma-chrome-launcher": "^0.1.12",
+          "karma-detect-browsers": "^2.0.1",
           "karma-firefox-launcher": "^0.1.6",
           "karma-mocha": "^0.1.10",
           "karma-mocha-reporter": "^1.0.2",
+          "karma-polymer-test": "^0.2.6",
           "karma-sinon-chai": "^1.0.0",
           "mocha": "^2.2.5",
           "proxyquireify": "^2.1.0",
@@ -308,13 +316,13 @@ function processAnswers(answers) {
         });
         break;
       case options.wct:
-        files.push(__dirname + '/templates/wct.conf.js');
+        files.push(dirnames.optional + 'wct.conf.js');
         _.extend(npmDevPackages, {
           "web-component-tester": "^3.2.0"
         });
         break;
       case options.editorconfig:
-        files.push(__dirname + '/templates/_editorconfig');
+        files.push(dirnames.optional + '_editorconfig');
         break;
     }
   });
@@ -337,7 +345,7 @@ function generateTemplate(files, answers) {
   }
 
   var buildPipe = gulp.src(files)
-    .pipe(template(answers,_.templateSettings))
+    .pipe(template(answers, _.templateSettings))
     .pipe(rename(function (filepath) {
       if (filepath.dirname[0] === '_') {
         filepath.dirname = '.' + filepath.dirname.slice(1);
