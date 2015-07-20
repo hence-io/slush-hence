@@ -6,10 +6,15 @@
   "main": "src/index.js",
   "scripts": {
     "start": "gulp",
+    "test": "karma start",
+    "test:watch": "karma start --no-single-run",
     "docs": "npm run sassdocs && npm run jsdocs && npm run esdocs",
     "esdocs": "esdoc -c .esdoc.json",
     "sassdocs": "sassdoc src/scss",
-    "jsdocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "jsdocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
+    "preinstall": "npm i -g gulp karma",<% if(cssProcessor === 'libSass') { %>
+    "postinstall": "sudo gem update && sudo gem install scss_lint"<% } %><% if(cssProcessor === 'compass') { %>
+    "postinstall": "sudo gem update && sudo gem install compass susy modular-scale breakpoint scss_lint"<% } %>
   },
   "browserify": {
     "transform": [

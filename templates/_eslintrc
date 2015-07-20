@@ -29,7 +29,7 @@
     "no-throw-literal": 2,
     "no-void": 2,
     "no-undef": 0,
-    "new-cap": [true,false],
+    "new-cap": [2, {"capIsNew":false}],
     "wrap-iife": [
       2,
       "inside"
