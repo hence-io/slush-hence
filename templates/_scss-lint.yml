@@ -1,3 +1,7 @@
 linters:
   SpaceAfterPropertyName:
     enabled: false
+  IdSelector:
+    enabled: false
+  SelectorFormat:
+    enabled: false
