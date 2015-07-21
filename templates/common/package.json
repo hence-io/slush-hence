@@ -21,12 +21,6 @@
       ["babelify"]
     ]
   },
-  "devDependencies": <%= npmDevPackages %>,
-  "dependencies": {
-    "consoler": "git://github.com/blitzcodes/consoler",
-    "hence-comp":"git://github.com/hence-io/hence-comp",
-    "lodash": "^3.10.0",
-    "moment": "^2.10.3",
-    "string": "^3.3.0"
-  }
+  "devDependencies": <%= npmDevDependencies %>,
+  "dependencies": <%= npmDependencies %>
 }

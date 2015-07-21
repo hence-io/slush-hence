@@ -1,14 +1,14 @@
-import Component from '../../src/index';
+import _ from 'lodash';
+import Component from '../../src/<%= compName %>';
 
 describe('ES6 component Tests - <%= compName %>', () => {
   let component;
 
   beforeEach(() => {
-    component = new Component();
+    component = _.cloneDeep(Component);
   });
 
   afterEach(() => {
-
   });
 
   it('should have the default greeting property set', () => {
@@ -20,6 +20,6 @@ describe('ES6 component Tests - <%= compName %>', () => {
   });
 
   it('should have a polymer config', () => {
-    expect(component.polymerOptions().is).to.equal('<%= compName %>');
+    expect(component.is).to.equal('<%= compName %>');
   });
 });

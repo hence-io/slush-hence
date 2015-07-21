@@ -181,18 +181,15 @@ gulp.task('default', function (done) {
       var pipe = generateTemplate(files, answers, destDir);
 
       var fontDir = destDir + '/fonts';
-      console.log('loading fonts now...');
       gulp.src(dirnames.fonts + '**')
-        .pipe(conflict(fontDir))
+        //.pipe(conflict(fontDir))
         .pipe(gulp.dest(fontDir))
-        .on('end', function(){
-          console.log('fonts loaded!');
+        .on('end', function () {
         });
 
       // Due to the nature of file files, or any other future files that must not be parsed by the template
       // controls, they have to be included after the fact.
       pipe.on('end', function () {
-
       });
     });
 });
@@ -203,30 +200,45 @@ function processAnswers(answers) {
   }
   answers.compNameSlug = S(answers.compName).slugify().s;
 
-  var npmDevPackages = {
-    "babelify": "^6.1.2",
-    "browser-sync": "^2.7.13",
-    "bs-html-injector": "^2.0.4",
-    "browserify": "^10.2.4",
-    "del": "^1.2.0",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^2.3.1",
-    "gulp-babel": "^5.1.0",
-    "gulp-cached": "^1.1.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-minify-css": "^1.1.6",
-    "gulp-minify-html": "^1.0.3",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.3",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6",
-    "imagemin-pngquant": "^4.1.0",
-    "require-dir": "^0.3.0",
-    "run-sequence": "^1.1.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
+  var npm = {
+    devDependencies: {
+      "babelify": "^6.1.2",
+      "browser-sync": "^2.7.13",
+      "bs-html-injector": "^2.0.4",
+      "browserify": "^10.2.4",
+      "del": "^1.2.0",
+      "gulp": "^3.9.0",
+      "gulp-autoprefixer": "^2.3.1",
+      "gulp-babel": "^5.1.0",
+      "gulp-cached": "^1.1.0",
+      "gulp-concat": "^2.5.2",
+      "gulp-imagemin": "^2.2.1",
+      "gulp-minify-css": "^1.1.6",
+      "gulp-minify-html": "^1.0.3",
+      "gulp-rename": "^1.2.2",
+      "gulp-replace": "^0.5.3",
+      "gulp-sourcemaps": "^1.5.2",
+      "gulp-uglify": "^1.2.0",
+      "gulp-util": "^3.0.6",
+      "imagemin-pngquant": "^4.1.0",
+      "require-dir": "^0.3.0",
+      "run-sequence": "^1.1.0",
+      "vinyl-buffer": "^1.0.0",
+      "vinyl-source-stream": "^1.1.0"
+    },
+    dependencies: {
+      "consoler": "git://github.com/blitzcodes/consoler",
+      "hence-comp": "git://github.com/hence-io/hence-comp",
+      "lodash": "^3.10.0",
+      "moment": "^2.10.3",
+      "string": "^3.3.0"
+    }
+  };
+
+  var bower = {
+    dependencies: {
+      "polymer": "Polymer/polymer#^1.0.0"
+    }
   };
 
   var files = [];
@@ -246,11 +258,14 @@ function processAnswers(answers) {
 
   switch (answers.compType) {
     case defaults.compTypes.schema:
-      _.extend(npmDevPackages, {
+      _.extend(npm.devDependencies, {
         "schemas": "^1.0.0",
       });
       break;
     case defaults.compTypes.model:
+      _.extend(bower.dependencies, {
+        "hence-comp-ui-card": "git://github.com/hence-io/hence-comp-ui-card",
+      });
       break;
     case defaults.compTypes.ui:
       break;
@@ -262,13 +277,13 @@ function processAnswers(answers) {
 
   switch (answers.cssProcessor) {
     case defaults.cssProcessors.compass:
-      _.extend(npmDevPackages, {
+      _.extend(npm.devDependencies, {
         "gulp-compass": "^2.1.0",
       });
       answers.cssProcessor = 'compass';
       break;
     case defaults.cssProcessors.libSass:
-      _.extend(npmDevPackages, {
+      _.extend(npm.devDependencies, {
         "gulp-sass": "^2.0.1",
       });
       answers.cssProcessor = 'libSass';
@@ -280,7 +295,7 @@ function processAnswers(answers) {
       case options.eslint:
         files.push(dirnames.optional + '_eslintrc');
         files.push(dirnames.optional + '_eslintignore');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "babel-eslint": "^3.1.23",
           "eslint": "^0.24.0",
           "gulp-eslint": "^0.13.2",
@@ -289,7 +304,7 @@ function processAnswers(answers) {
       case options.esdoc:
         files.push(dirnames.optional + '_esdoc.json');
         files.push(dirnames.optional + '_jsdoc.json');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "esdoc": "^0.1.2",
           "jsdoc": "^3.3.2",
           "minami": "^1.1.0",
@@ -297,25 +312,25 @@ function processAnswers(answers) {
         break;
       case options.scsslint:
         files.push(dirnames.optional + '_scss-lint.yml');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "gulp-scss-lint": "^0.2.0",
         });
         break;
       case options.sassdocs:
         files.push(dirnames.optional + '_sassdocrc');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "sassdoc": "^2.1.15"
         });
         break;
       case options.kss:
         files.push(dirnames.optional + '_sassdocrc');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "gulp-kss": "^0.0.2"
         });
         break;
       case options.karma:
         files.push(dirnames.optional + 'karma.conf.js');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "chai": "^3.0.0",
           "chai-as-promised": "^5.1.0",
           "karma": "^0.12.36",
@@ -335,7 +350,7 @@ function processAnswers(answers) {
         break;
       case options.wct:
         files.push(dirnames.optional + 'wct.conf.js');
-        _.extend(npmDevPackages, {
+        _.extend(npm.devDependencies, {
           "web-component-tester": "^3.2.0"
         });
         break;
@@ -345,7 +360,9 @@ function processAnswers(answers) {
     }
   });
 
-  answers.npmDevPackages = JSON.stringify(npmDevPackages);
+  answers.npmDevDependencies = JSON.stringify(npm.devDependencies);
+  answers.npmDependencies = JSON.stringify(npm.dependencies);
+  answers.bowerDependencies = JSON.stringify(bower.dependencies);
 
   return files;
 }

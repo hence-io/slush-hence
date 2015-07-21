@@ -2,7 +2,6 @@
 .DS_Store
 
 # Dev/Build folders
-dist/
 .tmp/
 docs/
 node_modules/

@@ -17,9 +17,7 @@
     "/comp/gulp/",
     "/comp/test/"
   ],
-  "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
-  },
+  "dependencies": <%= bowerDependencies %>,
   "devDependencies": {
     "web-component-tester": "*"
   }
