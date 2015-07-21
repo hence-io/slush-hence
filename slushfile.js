@@ -20,6 +20,13 @@ var _        = require('lodash'),
     inquirer = require('inquirer'),
     path     = require('path');
 
+var dirnames = {
+  common: __dirname + '/templates/common/',
+  type: __dirname + '/templates/type/',
+  fonts: __dirname + '/templates/fonts/',
+  optional: __dirname + '/templates/optional/'
+};
+
 _.templateSettings = {
   interpolate: /<%=(.+?)%>/g
 };
@@ -164,9 +171,28 @@ gulp.task('default', function (done) {
   inquirer.prompt(prompts,
     function (answers) {
       var files = processAnswers(answers);
-      var pipe = generateTemplate(files, answers);
+
+      var destDir = './' + answers.compFullname;
+
+      if (answers.folderOption === defaults.folderOption[1]) {
+        destDir = './';
+      }
+
+      var pipe = generateTemplate(files, answers, destDir);
+
+      var fontDir = destDir + '/fonts';
+      console.log('loading fonts now...');
+      gulp.src(dirnames.fonts + '**')
+        .pipe(conflict(fontDir))
+        .pipe(gulp.dest(fontDir))
+        .on('end', function(){
+          console.log('fonts loaded!');
+        });
+
+      // Due to the nature of file files, or any other future files that must not be parsed by the template
+      // controls, they have to be included after the fact.
       pipe.on('end', function () {
-        done();
+
       });
     });
 });
@@ -204,12 +230,6 @@ function processAnswers(answers) {
   };
 
   var files = [];
-
-  var dirnames = {
-    common: __dirname + '/templates/common/',
-    type: __dirname + '/templates/type/',
-    optional: __dirname + '/templates/optional/'
-  };
 
   files.push(dirnames.common + '**');
 
@@ -304,11 +324,9 @@ function processAnswers(answers) {
           "karma-chai": "^0.1.0",
           "karma-chai-as-promised": "^0.1.2",
           "karma-chrome-launcher": "^0.1.12",
-          "karma-detect-browsers": "^2.0.1",
           "karma-firefox-launcher": "^0.1.6",
           "karma-mocha": "^0.1.10",
           "karma-mocha-reporter": "^1.0.2",
-          "karma-polymer-test": "^0.2.6",
           "karma-sinon-chai": "^1.0.0",
           "mocha": "^2.2.5",
           "proxyquireify": "^2.1.0",
@@ -332,13 +350,7 @@ function processAnswers(answers) {
   return files;
 }
 
-function generateTemplate(files, answers) {
-  var destDir = './' + answers.compFullname;
-
-  if (answers.folderOption === defaults.folderOption[1]) {
-    destDir = './';
-  }
-
+function generateTemplate(files, answers, destDir) {
   if (!checkBoolean(answers.git)) {
     git.init({cwd: destDir}, function (err) {
     });

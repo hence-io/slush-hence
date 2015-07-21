@@ -52,6 +52,9 @@ gulp.task('build:serve', function (done) {
 
 // Build SASS for distribution.
 gulp.task('buildsass', function () {
+  gulp.src(global.paths.fonts)
+    .pipe(gulp.dest(global.paths.tmp + 'fonts'));
+
   gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
     .pipe(sass().on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
     .pipe(compass(global.compassOptions))<% } %>

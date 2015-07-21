@@ -23,19 +23,6 @@ let <%= compNameCamel %> = HenceComp({
     }
   },
 
-  /**
-   * The factoryImpl method is only invoked when you create an element using the constructor, this.createElement or
-   * it's binding functions. Instances hardcoded into html already will NOT execute this constructor. You've been
-   * warned.
-   *
-   * @param {Object} opts A set of options for configuring this component
-   */
-  factoryImpl(opts = {}) {
-    if (opts.greeting) {
-      this.set('greeting', opts.greeting);
-    }
-  },
-
   /*********************************************************************************************************************
    * Event Listeners
    ********************************************************************************************************************/
