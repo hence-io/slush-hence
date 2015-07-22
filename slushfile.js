@@ -190,6 +190,10 @@ gulp.task('default', function (done) {
       // Due to the nature of file files, or any other future files that must not be parsed by the template
       // controls, they have to be included after the fact.
       pipe.on('end', function () {
+        if (!checkBoolean(answers.git)) {
+          git.init({cwd: destDir}, function (err) {
+          });
+        }
       });
     });
 });
@@ -237,7 +241,8 @@ function processAnswers(answers) {
 
   var bower = {
     dependencies: {
-      "polymer": "Polymer/polymer#^1.0.0"
+      "polymer": "Polymer/polymer#^1.0.0",
+      "font-awesome": "~4.3.0"
     }
   };
 
@@ -251,7 +256,7 @@ function processAnswers(answers) {
   answers.compName = answers.compFullname;
 
   if (!checkBoolean(answers.git)) {
-    files.push("!" + dirnames.common + '_git/**');
+    files.push("!" + dirnames.common + '.git/**/*');
   }
 
   files.push(dirnames.type + answers.compType + '/**');
@@ -368,11 +373,6 @@ function processAnswers(answers) {
 }
 
 function generateTemplate(files, answers, destDir) {
-  if (!checkBoolean(answers.git)) {
-    git.init({cwd: destDir}, function (err) {
-    });
-  }
-
   var buildPipe = gulp.src(files)
     .pipe(template(answers, _.templateSettings))
     .pipe(rename(function (filepath) {

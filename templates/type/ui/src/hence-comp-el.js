@@ -64,6 +64,8 @@ let <%= compNameCamel %> = HenceComp({
   ready() {
     // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
     // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
+    let self = this;
+    let $ = self.$;
 
     // Access a local DOM element by ID using this.$
     // this.$.greeting.textContent += ", has loaded!";
@@ -80,6 +82,8 @@ let <%= compNameCamel %> = HenceComp({
   attached() {
     // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
     // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
+    let self = this;
+    let $ = self.$;
 
     // Access a local DOM element by ID using this.$
     // this.$.greeting.textContent += ", has loaded!";
@@ -112,6 +116,8 @@ let <%= compNameCamel %> = HenceComp({
   /*********************************************************************************************************************
    * Element Behaviour
    ********************************************************************************************************************/
+
+  behavior: [],
 
   /**
    * Does some secret magic!
