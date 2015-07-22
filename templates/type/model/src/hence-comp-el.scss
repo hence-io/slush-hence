@@ -15,11 +15,20 @@
 // Font awesome
 //@import 'font-awesome-compass';
 //@import 'font-awesome';
-//
-//$fa-font-path : '../font' !default;
+
+$fa-font-path : '/bower_components/font-awesome/fonts' !default;
 //
 /***************************
 ** Component Base Styles
 ****************************/
 <%= compName %> {
+  $dark-blue : #000080;
+
+  #greeting {
+    color : $dark-blue;
+  }
+
+  //button {
+  //  @extend .fa, .fa-home;
+  //}
 }
