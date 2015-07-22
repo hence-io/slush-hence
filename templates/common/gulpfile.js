@@ -19,8 +19,10 @@ global.paths = {
   'html': srcDir + '**/*.html',
   // Bower
   'bower': './bower_components/',
-  // Main JS file
-  'mainjs': srcDir + 'index.js',
+  // Dist JS file
+  'distjs': srcDir + 'dist.js',
+  // Dev JS file
+  'devjs': srcDir + 'dev.js',
   // JS sources.
   'js': srcDir + '**/*.js',
   // SASS sources.

@@ -19,10 +19,10 @@ gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
     files: global.paths.html
   });
   browserSync.init({
-    open: false,
     server: {
-      baseDir: [global.paths.bower, global.paths.tmp]
-    }
+      baseDir: ['./']
+    },
+    startPath: '/.tmp/index.html'
   });
 
   gulp.watch([global.paths.js], ['js-watch']).on('change', logChanges);
@@ -30,8 +30,8 @@ gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
   gulp.watch([global.paths.html], ['html-watch']).on('change', logChanges);
 });
 
-gulp.task('sass-watch', ['lintsass','sass']);
-gulp.task('js-watch', ['lintjs','js'], function () { return browserSync.reload(); });
+gulp.task('sass-watch', ['lintsass', 'sass']);
+gulp.task('js-watch', ['lintjs', 'js'], function () { return browserSync.reload(); });
 gulp.task('html-watch', ['html'], htmlInjector);
 
 /**

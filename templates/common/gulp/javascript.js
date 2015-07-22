@@ -10,7 +10,7 @@ var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 
 gulp.task('js',['lintjs'], function () {
-  return browserify(global.paths.mainjs, {debug: true})
+  return browserify(global.paths.devjs, {debug: true})
     .transform(babelify)
     .bundle().on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source(global.comp.name+'.js'))
