@@ -13,10 +13,8 @@
 ** Optional
 ****************************/
 // Font awesome
-@import 'font-awesome-compass';
-@import 'font-awesome';
-
-$fa-font-path : '/bower_components/font-awesome/fonts' !default;
+$fa-font-path : '/bower_components/font-awesome/fonts/' !default;
+//@import 'font-awesome';
 //
 /***************************
 ** Component Base Styles
