@@ -80,7 +80,9 @@ gulp.task('buildjs', function () {
     .bundle().on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source(global.comp.name+'.js'))
     .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
     .pipe(uglify())
+    .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(rename({
       suffix: '.min'
     }))
