@@ -3,10 +3,7 @@
   "description": "",
   "version": "0.1.0",
   "homepage": "https://github.com/hence-io/slush-hence-comp",
-  "author": {
-    "name": "Sean Homer",
-    "email": "sean.homer@therefore.ca"
-  },
+  "author": "Sean 'Blitz' Homer <sean.homer@therefore.ca>",
   "repository": {
     "type": "git",
     "url": "git://github.com/Sean/slush-slush-gen.git"
