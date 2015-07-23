@@ -76,16 +76,17 @@ gulp.task('buildsass', function () {
 // Build JS for distribution.
 gulp.task('buildjs', function () {
   return browserify(global.paths.distjs, {debug: true})
+    .add(require.resolve('babelify/polyfill'))
     .transform(babelify)
     .bundle().on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source(global.comp.name+'.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(rename({
       suffix: '.min'
     }))
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+    .pipe(uglify({ mangle: false }))
+    .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest(global.paths.dist + 'js'));
 });
 
