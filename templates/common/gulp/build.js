@@ -76,7 +76,7 @@ gulp.task('buildsass', function () {
 // Build JS for distribution.
 gulp.task('buildjs', function () {
   return browserify(global.paths.distjs, {debug: true})
-    .add(require.resolve('babelify/polyfill'))
+    //.add(require.resolve('babelify/polyfill'))
     .transform(babelify)
     .bundle().on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source(global.comp.name+'.js'))
