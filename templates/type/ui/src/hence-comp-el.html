@@ -1,3 +1,28 @@
-<link rel="import" href="<%= compName %>-module.html">
-<link rel="stylesheet" href="css/<%= compName %>.css">
-<script src="js/<%= compName %>.js"></script>
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <<%= compName %>></<%= compName %>>
+
+@demo
+-->
+<dom-module id="<%= compName %>">
+  <style>
+    /* Inherent styles for the component wrapper, since this only works within the template */
+    :host {
+
+    }
+  </style>
+  <template>
+    <!-- local DOM for your element -->
+    <div>
+      <!-- data bindings in local DOM; must take up the whole element >heretohere< and cannot share normal text/spaces -->
+      <span id="greeting">{{greeting}}</span>
+      <button id="spawn">Spawn Moar!</button>
+    </div>
+    <content></content>
+  </template>
+</dom-module>

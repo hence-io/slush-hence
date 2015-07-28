@@ -1,11 +1,13 @@
-var gulp = require('gulp');
-var requireDir = require('require-dir');
+import gulp from 'gulp';
+import requireDir from 'require-dir';
 
 var srcDir = './src/';
 var tmpDir = './.tmp/';
+var buildSrcDir = './gulp/build/src/';
 
 global.comp = {
-  name: '<%= compName %>'
+  name: '<%= compName %>',
+  camel: '<%= compNameCamel %>'
 };
 global.compassOptions = {
   //config_file: './config.rb',
@@ -19,10 +21,12 @@ global.paths = {
   'html': srcDir + '**/*.html',
   // Bower
   'bower': './bower_components/',
+  // Build Src Dir
+  buildSrcDir: buildSrcDir,
   // Dist JS file
-  'distjs': srcDir + 'dist.js',
+  'distjs': buildSrcDir + 'dist.js',
   // Dev JS file
-  'devjs': srcDir + 'dev.js',
+  'devjs': srcDir + 'index.js',
   // JS sources.
   'js': srcDir + '**/*.js',
   // SASS sources.
@@ -45,6 +49,8 @@ global.paths = {
 
 // Require all tasks in the 'gulp' folder.
 requireDir('./gulp', {recurse: false});
+requireDir('./gulp/build', {recurse: false});
+requireDir('./gulp/development', {recurse: false});
 
 // Default task; start local server & watch for changes.
 gulp.task('default', ['serve']);

@@ -206,12 +206,15 @@ function processAnswers(answers) {
 
   var npm = {
     devDependencies: {
-      "babelify": "^6.1.2",
+      "babel": "^5.8.9",
+      "babel-core": "^5.8.9",
+      "babelify": "6.1.2",
       "browser-sync": "^2.7.13",
       "bs-html-injector": "^2.0.4",
       "browserify": "^10.2.4",
       "del": "^1.2.0",
       "gulp": "^3.9.0",
+      "gulp-if": "^1.2.5",
       "gulp-autoprefixer": "^2.3.1",
       "gulp-babel": "^5.1.0",
       "gulp-cached": "^1.1.0",

@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
-var execSync = require('child_process').execSync;
-var webComponentTester = require('web-component-tester').test;
-var util = require('gulp-util');
+import gulp from 'gulp';
+import {execSync} from 'child_process';
+import {test as webComponentTester} from 'web-component-tester';
+import util from 'gulp-util';
 
 /***********************************************************************************************************************
  * Karma Unit Testing

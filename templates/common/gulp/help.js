@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
-var util = require('gulp-util');
+import gulp  from 'gulp';
+import util from 'gulp-util';
 
-gulp.task('help', function () {
+gulp.task('help', ()=> {
   util.log(util.colors.green('Hench-comp-stack Gulp Commands'));
   util.log(util.colors.green('$ gulp                  -- Will compile assets, serve your web component with live reload, transpile es6, and lint your js/scss all while watching your src files'));
   util.log(util.colors.green('$ gulp build            -- Will compile your component for consumption, exporting it to a /dist folder'));

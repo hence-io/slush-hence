@@ -1,12 +1,12 @@
 'use strict';
 
-var gulp = require('gulp');
-var cache = require('gulp-cached');
-var eslint = require('gulp-eslint');
-var scsslint = require('gulp-scss-lint');
+import gulp from 'gulp';
+import cache from 'gulp-cached';
+import eslint from 'gulp-eslint';
+import scsslint from 'gulp-scss-lint';
 
 // Lint JS.
-gulp.task('lintjs', function () {
+gulp.task('lintjs', ()=> {
   return gulp.src(global.paths.js)
     .pipe(cache('lintjs'))
     .pipe(eslint())
@@ -14,7 +14,7 @@ gulp.task('lintjs', function () {
 });
 
 // Lint SASS.
-gulp.task('lintsass', function () {
+gulp.task('lintsass', ()=> {
   return gulp.src(global.paths.sass)
     .pipe(cache('lintsass'))
     .pipe(scsslint());
