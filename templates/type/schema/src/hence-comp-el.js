@@ -3,7 +3,7 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import HenceComp from 'hence-comp';
+import {HenceSchema} from 'hence-comp';
 
 let is = '<%= compName %>';
 
@@ -11,17 +11,12 @@ let is = '<%= compName %>';
  * <%= compNameCamel %> Component
  * @constructor
  */
-let <%= compNameCamel %> = HenceComp({
+let <%= compNameCamel %> = HenceSchema({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
    ********************************************************************************************************************/
-  properties: {
-    greeting: {
-      type: String,
-      value: 'Hello!'
-    }
-  },
+  properties: {},
 
   /*********************************************************************************************************************
    * Event Listeners
@@ -33,108 +28,35 @@ let <%= compNameCamel %> = HenceComp({
    * against you DOM elements. By default listeners look for IDs on elements so ‘myButton.tap’ will watch click/touches
    * on a #myButton element in the component
    */
-  listeners: {
-    'spawn.tap': 'eventSpawnTap' // tap on a id="special" element
-  },
-
-  /**
-   * @param {Event} e The event executing this function
-   */
-    eventSpawnTap(e) {
-    // Update the property, using this.set to fire any expecting listeners
-    this.set('greeting', 'Spawning moar!');
-
-    // Create a new component and attach it to the document
-    let el = this.createElement();
-    document.body.appendChild(el);
-
-    // Create a new component, automatically appending to a given target
-    this.appendElementTo({greeting: '... and moar!'}, document.getElementById('newStuff'));
-  },
+  listeners: {},
 
   /*********************************************************************************************************************
    * Element DOM Hooks
    ********************************************************************************************************************/
 
-  /**
-   * This is called after all elements have been configured, but propagates bottom-up. This element's children are
-   * ready, but parents are not. This is the point where you should make modifications to the DOM (when  necessary),
-   * or kick off any processes the element wants to perform.
-   */
     ready() {
-    // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
-    // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
-    let self = this;
-    let $ = self.$;
-
-    // Access a local DOM element by ID using this.$
-    // this.$.greeting.textContent += ", has loaded!";
-
-    // Access a local DOM element by selector using this.$$('')
-    // this.$$('#greeting').textContent += ", has loaded!";
+    this.async(()=> {
+      //console.log('attached::_executeQuery on', this.action);
+      this._executeQuery();
+    })
   },
 
-  /**
-   * `attached` fires once the element and its parents have been inserted  into a document. This is a good place to
-   * perform any work related to your element's visual state or active behavior (measuring sizes, beginning animations,
-   * loading resources, etc).
-   */
-    attached() {
-    // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
-    // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
-    let self = this;
-    let $ = self.$;
-
-    // Access a local DOM element by ID using this.$
-    // this.$.greeting.textContent += ", has loaded!";
-
-    // Access a local DOM element by selector using this.$$('')
-    // this.$$('#greeting').textContent += ", has loaded!";
-
-    this.async(function() {
-      // access sibling or parent elements here
-    });
-  },
-
-  /**
-   * The analog to `attached`, `detached` fires when the element has been removed from a document. Use this to clean
-   * up anything you did in `attached`.
-   */
-    detached() {
-
-  },
-
-  /**
-   * @param {String} name The name of the attribute
-   * @param {String} type The variable type of the attribute
-   */
-    attributeChanged(name, type) {
-    let attr = this.getAttribute(name);
-    console.log(`${this.localName}#${this.id} attribute ${name} was changed to ${attr} of type ${type}`);
-  },
 
   /*********************************************************************************************************************
    * Element Behaviour
    ********************************************************************************************************************/
 
-  behavior: [],
+    _executeQuery() {
+    let self = this;
+    let query = self.query || {};
+    let results = self.results || [];
 
-  /**
-   * Does some secret magic!
-   * @private
-   */
-    _doHiddenstuff() {
+    switch (this.action) {
+    }
 
-  },
+    //console.log('_executeQuery ', query, results);
 
-  /**
-   * Sometimes it's just nice to say hi.
-   *
-   * @param {String} greeting A positive greeting.
-   * @return {String} The full greeting.
-   */
-    sayHello(greeting ='Hello World!') {
-    return '<%= compName %> says, ' + greeting;
+    return results;
   }
 });
 

@@ -9,7 +9,7 @@ let is = '<%= compName %>';
 
 /**
  * <%= compNameCamel %> Component
- * @constructor
+  * @constructor
  */
 let <%= compNameCamel %> = HenceComp({
   is, // auto set as is : is, es6 laziness joy!
@@ -40,16 +40,18 @@ let <%= compNameCamel %> = HenceComp({
   /**
    * @param {Event} e The event executing this function
    */
-    eventSpawnTap(e) {
-    // Update the property, using this.set to fire any expecting listeners
-    this.set('greeting', 'Spawning moar!');
+  eventSpawnTap(e) {
+    let self = this;
+
+    // Update the property, using self.set to fire any expecting listeners
+    self.set('greeting', 'Spawning moar!');
 
     // Create a new component and attach it to the document
-    let el = this.createElement();
+    let el = self.createElement();
     document.body.appendChild(el);
 
     // Create a new component, automatically appending to a given target
-    this.appendElementTo({greeting: '... and moar!'}, document.getElementById('newStuff'));
+    self.appendElementTo({greeting: '... and moar!'}, document.getElementById('newStuff'));
   },
 
   /*********************************************************************************************************************
@@ -61,17 +63,17 @@ let <%= compNameCamel %> = HenceComp({
    * ready, but parents are not. This is the point where you should make modifications to the DOM (when  necessary),
    * or kick off any processes the element wants to perform.
    */
-    ready() {
+  ready() {
     // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
     // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
     let self = this;
     let $ = self.$;
 
-    // Access a local DOM element by ID using this.$
-    // this.$.greeting.textContent += ", has loaded!";
+    // Access a local DOM element by ID using self.$
+    // self.$.greeting.textContent += ", has loaded!";
 
-    // Access a local DOM element by selector using this.$$('')
-    // this.$$('#greeting').textContent += ", has loaded!";
+    // Access a local DOM element by selector using self.$$('')
+    // self.$$('#greeting').textContent += ", has loaded!";
   },
 
   /**
@@ -79,19 +81,19 @@ let <%= compNameCamel %> = HenceComp({
    * perform any work related to your element's visual state or active behavior (measuring sizes, beginning animations,
    * loading resources, etc).
    */
-    attached() {
+  attached() {
     // WARNING, updating DOM elements HERE may override variable revisions in the factoryImpl function if created
     // with the createElement function,leveraging the components defaults instead. If the element is embedded, no issue.
     let self = this;
     let $ = self.$;
 
-    // Access a local DOM element by ID using this.$
-    // this.$.greeting.textContent += ", has loaded!";
+    // Access a local DOM element by ID using self.$
+    // self.$.greeting.textContent += ", has loaded!";
 
-    // Access a local DOM element by selector using this.$$('')
-    // this.$$('#greeting').textContent += ", has loaded!";
+    // Access a local DOM element by selector using self.$$('')
+    // self.$$('#greeting').textContent += ", has loaded!";
 
-    this.async(function() {
+    self.async(function() {
       // access sibling or parent elements here
     });
   },
@@ -100,7 +102,7 @@ let <%= compNameCamel %> = HenceComp({
    * The analog to `attached`, `detached` fires when the element has been removed from a document. Use this to clean
    * up anything you did in `attached`.
    */
-    detached() {
+  detached() {
 
   },
 
@@ -108,9 +110,10 @@ let <%= compNameCamel %> = HenceComp({
    * @param {String} name The name of the attribute
    * @param {String} type The variable type of the attribute
    */
-    attributeChanged(name, type) {
-    let attr = this.getAttribute(name);
-    console.log(`${this.localName}#${this.id} attribute ${name} was changed to ${attr} of type ${type}`);
+  attributeChanged(name, type) {
+    let self = this;
+    let attr = self.getAttribute(name);
+    console.log(`${self.localName}#${self.id} attribute ${name} was changed to ${attr} of type ${type}`);
   },
 
   /*********************************************************************************************************************
@@ -123,7 +126,7 @@ let <%= compNameCamel %> = HenceComp({
    * Does some secret magic!
    * @private
    */
-    _doHiddenstuff() {
+  _doHiddenstuff() {
 
   },
 
@@ -133,7 +136,7 @@ let <%= compNameCamel %> = HenceComp({
    * @param {String} greeting A positive greeting.
    * @return {String} The full greeting.
    */
-    sayHello(greeting ='Hello World!') {
+  sayHello(greeting ='Hello World!') {
     return '<%= compName %> says, ' + greeting;
   }
 });
