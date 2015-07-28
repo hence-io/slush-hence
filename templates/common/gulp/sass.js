@@ -10,12 +10,13 @@ import minifyCss from 'gulp-minify-css';
 import gulpkss from 'gulp-kss';
 import gulpif from 'gulp-if';
 
+<% if(cssProcessor === 'compass') { %>
 let compassOptions = {
   //config_file: './config.rb',
-  sass: srcDir,
-  css: tmpDir + 'css',
+  sass: global.paths.src,
+  css: global.paths.tmp + 'css',
   require: ['susy', 'modular-scale', 'breakpoint','font-awesome-sass']
-};
+};<% } %>
 
 /**
  * Sass Tasks
