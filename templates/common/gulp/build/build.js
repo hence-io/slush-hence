@@ -35,6 +35,9 @@ let browserSync = browserSyncConstructor.create();
 import sassCompilation from './../sass';
 sassCompilation('buildsass', global.paths.dist, browserSync, true);
 
+import htmlCompilation from './../html';
+htmlCompilation('buildhtml', true);
+
 // One build task to rule them all.
 gulp.task('build', (done)=> {
   runSeq('clean', ['buildsass', 'buildimg', 'buildjs'], 'buildhtml', done);
@@ -66,25 +69,6 @@ gulp.task('buildjs', ()=> {
     .pipe(uglify({mangle: false}))
     .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest(global.paths.dist + 'js'));
-});
-
-// Build HTML for distribution.
-gulp.task('buildhtml', ()=> {
-  var compHtmlFilename = global.comp.name + '.html';
-
-  gulp.src(global.paths.src + compHtmlFilename)
-    .pipe(replace('/bower_components', '../..'))
-    .pipe(rename({
-      suffix: '-module'
-    }))
-    .pipe(gulp.dest(global.paths.dist));
-
-  gulp.src([global.paths.src + 'index.html', global.paths.buildSrcDir + compHtmlFilename])
-    .pipe(replace('webcomponents-lite.js', 'webcomponents-lite.min.js'))
-    .pipe(replace('/bower_components', '../..'))
-    //.pipe(replace("<script>System.import('./js/app')</script>", ''))
-    .pipe(minifyHtml())
-    .pipe(gulp.dest(global.paths.dist));
 });
 
 // Build images for distribution.

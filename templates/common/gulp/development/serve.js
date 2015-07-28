@@ -12,6 +12,9 @@ let browserSync = browserSyncConstructor.create();
 import sassCompilation from './../sass';
 sassCompilation('sass',global.paths.tmp,browserSync);
 
+import htmlCompilation from './../html';
+htmlCompilation('html');
+
 /**
  * browserSync Tasks
  */

@@ -1,20 +1,17 @@
+
 import gulp from 'gulp';
 import requireDir from 'require-dir';
 
 var srcDir = './src/';
 var tmpDir = './.tmp/';
-var buildSrcDir = './gulp/build/src/';
+var buildSrcDir = './gulp/src/';
+
 
 global.comp = {
   name: '<%= compName %>',
   camel: '<%= compNameCamel %>'
 };
-global.compassOptions = {
-  //config_file: './config.rb',
-  sass: srcDir,
-  css: tmpDir + 'css',
-  require: ['susy', 'modular-scale', 'breakpoint','font-awesome-sass']
-};
+
 // Specify paths & globbing patterns for tasks.
 global.paths = {
   // HTML sources.
