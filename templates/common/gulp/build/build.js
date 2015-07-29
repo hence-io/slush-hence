@@ -33,7 +33,7 @@ import browserSyncConstructor from 'browser-sync';
 let browserSync = browserSyncConstructor.create();
 
 import sassCompilation from './../sass';
-sassCompilation('buildsass', global.paths.dist, browserSync, true);
+sassCompilation('buildsass', browserSync, true);
 
 import htmlCompilation from './../html';
 htmlCompilation('buildhtml', true);

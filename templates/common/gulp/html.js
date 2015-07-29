@@ -24,8 +24,8 @@ let htmlCompile = function (taskName, dist = false) {
     gulp.src([global.paths.src + 'index.html', global.paths.buildSrcDir + compHtmlFilename])
       .pipe(gulpif(dist, replace('webcomponents-lite.js', 'webcomponents-lite.min.js')))
       .pipe(gulpif(dist, replace('/bower_components', '../..')))
-      .pipe(gulpif(dist, replace(global.comp.name+'.js', global.comp.name+'.min.js')))
-      .pipe(gulpif(dist, replace(global.comp.name+'.css', global.comp.name+'.min.css')))
+      .pipe(gulpif(dist, replace(global.comp.name + '.js', global.comp.name + '.min.js')))
+      .pipe(gulpif(dist, replace(global.comp.name + '.css', global.comp.name + '.min.css')))
       .pipe(gulpif(dist, minifyHtml()))
       .pipe(gulp.dest(dest));
   });

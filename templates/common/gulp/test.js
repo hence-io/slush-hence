@@ -20,8 +20,8 @@ gulp.task('test:karma-watch', function () {
  * Web Component Testing
  **********************************************************************************************************************/
   // Re-purposed tasks from the web-component-test library; required to build the component in it's final form for wct testing
-gulp.task('test', ['wct:local'],function(done){
-  gulp.watch([global.paths.js,global.paths.sass,global.paths.html,global.paths.testBehaviour], ['wct:local']);
+gulp.task('test', ['wct:local'], function (done) {
+  gulp.watch([global.paths.js, global.paths.sass, global.paths.html, global.paths.testBehaviour], ['wct:local']);
 });
 
 gulp.task('wct:local', ['build'], function (done) {

@@ -1,4 +1,9 @@
 'use strict';
 
-import <%= compNameCamel %> from './../../src/<%= compName %>';
-<%= compNameCamel %>.registerElement();
+import <
+%= compNameCamel % > from
+'./../../src/<%= compName %>';
+<
+%= compNameCamel % >
+.
+registerElement();
