@@ -8,25 +8,29 @@
 @import 'breakpoint';
 // Spacing
 @import 'modular-scale';
+
 //
 /***************************
 ** Optional
 ****************************/
 // Font awesome
-$fa-font-path : '/bower_components/font-awesome/fonts/' !default;
+$fa-font-path: '/bower_components/font-awesome/fonts/' !default;
 @import 'font-awesome';
 //
 /***************************
 ** Component Base Styles
 ****************************/
-<%= compName %> {
-  $dark-blue : #000080;
 
-  #greeting {
-    color : $dark-blue;
-  }
+$dark-blue: #000080;
 
-  button {
-    @extend .fa, .fa-home;
-  }
+:host { // Style for the component wrapper built by shadow dom
+
+}
+
+#greeting {
+  color: $dark-blue;
+}
+
+button {
+  @extend .fa, .fa-home;
 }

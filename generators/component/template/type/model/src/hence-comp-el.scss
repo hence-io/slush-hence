@@ -8,6 +8,7 @@
 //@import 'breakpoint';
 // Spacing
 //@import 'modular-scale';
+
 //
 /***************************
 ** Optional
@@ -19,5 +20,6 @@
 /***************************
 ** Component Base Styles
 ****************************/
-//<%= compName %> {
+
+//:host { // Style for the component wrapper built by shadow dom
 //}
