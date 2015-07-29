@@ -3,8 +3,9 @@
 import gulp from 'gulp';
 import autoprefixer from 'gulp-autoprefixer';
 import rename from 'gulp-rename';
-import concat from 'gulp-concat';
-import compass from 'gulp-compass';
+import concat from 'gulp-concat';<% if(cssProcessor === 'libSass') { %>
+import sass from 'gulp-sass';<% } %><% if(cssProcessor === 'compass') { %>
+import compass from 'gulp-compass';<% } %>
 import sourcemaps from 'gulp-sourcemaps';
 import minifyCss from 'gulp-minify-css';
 import gulpkss from 'gulp-kss';
@@ -28,8 +29,12 @@ let sassCompilation = function (taskName, browserSync, dist = false) {
     gulp.src(global.paths.fonts)
       .pipe(gulp.dest(dest + 'fonts'));
 
-    gulp.src(global.paths.sass)
-      .pipe(compass(compassOptions))
+    gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
+      .pipe(sass({
+        errLogToConsole: true,
+        outputStyle: 'expanded'
+      }).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
+      .pipe(compass(compassOptions))<% } %>
       .pipe(concat(compSassFilename))
       .pipe(autoprefixer())
       .pipe(sourcemaps.init({loadMaps: true})) // loads map

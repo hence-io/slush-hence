@@ -15,7 +15,7 @@ let htmlCompile = function (taskName, dist = false) {
 // Build HTML for distribution.
   gulp.task(taskName, ()=> {
     gulp.src(global.paths.src + compHtmlFilename)
-      .pipe(gulpif(dist, replace('/bower_components', '../..')))
+      //.pipe(replace('</dom-module>', '<link rel="stylesheet" href="css/<%= compName %>.css"><script src="js/<%=compName %>.js"></script></dom-module>'))
       .pipe(rename({
         suffix: '-module'
       }))
