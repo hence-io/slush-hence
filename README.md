@@ -139,13 +139,13 @@ component and tools you wish to create.
 #### Review You Component Structure
 Now that your component has been generated, navigate into it's folder and we will review it's structure.
 
-* gulp
+* ```/gulp```
     * Contains all of the gulp tasks needed to support developing and building your component. With all
     the tireless efforts put into building Hence, you should have no need to affect these at all, however advanced
     users can certainly make adjustments as they see fit.
-* test
+* ```/test```
     * Contains all of the behaviour and unit tests to run against your component.
-* src
+* ```/src```
     * Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
     couple files to support previewing and testing variations of your component in the browser in real time. More
     details on each file are below
