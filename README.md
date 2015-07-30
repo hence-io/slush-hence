@@ -128,7 +128,7 @@ component and tools you wish to create.
 * Git
     * You will be prompted for your github username, and whether or not you wish to have a git repo initialized for
     your component as it's built.
-Configuration:
+* Configuration:
     * Sass processor: You are provide the option to choice to build this component with Compass (by default) or using
      lib-sass if you so desire.
     * Options: All of the optional tools to help you build your component are enabled by default, but you can freely
