@@ -150,7 +150,7 @@ function processAnswers(answers) {
       case options.kss:
         files.push(global.dirs.component.optional + '_sassdocrc');
         _.extend(npm.devDependencies, {
-          "gulp-kss": "^0.0.2"
+          "sc5-styleguide": "^0.3.27",
         });
         break;
       case options.karma:
