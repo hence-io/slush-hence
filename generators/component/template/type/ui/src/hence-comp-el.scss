@@ -1,3 +1,4 @@
+// styleguide:ignore:start
 /***************************
 ** Essentials
 ****************************/
@@ -14,23 +15,67 @@
 ** Optional
 ****************************/
 // Font awesome
-$fa-font-path: '/bower_components/font-awesome/fonts/' !default;
-@import 'font-awesome';
+$fa-font-path : '/bower_components/font-awesome/fonts/' !default;
+@import 'font-awesome'; // do not include unless needed
 //
 /***************************
 ** Component Base Styles
 ****************************/
+// styleguide:ignore:end
+/*
+<%= compName %> Variations
 
-$dark-blue: #000080;
+Styleguide 1.0
+*/
+/*
+Default
 
+markup:
+<<%= compName %>></<%= compName %>>
+*/
 :host { // Style for the component wrapper built by shadow dom
 
 }
 
+/*
+Component Elements
+
+Styleguide 2.0
+*/
+/*
+Colors
+
+$dark-blue - Deep dark blue
+
+markup:
+<div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
+
+Styleguide 2.1
+*/
+
+$dark-blue: #000080;
+
+/*
+Typography
+
+markup:
+<span id="greeting">Greeting</span>
+
+Styleguide 2.2
+*/
 #greeting {
   color: $dark-blue;
 }
 
+/*
+Buttons
+
+markup;
+<button></button>
+
+Styleguide 2.3
+*/
 button {
-  @extend .fa, .fa-home;
+  @extend .fa;
+  @extend .fa-home;
 }

@@ -1,8 +1,10 @@
 'use strict';
 
+import _ from 'lodash';
 import gulp from 'gulp';
 import autoprefixer from 'gulp-autoprefixer';
 import rename from 'gulp-rename';
+import replace from 'gulp-replace';
 import concat from 'gulp-concat';<% if(cssProcessor === 'libSass') { %>
 import sass from 'gulp-sass';<% } %><% if(cssProcessor === 'compass') { %>
 import compass from 'gulp-compass';<% } %>
@@ -20,29 +22,58 @@ let compSassFilename = global.comp.name + '.css';
 /**
  * Sass Tasks
  */
-let sassCompilation = function (taskName, browserSync, dist = false) {
-  let dest = dist ? global.paths.dist : global.paths.tmp;
+let sassCompilation = function (opts) {
+  let requiredTasks = [];
+  opts.dest = opts.dest ? opts.dest : (opts.dist ? global.paths.dist + 'css' : global.paths.tmp + 'css');
+
+  if (opts.dist) {
+    requiredTasks.push('lintsass');
+  }
+
+  // defaults so gulpif knows what is what
+  _.defaults(opts, {
+    dist: false,
+    replace: false,
+    concat: false,
+    bypassSourcemap: false,
+    styleguide: false
+  });
 
   // Compile SASS with sourcemaps + livereload.
-  gulp.task(taskName, ['lintsass'], function () {
-    gulp.src(global.paths.fonts)
-      .pipe(gulp.dest(dest + 'fonts'));
+  gulp.task(opts.taskName, requiredTasks, function () {
+    //gulp.src(global.paths.fonts)
+    //  .pipe(gulp.dest(dest + 'fonts'));
 
-    gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
+    //console.log('Running ',opts);
+
+    let data = gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
       .pipe(sass({
-        errLogToConsole: true,
-        outputStyle: 'expanded'
-      }).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
+          errLogToConsole: true,
+          outputStyle: 'expanded'
+        }).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
       .pipe(compass(compassOptions))<% } %>
-      .pipe(concat(compSassFilename))
-      .pipe(autoprefixer())
-      .pipe(sourcemaps.init({loadMaps: true})) // loads map
-      .pipe(gulpif(dist, minifyCss()))
-      .pipe(gulpif(dist, rename({suffix: '.min'})))
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(dest + 'css'))
-      .pipe(browserSync.stream());
+      .pipe(gulpif(opts.replace, replace(opts.replace.this, opts.replace.with)))
+      .pipe(concat(opts.concat ? opts.concat : compSassFilename))
+      .pipe(autoprefixer());
+
+    if (opts.styleguide) {
+      data.pipe(opts.styleguide.applyStyles());
+    }
+
+    data.pipe(gulpif(!opts.bypassSourcemap, sourcemaps.init({loadMaps: true})))
+      .pipe(gulpif(opts.dist, minifyCss()))
+      .pipe(gulpif(opts.dist, rename({suffix: '.min'})))
+      .pipe(gulpif(!opts.bypassSourcemap, sourcemaps.write('./')))
+      .pipe(gulp.dest(opts.dest));
+
+    // Doesn't work in a gulpif
+    if (opts.browserSync) {
+      data.pipe(opts.browserSync.stream());
+    }
+
+    return data;
   });
 };
 
+export {compassOptions};
 export default sassCompilation;
