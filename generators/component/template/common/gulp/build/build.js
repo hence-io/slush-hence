@@ -9,17 +9,9 @@ import runSeq from 'run-sequence';
 import sourcemaps from 'gulp-sourcemaps';
 import util from 'gulp-util';
 
-// Html
-import minifyHtml from 'gulp-minify-html';
-
 // Images
 import pngquant from 'imagemin-pngquant';
 import imagemin from 'gulp-imagemin';
-
-// Sass
-import autoprefixer from 'gulp-autoprefixer';
-import minifyCss from 'gulp-minify-css';
-import gulpkss from 'gulp-kss';
 
 // JS
 import uglify from 'gulp-uglify';
@@ -33,7 +25,7 @@ import browserSyncConstructor from 'browser-sync';
 let browserSync = browserSyncConstructor.create();
 
 import sassCompilation from './../sass';
-sassCompilation('buildsass', browserSync, true);
+sassCompilation({taskName: 'buildsass', browserSync: browserSync, dist: true});
 
 import htmlCompilation from './../html';
 htmlCompilation('buildhtml', true);

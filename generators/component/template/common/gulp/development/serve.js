@@ -10,7 +10,7 @@ import browserSyncConstructor from 'browser-sync';
 let browserSync = browserSyncConstructor.create();
 
 import sassCompilation from './../sass';
-sassCompilation('sass', browserSync);
+sassCompilation({taskName: 'sass', browserSync: browserSync});
 
 import htmlCompilation from './../html';
 htmlCompilation('html');

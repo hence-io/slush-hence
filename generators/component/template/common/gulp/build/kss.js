@@ -16,7 +16,7 @@ let browserSync = browserSyncConstructor.create();
 /**
  * Sass Tasks
  */
-gulp.task('kss', ['kss:generate', 'kss:apply']);
+gulp.task('kss', ['lintsass','kss:generate', 'kss:apply']);
 
 gulp.task('kss:serve', ['kss'], function () {
   browserSync.init({

@@ -23,7 +23,7 @@ $fa-font-path : '/bower_components/font-awesome/fonts/' !default;
 ****************************/
 // styleguide:ignore:end
 /*
-<%= compName %> Variations
+Component Variations
 
 Styleguide 1.0
 */
@@ -32,9 +32,12 @@ Default
 
 markup:
 <<%= compName %>></<%= compName %>>
-*/
-:host { // Style for the component wrapper built by shadow dom
 
+Styleguide 1.1
+*/
+// Styles for the component wrapper built by shadow dom, any any component globals to apply
+:host {
+  $ms-ratio : $minor-second; // define the modular-scale for this component; DO NO REMOVE, you've been warned. (¬_¬)ﾉ
 }
 
 /*
@@ -65,12 +68,13 @@ Styleguide 2.2
 */
 #greeting {
   color: $dark-blue;
+  font-size: ms(2);
 }
 
 /*
 Buttons
 
-markup;
+markup:
 <button></button>
 
 Styleguide 2.3
@@ -78,4 +82,5 @@ Styleguide 2.3
 button {
   @extend .fa;
   @extend .fa-home;
+  font-size: ms(1.5);
 }
