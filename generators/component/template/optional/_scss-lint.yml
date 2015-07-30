@@ -7,3 +7,5 @@ linters:
     enabled: false
   Comment:
     enabled: false
+  PlaceholderInExtend:
+    enabled: false
