@@ -35,6 +35,7 @@ which work together all focused on their individual concerns. The Hence scaffold
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
+    * HenceComp core
     * Polymer Web Components
     * ES6 / ES2015
         * Babel
@@ -47,6 +48,7 @@ What's under the hood? Hence leverages up and coming tech supported by a solid f
     * ES Lint
     * Scss Lint
     * KSS Style Guide
+        * SC5 Styleguide
     * Web Component Behavioural Testing
     * Karma Unit Testing
     * JS Doc Generation
@@ -72,8 +74,35 @@ Install locally:
 $ git clone https://github.com/hence-io/slush-hence-comp.git
 $ npm i -g ./slush-hence-comp
 ```
+### Building Your First Component - Quick Start
 
-### Building Your First Component
+Generate a new component with the following command, and adjust your options at the prompts:
+```bash
+$ slush hence-comp
+```
+
+Navigate to your component folder, and start your component:
+```bash
+$ gulp
+```
+
+Make some changes to the files in the /src folder, and watch your changes update in real time while building
+your component.
+
+When you have your component in a good place, you can build it to be used for consumption:
+```bash
+$ gulp build
+```
+
+The built component will reside in a ```/dist``` folder. The distribution copy has minified assets (css/js), and
+generates a needed import file consolidating your module and assets, so that you can include it in other components.
+
+With the build complete, you can now easily push your repo to bower or npm. Review those package files and update any
+details you want before doing so.
+
+All done!  If you'd like to know more in depth aspects of the framework, read the Extended build guide below.
+
+### Building Your First Component - Extended
 #### Generate Your Component
 With the component generator installed, we can now start creating our first component.
 
