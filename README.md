@@ -3,16 +3,16 @@
 >
 
 ## About
-Hence is a shift in modern development methodology, focused intently on build web components at it's core, utilizing
-Google's Polymer while having a code base built entirely in ES6 / ES2015.
+Hence is a shift in modern development methodology, focused intently on build web components at it's core utilizing
+Google's Polymer with a code base built entirely in ES6 / ES2015.
 
-Providing a comprehensive scaffolding and build support, you can get up and running with some base line components
-effortlessly, leveraging the power of the HenceComp core, an empowering extensible layer on top of Polymer to provide
- with the flavour of components at your finger tips, and includes some much needed missing abilities not natively
- found yet in Polymer.
+Providing comprehensive scaffolding and build support, you can get up and running with some base line components
+effortlessly. Leveraging the power of the HenceComp core, an empowering extensible layer on top of Polymer, provides
+ you with the specialized component type at your finger tips, including some much needed abilities not
+ natively found in Polymer.
 
 Hence's aim is to provide you with a streamlined development & build processes today for the cutting edge technology
-of tomorrow.
+of tomorrow. Build smaller, build smarter!
 
 ### Component Types
 When creating Hence, fully embracing the web component mindset, we set out to define a key set of component types
