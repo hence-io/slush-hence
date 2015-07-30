@@ -40,11 +40,11 @@ htmlCompilation('buildhtml', true);
 
 // One build task to rule them all.
 gulp.task('build', (done)=> {
-  runSeq('clean', ['buildsass', 'buildimg', 'buildjs'], 'buildhtml', done);
+  runSeq('clean', ['buildsass', 'buildimg', 'buildjs','kss'], 'buildhtml', done);
 });
 
 gulp.task('build:serve', (done)=> {
-  runSeq('clean', ['buildsass', 'buildimg', 'buildjs'], 'buildhtml', function () {
+  runSeq('clean', ['build'], 'buildhtml', function () {
     browserSync.init({
       server: {
         baseDir: ['./']

@@ -35,6 +35,7 @@ function processAnswers(answers) {
       "gulp-babel": "^5.1.0",
       "gulp-cached": "^1.1.0",
       "gulp-concat": "^2.5.2",
+      "gulp-insert": "^0.4.0",
       "gulp-imagemin": "^2.2.1",
       "gulp-minify-css": "^1.1.6",
       "gulp-minify-html": "^1.0.3",

@@ -8,7 +8,6 @@ import sass from 'gulp-sass';<% } %><% if(cssProcessor === 'compass') { %>
 import compass from 'gulp-compass';<% } %>
 import sourcemaps from 'gulp-sourcemaps';
 import minifyCss from 'gulp-minify-css';
-import gulpkss from 'gulp-kss';
 import gulpif from 'gulp-if';
 
 let compassOptions = {
@@ -43,14 +42,6 @@ let sassCompilation = function (taskName, browserSync, dist = false) {
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(dest + 'css'))
       .pipe(browserSync.stream());
-
-    if (dist) {
-      gulp.src(global.paths.sass)
-        .pipe(gulpkss({
-          overview: global.paths.dist + 'css/styleguide.md'
-        }))
-        .pipe(gulp.dest(global.paths.dist + 'css/styleguide'));
-    }
   });
 };
 
