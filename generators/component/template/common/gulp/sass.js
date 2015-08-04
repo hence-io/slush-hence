@@ -16,8 +16,12 @@ import gulpif from 'gulp-if';
 // Fall back include
 import browserSyncConstructor from 'browser-sync';
 let browserSync = browserSyncConstructor.create();
-<% if(cssProcessor === 'compass') { %>
-let compassOptions = {
+<% if(cssProcessor === 'libSass') { %>
+let styleOptions = {
+  errLogToConsole: true,
+  outputStyle: 'expanded'
+};<% } %><% if(cssProcessor === 'compass') { %>
+let styleOptions = {
   style: 'expanded',
   time: true,
   sourcemap: true,
@@ -45,7 +49,6 @@ let sassCompilation = function (opts) {
     replace: false,
     concat: false,
     bypassSourcemap: false,
-    styleguide: false,
     browserSync: browserSync // fall back to prevent issues with live injection
   });
 
@@ -55,21 +58,12 @@ let sassCompilation = function (opts) {
     //  .pipe(gulp.dest(dest + 'fonts'));
 
     let data = gulp.src(global.paths.sass)
-      .pipe(plumber())<% if(cssProcessor === 'libSass') { %>
-      .pipe(sass({
-          errLogToConsole: true,
-          outputStyle: 'expanded'
-        }).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
-      .pipe(compass(compassOptions))<% } %>
+      .pipe(plumber())
+      .pipe(gulpif(!opts.bypassSourcemap, sourcemaps.init({loadMaps: true})))<% if(cssProcessor === 'libSass') { %>
+      .pipe(sass(styleOptions).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
+      .pipe(compass(styleOptions))<% } %>
       .pipe(gulpif(opts.replace, replace(opts.replace.this, opts.replace.with)))
-      .pipe(concat(opts.concat ? opts.concat : compCssFilename));
-
-    // Doesn't work in a gulpif being an object with methods.
-    if (opts.styleguide) {
-      data.pipe(opts.styleguide.applyStyles());
-    }
-
-    data.pipe(gulpif(!opts.bypassSourcemap, sourcemaps.init({loadMaps: true})))
+      .pipe(concat(opts.concat ? opts.concat : compCssFilename))
       .pipe(autoprefixer())
       .pipe(gulpif(opts.dist, minifyCss()))
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))
@@ -81,4 +75,5 @@ let sassCompilation = function (opts) {
   });
 };
 
+export {styleOptions};
 export default sassCompilation;

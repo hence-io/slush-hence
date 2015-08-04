@@ -1,14 +1,15 @@
 'use strict';
 
 import gulp from 'gulp';
-import styleguide from 'sc5-styleguide';
-import compass from 'gulp-compass';
+import styleguide from 'sc5-styleguide';<% if(cssProcessor === 'libSass') { %>
+import sass from 'gulp-sass';<% } %><% if(cssProcessor === 'compass') { %>
+import compass from 'gulp-compass';<% } %>
 
 let styleguideDir = global.paths.dist + 'styleguide/';
 let compSass = global.comp.name + '.scss';
 let compCss = global.comp.name + '.css';
 
-import {compassOptions} from './../sass';
+import {styleOptions} from './../sass';
 
 import browserSyncConstructor from 'browser-sync';
 let browserSync = browserSyncConstructor.create();
@@ -51,8 +52,9 @@ gulp.task('kss:generate', function () {
 });
 
 gulp.task('kss:apply', function () {
-  return gulp.src(global.paths.sass)
-    .pipe(compass(compassOptions))
+  return gulp.src(global.paths.sass)<% if(cssProcessor === 'libSass') { %>
+  .pipe(sass(styleOptions).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
+  .pipe(compass(styleOptions))<% } %>
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(styleguideDir));
 });
