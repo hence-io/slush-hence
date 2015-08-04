@@ -30,6 +30,7 @@ function processAnswers(answers) {
       "browserify": "^10.2.4",
       "del": "^1.2.0",
       "gulp": "^3.9.0",
+      "gulp-plumber": "^1.0.1",
       "gulp-if": "^1.2.5",
       "gulp-autoprefixer": "^2.3.1",
       "gulp-babel": "^5.1.0",
@@ -53,6 +54,7 @@ function processAnswers(answers) {
     dependencies: {
       "consoler": "git://github.com/blitzcodes/consoler",
       "hence-comp": "git://github.com/hence-io/hence-comp",
+      "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",
       "moment": "^2.10.3",
       "string": "^3.3.0"

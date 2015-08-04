@@ -40,6 +40,9 @@ global.paths = {
   'dist': './dist/',
   // Temp folder.
   'tmp': tmpDir,
+  // Output css filepath
+  tmpCssOutput : `${tmpDir}css/`,
+  tmpCssOutputFile : `${tmpDir}css/${global.comp.name}.css`,
   // WCT Test folder
   'testBehaviour': './test/behaviour/**'
 };
