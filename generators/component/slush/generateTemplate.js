@@ -26,8 +26,8 @@ function generateTemplate(files, answers, destDir) {
 
       if (filepath.basename[0] === '_') {
         filepath.basename = '.' + filepath.basename.slice(1);
-      } else if (filepath.basename.indexOf('hence-comp-el') !== -1) {
-        filepath.basename = filepath.basename.replace('hence-comp-el', answers.compFullname);
+      } else if (filepath.basename.indexOf('hence-el') !== -1) {
+        filepath.basename = filepath.basename.replace('hence-el', answers.compFullname);
       }
 
       //console.log('file: '+JSON.stringify(file));

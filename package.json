@@ -1,8 +1,8 @@
 {
-  "name": "slush-hence-comp",
+  "name": "slush-hence",
   "description": "",
   "version": "0.1.0",
-  "homepage": "https://github.com/hence-io/slush-hence-comp",
+  "homepage": "https://github.com/hence-io/slush-hence",
   "author": "Sean 'Blitz' Homer <sean.homer@therefore.ca>",
   "repository": {
     "type": "git",

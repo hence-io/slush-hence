@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 cd ../
-npm i -g slush-hence-comp/
-slush hence-comp
-cd slush-hence-comp
+npm i -g slush-hence/
+slush hence
+cd slush-hence

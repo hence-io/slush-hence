@@ -91,12 +91,11 @@ function processAnswers(answers) {
       break;
     case defaults.compTypes.model:
       _.extend(bower.dependencies, {
-        "hence-comp-ui-card": "git://github.com/hence-io/hence-comp-ui-card",
       });
       break;
     case defaults.compTypes.ui:
-      break;
-    case defaults.compTypes.service:
+      _.extend(bower.dependencies, {
+      });
       break;
   }
 

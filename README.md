@@ -62,23 +62,23 @@ You must have Nodejs installed, with the bower package installed globally. As we
 Sass Compass option, you also must have Ruby & Compass pre-installed.
 
 #### Obtaining the Generator
-To install `slush-hence-comp` globally with NPM. As a preinstall flag, this package will install slush for you globally
+To install `slush-hence` globally with NPM. As a preinstall flag, this package will install slush for you globally
 should you not already have it.
 
 ```bash
-$ npm i -g slush-hence-comp
+$ npm i -g slush-hence
 ```
 
 Install locally:
 ```bash
-$ git clone https://github.com/hence-io/slush-hence-comp.git
-$ npm i -g ./slush-hence-comp
+$ git clone https://github.com/hence-io/slush-hence.git
+$ npm i -g ./slush-hence
 ```
 ### Building Your First Component - Quick Start
 
 Generate a new component with the following command, and adjust your options at the prompts:
 ```bash
-$ slush hence-comp
+$ slush hence
 ```
 
 Navigate to your component folder, and start your component:
@@ -111,7 +111,7 @@ generator will ask you if you wish to create your new component into a sub-folde
 the current folder.
 
 ```bash
-$ slush hence-comp
+$ slush hence
 ```
 
 When the generator begins, you will be asked a series of questions and select some options regarding what kind of

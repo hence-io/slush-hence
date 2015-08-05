@@ -54,12 +54,12 @@ var defaults = (function () {
 
   return {
     currentDir: workingDirName,
-    compPrefix: 'hence-comp',
+    compPrefix: 'hence',
     compName: 'sample',
     githubUser: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
-    compTypes: {schema: 'schema', model: 'model', ui: 'ui', service: 'service'},
+    compTypes: {schema: 'schema', model: 'model', ui: 'ui'},
     compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
     cssProcessors: {compass: 'Sass (Compass)', libSass: 'Sass (lib-sass)'},
     options: [
@@ -81,6 +81,6 @@ var defaults = (function () {
 
 module.exports = {
   defaults: defaults,
-  options:options,
-  checkBoolean:checkBoolean
+  options: options,
+  checkBoolean: checkBoolean
 };

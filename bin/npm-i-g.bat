@@ -1,2 +1,2 @@
 cd ../../
-npm i -g slush-hence-comp/
+npm i -g slush-hence/
