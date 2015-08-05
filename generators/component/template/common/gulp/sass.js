@@ -59,7 +59,7 @@ let sassCompilation = function (opts) {
 
     let data = gulp.src(global.paths.sass)
       .pipe(plumber())
-      .pipe(gulpif(!opts.bypassSourcemap, sourcemaps.init({loadMaps: true})))<% if(cssProcessor === 'libSass') { %>
+      .pipe(gulpif(!opts.bypassSourcemap && !opts.dist, sourcemaps.init({loadMaps: true})))<% if(cssProcessor === 'libSass') { %>
       .pipe(sass(styleOptions).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
       .pipe(compass(styleOptions))<% } %>
       .pipe(gulpif(opts.replace, replace(opts.replace.this, opts.replace.with)))
@@ -67,7 +67,7 @@ let sassCompilation = function (opts) {
       .pipe(autoprefixer())
       .pipe(gulpif(opts.dist, minifyCss()))
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))
-      .pipe(gulpif(!opts.bypassSourcemap, sourcemaps.write('./')))
+      .pipe(gulpif(!opts.bypassSourcemap && !opts.dist, sourcemaps.write('./')))
       .pipe(gulp.dest(opts.dest))
       .pipe(opts.browserSync.stream());
 

@@ -10,18 +10,36 @@
 // Spacing
 @import 'modular-scale';
 
-//
 /***************************
 ** Optional
 ****************************/
-// Font awesome
+// Font awesome, do not include unless needed
 $fa-font-path : '/bower_components/font-awesome/fonts/' !default;
-@import 'font-awesome'; // do not include unless needed
-//
+@import 'font-awesome';
+// styleguide:ignore:end
+/***************************
+** Vars
+****************************/
+/*
+Component Elements
+
+Styleguide 2.0
+*/
+/*
+Colors
+
+$dark-blue - Deep dark blue
+
+markup:
+<div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
+
+Styleguide 2.1
+*/
+$dark-blue : #000080;
+
 /***************************
 ** Component Base Styles
 ****************************/
-// styleguide:ignore:end
 /*
 Component Variations
 
@@ -41,24 +59,6 @@ Styleguide 1.1
 }
 
 /*
-Component Elements
-
-Styleguide 2.0
-*/
-/*
-Colors
-
-$dark-blue - Deep dark blue
-
-markup:
-<div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
-
-Styleguide 2.1
-*/
-
-$dark-blue: #000080;
-
-/*
 Typography
 
 markup:
@@ -67,8 +67,8 @@ markup:
 Styleguide 2.2
 */
 #greeting {
-  color: $dark-blue;
-  font-size: ms(2);
+  color     : $dark-blue;
+  font-size : ms(2);
 }
 
 /*
@@ -82,5 +82,5 @@ Styleguide 2.3
 button {
   @extend .fa;
   @extend .fa-home;
-  font-size: ms(1);
+  font-size : ms(1);
 }

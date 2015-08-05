@@ -27,12 +27,15 @@ let browserSync = browserSyncConstructor.create();
 import sassCompilation from './../sass';
 sassCompilation({taskName: 'buildsass', browserSync: browserSync, dist: true});
 
+import jsCompilation from './../javascript';
+jsCompilation({taskName: 'buildjs', dist: true});
+
 import htmlCompilation from './../html';
-htmlCompilation('buildhtml', true);
+htmlCompilation({taskName: 'buildhtml', dist: true});
 
 // One build task to rule them all.
 gulp.task('build', (done)=> {
-  runSeq('clean', ['buildsass', 'buildimg', 'buildjs','kss'], 'buildhtml', done);
+  runSeq('clean', ['buildsass', 'buildimg', 'buildjs', 'kss'], 'buildhtml', done);
 });
 
 gulp.task('build:serve', (done)=> {
@@ -44,23 +47,6 @@ gulp.task('build:serve', (done)=> {
       startPath: '/dist/index.html'
     });
   });
-});
-
-// Build JS for distribution.
-gulp.task('buildjs', ()=> {
-  browserify(global.paths.distjs, {debug: false})
-    //.add(require.resolve('babelify/polyfill'))
-    .transform(babelify)
-    .bundle().on('error', util.log.bind(util, 'Browserify Error'))
-    .pipe(source(global.comp.name + '.js'))
-    .pipe(buffer())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-    .pipe(uglify({mangle: false}))
-    .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest(global.paths.dist + 'js'));
 });
 
 // Build images for distribution.
