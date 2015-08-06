@@ -51,7 +51,7 @@ let <%= compNameCamel %> = HenceComp({
     document.body.appendChild(el);
 
     // Create a new component, automatically appending to a given target
-    self.appendElementTo({greeting: '... and moar!'}, document.getElementById('newStuff'));
+    self.appendElementTo({greeting: '... and moar!'}, document.getElementById('component-previews'));
   },
 
   /*********************************************************************************************************************
