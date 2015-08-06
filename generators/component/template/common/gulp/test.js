@@ -1,19 +1,18 @@
 'use strict';
 
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import {execSync} from 'child_process';
+import {exec,execSync} from 'child_process';
 import {test as webComponentTester} from 'web-component-tester';
 import util from 'gulp-util';
 
 /***********************************************************************************************************************
  * Karma Unit Testing
  **********************************************************************************************************************/
-gulp.task('test:karma', function () {
-  execSync('npm run test', {stdio: 'inherit'});
+gulp.task('karma', function () {
+  exec('npm run test', (err,stdout)=>{ console.log(stdout); });
 });
 
-gulp.task('test:karma-watch', function () {
+gulp.task('karma:watch', function () {
   execSync('npm run test:watch', {stdio: 'inherit'});
 });
 
@@ -21,8 +20,8 @@ gulp.task('test:karma-watch', function () {
  * Web Component Testing
  **********************************************************************************************************************/
   // Re-purposed tasks from the web-component-test library; required to build the component in it's final form for wct testing
-gulp.task('test', ['wct:local'], function (done) {
-  gulp.watch([global.paths.js, global.paths.sass, global.paths.html, global.paths.testBehaviour], ['wct:local']);
+gulp.task('test', ['wct:local'],function(done){
+  gulp.watch([global.paths.js,global.paths.sass,global.paths.html,global.paths.testBehaviour], ['wct:local']);
 });
 
 gulp.task('wct:local', ['build'], function (done) {
