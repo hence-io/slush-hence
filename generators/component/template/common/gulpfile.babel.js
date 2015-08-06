@@ -1,4 +1,3 @@
-
 import gulp from 'gulp';
 import requireDir from 'require-dir';
 
@@ -6,9 +5,12 @@ var srcDir = './src/';
 var tmpDir = './.tmp/';
 var buildSrcDir = './gulp/src/';
 
-
 global.comp = {
   name: '<%= compName %>',
+  js: '<%= compName %>.js',
+  scss: '<%= compName %>.scss',
+  css: '<%= compName %>.css',
+  html: '<%= compName %>.html',
   camel: '<%= compNameCamel %>'
 };
 
@@ -24,6 +26,8 @@ global.paths = {
   'distjs': buildSrcDir + 'dist.js',
   // Dev JS file
   'devjs': srcDir + 'index.js',
+  // JS sources.
+  'gulp': srcDir + 'gulp/**/*.js',
   // JS sources.
   'js': srcDir + '**/*.js',
   // SASS sources.
@@ -41,8 +45,8 @@ global.paths = {
   // Temp folder.
   'tmp': tmpDir,
   // Output css filepath
-  tmpCssOutput : `${tmpDir}css/`,
-  tmpCssOutputFile : `${tmpDir}css/${global.comp.name}.css`,
+  tmpCssOutput: `${tmpDir}css/`,
+  tmpCssOutputFile: `${tmpDir}css/${global.comp.name}.css`,
   // WCT Test folder
   'testBehaviour': './test/behaviour/**'
 };

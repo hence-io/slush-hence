@@ -25,7 +25,7 @@ let jsCompilation = function (opts) {
     dist: false,
     sourcemap: true,
     browserify: {
-      debug: false
+      debug: true
     }
   });
 
@@ -38,9 +38,9 @@ let jsCompilation = function (opts) {
       .pipe(source(global.comp.name + '.js'))
       .pipe(buffer())
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))
-      .pipe(gulpif(opts.sourcemap,sourcemaps.init({loadMaps: true}))) // loads map from browserify file
+      .pipe(gulpif(opts.sourcemap, sourcemaps.init({loadMaps: true}))) // loads map from browserify file
       .pipe(gulpif(opts.dist, uglify({mangle: false})))
-      .pipe(gulpif(opts.sourcemap,sourcemaps.write('./'))) // writes .map file
+      .pipe(gulpif(opts.sourcemap, sourcemaps.write('./'))) // writes .map file
       .pipe(gulp.dest(opts.dest));
   });
 };
