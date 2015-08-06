@@ -90,12 +90,10 @@ function processAnswers(answers) {
       });
       break;
     case defaults.compTypes.model:
-      _.extend(bower.dependencies, {
-      });
+      _.extend(bower.dependencies, {});
       break;
     case defaults.compTypes.ui:
-      _.extend(bower.dependencies, {
-      });
+      _.extend(bower.dependencies, {});
       break;
   }
 
@@ -151,7 +149,7 @@ function processAnswers(answers) {
       case options.kss:
         files.push(global.dirs.component.optional + '_sassdocrc');
         _.extend(npm.devDependencies, {
-          "sc5-styleguide": "^0.3.27",
+          "sc5-styleguide": "git://github.com/hence-io/sc5-styleguide",
         });
         break;
       case options.karma:
