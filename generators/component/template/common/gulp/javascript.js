@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import gulp  from 'gulp';
+import plumber from 'gulp-plumber';
 import util from 'gulp-util';
 import sourcemaps from 'gulp-sourcemaps';
 import source from 'vinyl-source-stream';
@@ -35,6 +36,7 @@ let jsCompilation = function (opts) {
       //.add(require.resolve('babelify/polyfill'))
       .transform(babelify)
       .bundle().on('error', util.log.bind(util, 'Browserify Error'))
+      .pipe(plumber())
       .pipe(source(global.comp.name + '.js'))
       .pipe(buffer())
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))

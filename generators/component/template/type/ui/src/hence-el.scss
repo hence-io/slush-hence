@@ -1,6 +1,6 @@
 // styleguide:ignore:start
 /***************************
-** Essentials
+** Essentials Libraries
 ****************************/
 // Core
 @import 'compass';
@@ -11,21 +11,25 @@
 @import 'modular-scale';
 
 /***************************
-** Optional
+** Optional Libraries
 ****************************/
 // Font awesome, do not include unless needed
-$fa-font-path : '/bower_components/font-awesome/fonts/' !default;
+$fa-font-path: '/bower_components/font-awesome/fonts/' !default;
 @import 'font-awesome';
 // styleguide:ignore:end
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***************************
-** Vars
-****************************/
-/*
 Component Elements
+
+Styleguide 1.0
+*/
+/***************************
+Component Variations
 
 Styleguide 2.0
 */
-/*
+
+/***************************
 Colors
 
 $dark-blue - Deep dark blue
@@ -33,54 +37,52 @@ $dark-blue - Deep dark blue
 markup:
 <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
 
-Styleguide 2.1
+Styleguide 1.1
 */
-$dark-blue : #000080;
+$dark-blue: #000080;
 
 /***************************
-** Component Base Styles
-****************************/
-/*
-Component Variations
-
-Styleguide 1.0
-*/
-/*
-Default
+Default Component
 
 markup:
 <<%= compName %>></<%= compName %>>
 
-Styleguide 1.1
+Styleguide 2.1
 */
 // Styles for the component wrapper built by shadow dom, any any component globals to apply
 :host {
-  $ms-ratio : $minor-second; // define the modular-scale for this component; DO NO REMOVE, you've been warned. (¬_¬)ﾉ
+  $ms-ratio: $minor-second; // define the modular-scale for this component; DO NO REMOVE, you've been warned. (¬_¬)ﾉ
 }
 
-/*
+/***************************
 Typography
 
 markup:
 <span id="greeting">Greeting</span>
 
-Styleguide 2.2
+Styleguide 1.2
 */
 #greeting {
-  color     : $dark-blue;
-  font-size : ms(2);
+  color: $dark-blue;
+  font-size: ms(2);
 }
 
-/*
+/***************************
 Buttons
 
 markup:
 <button></button>
 
-Styleguide 2.3
+Styleguide 1.3
 */
-button {
+%icon-home {
   @extend .fa;
   @extend .fa-home;
-  font-size : ms(1);
+}
+
+button {
+  &:before {
+    @extend %icon-home;
+  }
+  font-size: ms(1);
 }

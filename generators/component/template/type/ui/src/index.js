@@ -9,5 +9,5 @@ docReady(()=> {
   let componentPreviewBox = document.getElementById('component-previews');
 
   // Spawn various states of the component to preview them side by side
-  <%= compNameCamel %>.appendElementTo({},componentPreviewBox);
+  <%= compNameCamel %>.appendElementTo({}, componentPreviewBox);
 });

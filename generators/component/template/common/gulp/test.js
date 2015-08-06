@@ -1,6 +1,7 @@
 'use strict';
 
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
 import {execSync} from 'child_process';
 import {test as webComponentTester} from 'web-component-tester';
 import util from 'gulp-util';

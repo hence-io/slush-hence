@@ -2,6 +2,7 @@
 
 // Common
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
 import concat from 'gulp-concat';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
@@ -52,6 +53,7 @@ gulp.task('build:serve', (done)=> {
 // Build images for distribution.
 gulp.task('buildimg', ()=> {
   gulp.src(global.paths.img)
+    .pipe(plumber())
     .pipe(imagemin({
       progressive: true,
       svgoPlugins: [{removeViewBox: false}],

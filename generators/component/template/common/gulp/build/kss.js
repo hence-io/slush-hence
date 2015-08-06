@@ -1,6 +1,7 @@
 'use strict';
 
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
 import styleguide from 'sc5-styleguide';
 import compass from 'gulp-compass';
 import replace from 'gulp-replace';
@@ -21,7 +22,7 @@ jsCompilation({taskName: 'kss:js', source: global.paths.devjs, dest: styleguideD
 /**
  * Sass Tasks
  */
-gulp.task('kss', ['lintsass', 'kss:generate', 'kss:apply', 'kss:js', 'kss:html']);
+gulp.task('kss', ['kss:generate', 'kss:apply', 'kss:js', 'kss:html'], ()=> { return browserSync.reload(); });
 
 gulp.task('kss:serve', ['kss'], ()=> {
   browserSync.init({
@@ -31,11 +32,12 @@ gulp.task('kss:serve', ['kss'], ()=> {
     startPath: '/dist/styleguide/index.html'
   });
 
-  gulp.watch([global.paths.sass], ['kss']).on('change', ()=> { return browserSync.reload(); });
+  gulp.watch([`${global.paths.src}**/*`], ['kss', 'lintsass']);
 });
 
 gulp.task('kss:generate', ()=> {
   return gulp.src(global.paths.sass)
+    .pipe(plumber())
     .pipe(styleguide.generate({
       title: 'Component Styleguide',
       server: false,
@@ -55,6 +57,7 @@ gulp.task('kss:generate', ()=> {
 
 gulp.task('kss:apply', ()=> {
   return gulp.src(global.paths.sass)
+    .pipe(plumber())
     .pipe(compass(styleOptions))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(styleguideDir));
@@ -63,6 +66,7 @@ gulp.task('kss:apply', ()=> {
 let compHtmlFilename = global.comp.name + '.html';
 gulp.task('kss:html', ()=> {
   gulp.src(global.paths.src + compHtmlFilename)
+    .pipe(plumber())
     .pipe(replace('</dom-module>',
       `<link rel="import" type="css" href="${global.comp.name}.css\">
        <script src="${global.comp.name}.js\"></script>
