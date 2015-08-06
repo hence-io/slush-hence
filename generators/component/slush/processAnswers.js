@@ -72,7 +72,7 @@ function processAnswers(answers) {
 
   files.push(global.dirs.component.common + '**');
 
-  answers.compFullname = [answers.compPrefix, answers.compType, answers.compNameSlug].join('-');
+  answers.compFullname = [answers.compPrefix, answers.compNameSlug].join('-');
   answers.compNameCamel = S(answers.compFullname).camelize().s;
   answers.compNameCamel = answers.compNameCamel[0].toUpperCase() + answers.compNameCamel.slice(1); // Can't use .capitalize() as it will lowercase the camel humps
   answers.compName = answers.compFullname;

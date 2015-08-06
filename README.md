@@ -35,7 +35,7 @@ which work together all focused on their individual concerns. The Hence scaffold
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
-    * HenceComp core
+    * Hence Polymer Core
     * Polymer Web Components
     * ES6 / ES2015
         * Babel

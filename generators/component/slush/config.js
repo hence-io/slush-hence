@@ -75,7 +75,7 @@ var defaults = (function () {
       new inquirer.Separator(),
       {name: options.editorconfig, checked: true}
     ],
-    folderOption: ['Make a subfolder "[prefix]-[type]-[name]" for it', 'Create it the current folder']
+    folderOption: ['Make a subfolder "[prefix]-[name]" for it', 'Create it the current folder']
   };
 })();
 

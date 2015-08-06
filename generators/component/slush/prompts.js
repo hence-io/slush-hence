@@ -15,19 +15,12 @@ var defaults = require('./config').defaults;
 var prompts = [
   {
     name: 'compPrefix',
-    message: 'Name: "[prefix]-[type]-[name]" What would you like to prefix the component with?',
+    message: 'Name: "[prefix]-[name]" What would you like to prefix the component with?',
     "default": defaults.compPrefix
   },
   {
-    type: 'list',
-    name: 'compType',
-    message: 'Name: "[prefix]-[type]-[name]" What type of component do you want to create?',
-    choices: _.keys(defaults.compTypes),
-    "default": "ui"
-  },
-  {
     name: 'compName',
-    message: 'Name: "[prefix]-[type]-[name]" What is the name of your new component?',
+    message: 'Name: "[prefix]-[name]" What is the name of your new component?',
     "default": defaults.compName
   }, {
     name: 'compDescription',
@@ -53,6 +46,12 @@ var prompts = [
     type: 'confirm',
     name: 'git',
     message: 'Git: Initialize an empty git repo with your details?'
+  }, {
+    type: 'list',
+    name: 'compType',
+    message: 'Configuration: "[prefix]-[name]" What type of component do you want to create?',
+    choices: _.keys(defaults.compTypes),
+    "default": "ui"
   }, {
     type: 'list',
     name: 'cssProcessor',
