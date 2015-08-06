@@ -37,7 +37,7 @@ let jsCompilation = function (opts) {
       .transform(babelify)
       .bundle().on('error', util.log.bind(util, 'Browserify Error'))
       .pipe(plumber())
-      .pipe(source(global.comp.name + '.js'))
+      .pipe(source(global.comp.js))
       .pipe(buffer())
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))
       .pipe(gulpif(opts.sourcemap, sourcemaps.init({loadMaps: true}))) // loads map from browserify file

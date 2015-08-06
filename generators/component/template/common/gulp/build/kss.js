@@ -63,13 +63,12 @@ gulp.task('kss:apply', ()=> {
     .pipe(gulp.dest(styleguideDir));
 });
 
-let compHtmlFilename = global.comp.name + '.html';
 gulp.task('kss:html', ()=> {
-  gulp.src(global.paths.src + compHtmlFilename)
+  gulp.src(global.paths.src + global.comp.html)
     .pipe(plumber())
     .pipe(replace('</dom-module>',
-      `<link rel="import" type="css" href="${global.comp.name}.css\">
-       <script src="${global.comp.name}.js\"></script>
+      `<link rel="import" type="css" href="${global.comp.css}\">
+       <script src="${global.comp.js}\"></script>
         </dom-module>
         `))
     .pipe(rename({suffix: '-styleguide'}))

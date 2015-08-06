@@ -30,8 +30,7 @@ let styleOptions = {
   require: ['susy', 'modular-scale', 'breakpoint', 'font-awesome-sass']
 };
 <% } %>
-let compSassFilename = global.comp.name + '.scss';
-let compCssFilename = global.comp.name + '.css';
+
 /**
  * Sass Tasks
  */
@@ -63,7 +62,7 @@ let sassCompilation = function (opts) {
       .pipe(sass(styleOptions).on('error', sass.logError))<% } %><% if(cssProcessor === 'compass') { %>
       .pipe(compass(styleOptions))<% } %>
       .pipe(gulpif(opts.replace, replace(opts.replace.this, opts.replace.with)))
-      .pipe(concat(opts.concat ? opts.concat : compCssFilename))
+      .pipe(concat(opts.concat ? opts.concat : global.comp.css))
       .pipe(autoprefixer())
       .pipe(gulpif(opts.dist, minifyCss()))
       .pipe(gulpif(opts.dist, rename({suffix: '.min'})))

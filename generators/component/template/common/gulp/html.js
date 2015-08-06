@@ -8,15 +8,13 @@ import replace from 'gulp-replace';
 // Html
 import minifyHtml from 'gulp-minify-html';
 
-let compHtmlFilename = global.comp.name + '.html';
-
 let htmlCompile = function (opts) {
   let {taskName, dist} = opts;
   let dest = dist ? global.paths.dist : global.paths.tmp;
 
   // Build HTML for distribution.
   gulp.task(taskName, ()=> {
-    gulp.src(global.paths.src + compHtmlFilename)
+    gulp.src(global.paths.src + global.comp.html)
       .pipe(plumber())
       .pipe(replace('</dom-module>',
         `<link rel="import" type="css" href="css/${global.comp.name}.css\">
