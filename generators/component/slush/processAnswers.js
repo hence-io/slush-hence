@@ -53,7 +53,7 @@ function processAnswers(answers) {
     },
     dependencies: {
       "consoler": "git://github.com/blitzcodes/consoler",
-      "hence-comp": "git://github.com/hence-io/hence-comp",
+      "hence-polycore": "git://github.com/hence-io/hence-polycore",
       "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",
       "moment": "^2.10.3",

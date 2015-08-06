@@ -4,7 +4,7 @@
     "dictionaries": ["jsdoc"]
   },
   "source": {
-    "include": ["src", "package.json", "README.md","node_modules/hence-comp"],
+    "include": ["src", "package.json", "README.md","node_modules/hence-polycore"],
     "includePattern": ".js$"
   },
   "plugins": [

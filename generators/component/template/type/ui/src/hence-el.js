@@ -3,7 +3,7 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import HenceComp from 'hence-comp';
+import HenceComp from 'hence-polycore';
 
 let is = '<%= compName %>';
 
