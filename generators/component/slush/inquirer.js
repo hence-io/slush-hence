@@ -19,9 +19,36 @@ var processAnswers = require('./processAnswers');
 var generateTemplate = require('./generateTemplate');
 
 function startInquirer(done) {
+  console.log(">\n" +
+    ">  _   _ _____ _   _  ____ _____   _\n" +
+    "> | | | | ____| \\ | |/ ___| ____| (_) ___\n" +
+    "> | |_| |  _| |  \\| | |   |  _|   | |/ _ \\\n" +
+    "> |  _  | |___| |\\  | |___| |___ _| | (_) |\n" +
+    "> |_| |_|_____|_| \\_|\\____|_____(_)_|\\___/\n" +
+    "> \n" +
+    "> Welcome to the Hence Scaffolding Tool. Your component generation is about to be being. You have to option to\n" +
+    "> create a component with a quick install, or dive into a detailed installation shoul you desire.\n" +
+    ">"
+  );
+
   inquirer.prompt(prompts,
     function (answers) {
       var files = processAnswers(answers);
+
+      if (!files) {
+        console.log(">\n" +
+          ">    _   ____  _____ _____ _____ _____ ____ \n" +
+          ">   / \\ |  _ \\|  _  |  _  |_   _| ____|  _ \\ \n" +
+          ">  / _ \\| |_| | | | | |_| / | | |  _| | | | |  \n" +
+          "> | |_| | |_| | |_| |  _ \\  | | | |___| |_| |    \n" +
+          "> |_| |_|____/|_____|_| \\_\\ |_| |_____|____/      \n" +
+          "> \n" +
+          ">                ¯\\_(ツ)_/¯¯\n" +
+          "> \n" +
+          "> We're sorry you decided to stop here, but hope to see you again soon!\n" +
+          ">");
+        return done();
+      }
 
       var destDir = './' + answers.compFullname;
 

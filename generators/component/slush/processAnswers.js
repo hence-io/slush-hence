@@ -15,8 +15,8 @@ var options = require('./config').options;
 var checkBoolean = require('./config').checkBoolean;
 
 function processAnswers(answers) {
-  if (!answers.moveon) {
-    return done();
+  if (!(checkBoolean(answers.start))) {
+    return false;
   }
   answers.compNameSlug = S(answers.compName).slugify().s;
 
@@ -78,7 +78,7 @@ function processAnswers(answers) {
   answers.compName = answers.compFullname;
 
   if (!checkBoolean(answers.git)) {
-    files.push("!" + global.dirs.component.common + '.git/**/*');
+    files.push("!" + global.dirs.component.common + '_git/**/*');
   }
 
   files.push(global.dirs.component.type + answers.compType + '/**');

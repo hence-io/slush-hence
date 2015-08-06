@@ -32,6 +32,11 @@ var options = {
   'editorconfig': 'include editorconfig'
 };
 
+var installOption = {
+  quick: 'Quick',
+  detailed:'Detailed'
+};
+
 var defaults = (function () {
   var workingDirName = path.basename(process.cwd()),
       homeDir, osUserName, configFile, user;
@@ -82,5 +87,6 @@ var defaults = (function () {
 module.exports = {
   defaults: defaults,
   options: options,
+  installOption:installOption,
   checkBoolean: checkBoolean
 };
