@@ -48,7 +48,9 @@ global.paths = {
   tmpCssOutput: `${tmpDir}css/`,
   tmpCssOutputFile: `${tmpDir}css/${global.comp.name}.css`,
   // WCT Test folder
-  'testBehaviour': './test/behaviour/**'
+  'testBehaviour': './test/behaviour/**/*',
+  // Unit Test folder
+  'testUnit': './test/unit/**/*'
 };
 
 // Require all tasks in the 'gulp' folder.
