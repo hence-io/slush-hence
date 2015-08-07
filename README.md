@@ -121,9 +121,9 @@ component and tools you wish to create.
 
 ##### Name
 * Each component should have it's own unique name. The generator will guide you through the process of naming your component using the convention '[prefix]-[type]-[name]'.
-** The Prefix for your component will help to indetify the project where the component will existing
-** The Name is a descriptor for your component unique to your project
-** Selecting different component types will provide you with different configurations to match that type's requirements.
+.* The Prefix for your component will help to indetify the project where the component will existing
+.* The Name is a descriptor for your component unique to your project
+.* Selecting different component types will provide you with different configurations to match that type's requirements.
 
 ##### Details
 * There are 4 questions related to your components details, from description and version, to your name & email for authoring the component.
