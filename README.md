@@ -119,18 +119,18 @@ $ slush hence
 When the generator begins, you will be asked a series of questions and select some options regarding what kind of
 component and tools you wish to create.
 
-* Name
+##### Name
 * There are 3 questions related to your component name and type, prefix/type/name. This will aid in helping to
 define the components name '[prefix]-[type]-[name]'.
 * Selecting different component types will provide you with different configurations to match that type's
 requirements.
-* Details
+##### Details
 * There are 4 questions related to your components details, from description and version, to your name & email
 for authoring the component.
-* Git
+##### Git
 * You will be prompted for your github username, and whether or not you wish to have a git repo initialized for
 your component as it's built.
-* Configuration:
+##### Configuration:
 * Sass processor: You are provide the option to choice to build this component with Compass (by default) or using
 lib-sass if you so desire.
 * Options: All of the optional tools to help you build your component are enabled by default, but you can freely
