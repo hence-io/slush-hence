@@ -11,6 +11,7 @@ var inquirer = require('inquirer');
 var path = require('path');
 
 var defaults = require('./config').defaults;
+var promptOptions = require('./config').promptOptions;
 var options = require('./config').options;
 var checkBoolean = require('./config').checkBoolean;
 
@@ -18,6 +19,9 @@ function processAnswers(answers) {
   if (!(checkBoolean(answers.start))) {
     return false;
   }
+
+  _.defaults(answers, defaults);
+
   answers.compNameSlug = S(answers.compName).slugify().s;
 
   var npm = {
@@ -84,15 +88,15 @@ function processAnswers(answers) {
   files.push(global.dirs.component.type + answers.compType + '/**');
 
   switch (answers.compType) {
-    case defaults.compTypes.schema:
+    case promptOptions.compTypes.schema:
       _.extend(npm.devDependencies, {
         "schemas": "^1.0.0",
       });
       break;
-    case defaults.compTypes.model:
+    case promptOptions.compTypes.model:
       _.extend(bower.dependencies, {});
       break;
-    case defaults.compTypes.ui:
+    case promptOptions.compTypes.ui:
       _.extend(bower.dependencies, {});
       break;
   }
@@ -100,13 +104,13 @@ function processAnswers(answers) {
   //console.log(answers.options);
 
   switch (answers.cssProcessor) {
-    case defaults.cssProcessors.compass:
+    case promptOptions.cssProcessors.compass:
       _.extend(npm.devDependencies, {
         "gulp-compass": "^2.1.0",
       });
       answers.cssProcessor = 'compass';
       break;
-    case defaults.cssProcessors.libSass:
+    case promptOptions.cssProcessors.libSass:
       _.extend(npm.devDependencies, {
         "gulp-sass": "^2.0.1",
       });
@@ -150,6 +154,7 @@ function processAnswers(answers) {
         files.push(global.dirs.component.optional + '_sassdocrc');
         _.extend(npm.devDependencies, {
           "sc5-styleguide": "git://github.com/hence-io/sc5-styleguide",
+          //"sc5-styleguide": "^0.3.27",
         });
         break;
       case options.karma:

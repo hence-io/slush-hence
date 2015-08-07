@@ -11,7 +11,8 @@ var inquirer = require('inquirer');
 var path = require('path');
 
 var defaults = require('./config').defaults;
-var installOption = require('./config').installOption;
+var promptOptions = require('./config').promptOptions;
+var installOptions = promptOptions.installOptions;
 
 function validatePrompt(input) {
 
@@ -31,16 +32,16 @@ function validatePrompt(input) {
 }
 
 function detailedInstallOnly(answer) {
-  return answer.installOption === installOption.detailed;
+  return answer.installOption === installOptions.detailed;
 }
 
 var prompts = [
   {
     type: 'list',
-    name: 'compType',
+    name: 'installOption',
     message: 'Quick set up or detailed?',
-    choices: _.values(installOption),
-    "default": installOption.quick
+    choices: _.values(installOptions),
+    "default": installOptions.quick
   }, {
     name: 'compPrefix',
     message: 'Name: "[prefix]-[name]" What would you like to prefix the component with?',
@@ -54,8 +55,8 @@ var prompts = [
     type: 'list',
     name: 'compType',
     message: 'Details: What type of component do you want to create?',
-    choices: _.keys(defaults.compTypes),
-    "default": "ui"
+    choices: _.keys(promptOptions.compTypes),
+    "default": defaults.compType
   }, {
     name: 'compDescription',
     message: 'Details: Describe your new component:',
@@ -64,7 +65,7 @@ var prompts = [
   }, {
     name: 'compVersion',
     message: 'Details: Starting version of your project?',
-    "default": '0.1.0',
+    "default": defaults.compVersion,
     when: detailedInstallOnly
   }, {
     name: 'authorName',
@@ -90,19 +91,19 @@ var prompts = [
     type: 'list',
     name: 'cssProcessor',
     message: 'Configuration: Which css preprocessor do you wish to use?',
-    choices: _.values(defaults.cssProcessors),
+    choices: _.values(promptOptions.cssProcessors),
     when: detailedInstallOnly
   }, {
     type: 'checkbox',
     name: 'options',
     message: 'Configuration: Select your development options you wish to enabled',
-    choices: defaults.options,
+    choices: promptOptions.optionList,
     when: detailedInstallOnly
   }, {
     type: 'list',
     name: 'folderOption',
     message: 'Configuration: Where do you want these files generated?',
-    choices: defaults.folderOption,
+    choices: promptOptions.folderOptionList,
     when: detailedInstallOnly
   }, {
     type: 'confirm',

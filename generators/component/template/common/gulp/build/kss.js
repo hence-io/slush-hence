@@ -22,9 +22,9 @@ jsCompilation({taskName: 'kss:js', source: global.paths.devjs, dest: styleguideD
 /**
  * Sass Tasks
  */
-gulp.task('kss', ['kss:generate', 'kss:apply', 'kss:js', 'kss:html'], ()=> { return browserSync.reload(); });
+gulp.task('kss:build', ['kss:generate', 'kss:apply', 'kss:js', 'kss:html'], ()=> { return browserSync.reload(); });
 
-gulp.task('kss:serve', ['kss'], ()=> {
+gulp.task('kss', ['kss:build'], ()=> {
   browserSync.init({
     server: {
       baseDir: ['./']

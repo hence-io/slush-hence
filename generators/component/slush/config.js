@@ -32,10 +32,7 @@ var options = {
   'editorconfig': 'include editorconfig'
 };
 
-var installOption = {
-  quick: 'Quick',
-  detailed:'Detailed'
-};
+var folderOptionList = ['Make a subfolder "[prefix]-[name]" for it', 'Create it the current folder'];
 
 var defaults = (function () {
   var workingDirName = path.basename(process.cwd()),
@@ -64,29 +61,43 @@ var defaults = (function () {
     githubUser: osUserName || format(user.name || ''),
     authorName: user.name || '',
     authorEmail: user.email || '',
-    compTypes: {schema: 'schema', model: 'model', ui: 'ui'},
     compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
-    cssProcessors: {compass: 'Sass (Compass)', libSass: 'Sass (lib-sass)'},
-    options: [
-      {name: options.eslint, checked: true},
-      {name: options.esdoc, checked: true},
-      new inquirer.Separator(),
-      {name: options.scsslint, checked: true},
-      {name: options.sassdocs, checked: true},
-      {name: options.kss, checked: true},
-      new inquirer.Separator(),
-      {name: options.karma, checked: true},
-      {name: options.wct, checked: true},
-      new inquirer.Separator(),
-      {name: options.editorconfig, checked: true}
-    ],
-    folderOption: ['Make a subfolder "[prefix]-[name]" for it', 'Create it the current folder']
+    compVersion: '0.1.0',
+    install: true,
+    git: true,
+    compType: 'ui',
+    cssProcessor: 'compass',
+    options: _.values(options),
+    folderOption: folderOptionList[0]
   };
 })();
+
+var promptOptions = {
+  compTypes: {schema: 'schema', model: 'model', ui: 'ui'},
+  cssProcessors: {compass: 'Sass (Compass)', libSass: 'Sass (lib-sass)'},
+  optionList: [
+    {name: options.eslint, checked: true},
+    {name: options.esdoc, checked: true},
+    new inquirer.Separator(),
+    {name: options.scsslint, checked: true},
+    {name: options.sassdocs, checked: true},
+    {name: options.kss, checked: true},
+    new inquirer.Separator(),
+    {name: options.karma, checked: true},
+    {name: options.wct, checked: true},
+    new inquirer.Separator(),
+    {name: options.editorconfig, checked: true}
+  ],
+  folderOptionList: folderOptionList,
+  installOptions: {
+    quick: 'Quick',
+    detailed: 'Detailed'
+  }
+};
 
 module.exports = {
   defaults: defaults,
   options: options,
-  installOption:installOption,
+  promptOptions: promptOptions,
   checkBoolean: checkBoolean
 };
