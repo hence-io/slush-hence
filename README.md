@@ -120,16 +120,18 @@ When the generator begins, you will be asked a series of questions and select so
 component and tools you wish to create.
 
 ##### Name
-* There are 3 questions related to your component name and type, prefix/type/name. This will aid in helping to
-define the components name '[prefix]-[type]-[name]'.
-* Selecting different component types will provide you with different configurations to match that type's
-requirements.
+* Each component should have it's own unique name. The generator will guide you through the process of naming your component using the convention '[prefix]-[type]-[name]'.
+** The Prefix for your component will help to indetify the project where the component will existing
+** The Name is a descriptor for your component unique to your project
+** Selecting different component types will provide you with different configurations to match that type's requirements.
+
 ##### Details
-* There are 4 questions related to your components details, from description and version, to your name & email
-for authoring the component.
+* There are 4 questions related to your components details, from description and version, to your name & email for authoring the component.
+
 ##### Git
 * You will be prompted for your github username, and whether or not you wish to have a git repo initialized for
 your component as it's built.
+
 ##### Configuration:
 * Sass processor: You are provide the option to choice to build this component with Compass (by default) or using
 lib-sass if you so desire.
