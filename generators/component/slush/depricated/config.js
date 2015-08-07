@@ -15,7 +15,7 @@ function format(string) {
   return username.replace(/\s/g, '');
 }
 
-var checkBoolean = function (v) {
+var isTruthy = function (v) {
   var isTrue = v === true || v === "true" || v === "y" || v === "yes" || v === "Y" || v === "Yes" ? true : false;
   v = isTrue;
   return v;
@@ -99,5 +99,5 @@ module.exports = {
   defaults: defaults,
   options: options,
   promptOptions: promptOptions,
-  checkBoolean: checkBoolean
+  isTruthy: isTruthy
 };

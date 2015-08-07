@@ -13,112 +13,39 @@ var path = require('path');
 var defaults = require('./config').defaults;
 var promptOptions = require('./config').promptOptions;
 var options = require('./config').options;
-var checkBoolean = require('./config').checkBoolean;
+var isTruthy = require('./config').isTruthy;
 
-function processAnswers(answers) {
-  if (!(checkBoolean(answers.start))) {
+function processAnswers(results) {
+  if (!isTruthy(results.start)) {
     return false;
   }
 
-  _.defaults(answers, defaults);
-
-  answers.compNameSlug = S(answers.compName).slugify().s;
-
-  var npm = {
-    devDependencies: {
-      "babel": "^5.8.9",
-      "babel-core": "^5.8.9",
-      "babelify": "6.1.2",
-      "browser-sync": "^2.7.13",
-      "bs-html-injector": "^2.0.4",
-      "browserify": "^10.2.4",
-      "del": "^1.2.0",
-      "gulp": "^3.9.0",
-      "gulp-plumber": "^1.0.1",
-      "gulp-if": "^1.2.5",
-      "gulp-autoprefixer": "^2.3.1",
-      "gulp-babel": "^5.1.0",
-      "gulp-cached": "^1.1.0",
-      "gulp-concat": "^2.5.2",
-      "gulp-insert": "^0.4.0",
-      "gulp-imagemin": "^2.2.1",
-      "gulp-minify-css": "^1.1.6",
-      "gulp-minify-html": "^1.0.3",
-      "gulp-rename": "^1.2.2",
-      "gulp-replace": "^0.5.3",
-      "gulp-sourcemaps": "^1.5.2",
-      "gulp-uglify": "^1.2.0",
-      "gulp-util": "^3.0.6",
-      "imagemin-pngquant": "^4.1.0",
-      "require-dir": "^0.3.0",
-      "run-sequence": "^1.1.0",
-      "vinyl-buffer": "^1.0.0",
-      "vinyl-source-stream": "^1.1.0"
-    },
-    dependencies: {
-      "consoler": "git://github.com/blitzcodes/consoler",
-      "hence-polycore": "git://github.com/hence-io/hence-polycore",
-      "doc-ready": "^1.0.3",
-      "lodash": "^3.10.0",
-      "moment": "^2.10.3",
-      "string": "^3.3.0"
-    }
-  };
-
-  var bower = {
-    dependencies: {
-      "polymer": "Polymer/polymer#^1.0.0",
-      "font-awesome": "~4.3.0"
-    }
-  };
+  _.defaults(results, defaults);
 
   var files = [];
 
-  files.push(global.dirs.component.common + '**');
-
-  answers.compFullname = [answers.compPrefix, answers.compNameSlug].join('-');
-  answers.compNameCamel = S(answers.compFullname).camelize().s;
-  answers.compNameCamel = answers.compNameCamel[0].toUpperCase() + answers.compNameCamel.slice(1); // Can't use .capitalize() as it will lowercase the camel humps
-  answers.compName = answers.compFullname;
-
-  if (!checkBoolean(answers.git)) {
+  if (!isTruthy(results.git)) {
     files.push("!" + global.dirs.component.common + '_git/**/*');
-  }
-
-  files.push(global.dirs.component.type + answers.compType + '/**');
-
-  switch (answers.compType) {
-    case promptOptions.compTypes.schema:
-      _.extend(npm.devDependencies, {
-        "schemas": "^1.0.0",
-      });
-      break;
-    case promptOptions.compTypes.model:
-      _.extend(bower.dependencies, {});
-      break;
-    case promptOptions.compTypes.ui:
-      _.extend(bower.dependencies, {});
-      break;
   }
 
   //console.log(answers.options);
 
-  switch (answers.cssProcessor) {
+  switch (results.cssProcessor) {
     case promptOptions.cssProcessors.compass:
       _.extend(npm.devDependencies, {
         "gulp-compass": "^2.1.0",
       });
-      answers.cssProcessor = 'compass';
+      results.cssProcessor = 'compass';
       break;
     case promptOptions.cssProcessors.libSass:
       _.extend(npm.devDependencies, {
         "gulp-sass": "^2.0.1",
       });
-      answers.cssProcessor = 'libSass';
+      results.cssProcessor = 'libSass';
       break;
   }
 
-  answers.options.forEach(function (opt) {
+  results.options.forEach(function (opt) {
     switch (opt) {
       case options.eslint:
         files.push(global.dirs.component.optional + '_eslintrc');
@@ -189,9 +116,9 @@ function processAnswers(answers) {
     }
   });
 
-  answers.npmDevDependencies = JSON.stringify(npm.devDependencies);
-  answers.npmDependencies = JSON.stringify(npm.dependencies);
-  answers.bowerDependencies = JSON.stringify(bower.dependencies);
+  results.npmDevDependencies = JSON.stringify(npm.devDependencies);
+  results.npmDependencies = JSON.stringify(npm.dependencies);
+  results.bowerDependencies = JSON.stringify(bower.dependencies);
 
   return files;
 }

@@ -10,7 +10,7 @@ var S = require('string');
 var inquirer = require('inquirer');
 var path = require('path');
 
-var checkBoolean = require('./config').checkBoolean;
+var isTruthy = require('./config').isTruthy;
 
 function generateTemplate(files, answers, destDir) {
   _.templateSettings = {
@@ -35,7 +35,7 @@ function generateTemplate(files, answers, destDir) {
     }))
     .pipe(conflict(destDir))
     .pipe(gulp.dest(destDir))
-    .pipe(gulpif(checkBoolean(answers.install), install()));
+    .pipe(gulpif(isTruthy(answers.install), install()));
 }
 
 module.exports = generateTemplate;

@@ -23,9 +23,9 @@ global.dirs = {
 
 // Run the component generator by default
 gulp.task('default', function (done) {
-  require('./generators/component/slush/inquirer')(done);
+  require('./generators/component/slush')(done);
 });
 
 gulp.task('component', function (done) {
-  require('./generators/component/slush/inquirer')(done);
+  require('./generators/component/slush')(done);
 });
