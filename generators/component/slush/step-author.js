@@ -39,17 +39,17 @@ var step = function (generator) {
     prompts: [
       {
         name: 'authorName',
-        message: 'Details: What is your name?',
+        message: 'What is your name?',
         "default": defaults.authorName,
         when: generator.validation.detailedInstallOnly
       }, {
         name: 'authorEmail',
-        message: 'Details: What is your email?',
+        message: 'What is your email?',
         "default": defaults.authorEmail,
         when: generator.validation.detailedInstallOnly
       }, {
         name: 'githubUser',
-        message: 'Git: What is your github username?',
+        message: 'What is your github username?',
         "default": defaults.githubUser,
         when: generator.validation.detailedInstallOnly
       }

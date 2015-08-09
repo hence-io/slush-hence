@@ -17,7 +17,7 @@ var step = function (generator) {
       {
         type: 'confirm',
         name: 'start',
-        message: 'Complete: Everything is set, generate this component now?'
+        message: 'Everything is set, generate this component now?'
       }
     ],
     process: function (answers) {

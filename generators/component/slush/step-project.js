@@ -46,30 +46,30 @@ var step = function (generator) {
       {
         type: 'confirm',
         name: 'git',
-        message: 'Git: Initialize an empty git repo with your details?',
+        message: 'Initialize an empty git repo with your details?',
         when: generator.validation.detailedInstallOnly
       }, {
         type: 'list',
         name: 'cssProcessor',
-        message: 'Configuration: Which css preprocessor do you wish to use?',
+        message: ' Which css preprocessor do you wish to use?',
         choices: _.values(options.cssProcessors),
         when: generator.validation.detailedInstallOnly
       }, {
         type: 'checkbox',
         name: 'options',
-        message: 'Configuration: Select your development options you wish to enabled',
+        message: 'Select your development options you wish to enabled',
         choices: options.optionList,
         when: generator.validation.detailedInstallOnly
       }, {
         type: 'list',
         name: 'folderOption',
-        message: 'Configuration: Where do you want these files generated?',
+        message: ' Where do you want these files generated?',
         choices: options.folderOptionList,
         when: generator.validation.detailedInstallOnly
       }, {
         type: 'confirm',
         name: 'install',
-        message: 'Configuration: Auto install npm/bower packages?',
+        message: ' Auto install npm/bower packages?',
         when: generator.validation.detailedInstallOnly
       }
     ],
