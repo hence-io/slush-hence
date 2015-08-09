@@ -8,8 +8,8 @@ Google's Polymer with a code base built entirely in ES6 / ES2015.
 
 Providing comprehensive scaffolding and build support, you can get up and running with some base line components
 effortlessly. Leveraging the power of the HenceComp core, an empowering extensible layer on top of Polymer, provides
- you with the specialized component type at your finger tips, including some much needed abilities not
- natively found in Polymer.
+you with the specialized component type at your finger tips, including some much needed abilities not
+natively found in Polymer.
 
 Hence's aim is to provide you with a streamlined development & build processes today for the cutting edge technology
 of tomorrow. Build smaller, build smarter!
@@ -17,41 +17,41 @@ of tomorrow. Build smaller, build smarter!
 ### Component Types
 When creating Hence, fully embracing the web component mindset, we set out to define a key set of component types
 which work together all focused on their individual concerns. The Hence scaffolding tool helps you to build out these
- specific component types, custom tailored to give you the assets and ready to go code best suited to it's purpose.
+specific component types, custom tailored to give you the assets and ready to go code best suited to it's purpose.
 
 * UI
-    * UI components have the most diverse controls and sections built in, as they encompass the full range of possible
-    Polymer aspects when it comes to planning out and building what you need.
+* UI components have the most diverse controls and sections built in, as they encompass the full range of possible
+Polymer aspects when it comes to planning out and building what you need.
 * Model
-    * Models come with some baked in model specific controls, and require less in the resulting component which you will
-    build upon, yet you are in no way limited in what you can do with them (just adhere to is purpose). It also comes
-    with copies of it's needed override function.
+* Models come with some baked in model specific controls, and require less in the resulting component which you will
+build upon, yet you are in no way limited in what you can do with them (just adhere to is purpose). It also comes
+with copies of it's needed override function.
 * Schema
-    * Schemas like models come with less fluff, largely focused on one purpose, overriding the executeQuery method,
-    which feeds data out to any other components desiring to consume API data, yet again you're not limited in varying
-     how you approach this.
+* Schemas like models come with less fluff, largely focused on one purpose, overriding the executeQuery method,
+which feeds data out to any other components desiring to consume API data, yet again you're not limited in varying
+how you approach this.
 
 ### Hence's Tool Belt
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
-    * Hence Polymer Core
-    * Polymer Web Components
-    * ES6 / ES2015
-        * Babel
-        * Browserify
-    * Sass
-        * Compass
-    * Gulp
-        * BrowserSync
+* Hence Polymer Core
+* Polymer Web Components
+* ES6 / ES2015
+* Babel
+* Browserify
+* Sass
+* Compass
+* Gulp
+* BrowserSync
 * Optional
-    * ES Lint
-    * Scss Lint
-    * KSS Style Guide
-        * SC5 Styleguide
-    * Web Component Behavioural Testing
-    * Karma Unit Testing
-    * JS Doc Generation
+* ES Lint
+* Scss Lint
+* KSS Style Guide
+* SC5 Styleguide
+* Web Component Behavioural Testing
+* Karma Unit Testing
+* JS Doc Generation
 
 >
 
@@ -71,7 +71,10 @@ $ npm i -g slush-hence
 
 Install locally:
 ```bash
-$ git clone git@github.com:hence-io/slush-hence.git && cd slush-hence && git checkout tags/v0.2.0 && npm i -g .
+$ git clone git@github.com:hence-io/slush-hence.git
+$ cd slush-hence
+$ git checkout tags/v0.2.0 
+$ npm install -g .
 ```
 ### Building Your First Component - Quick Start
 
@@ -116,38 +119,40 @@ $ slush hence
 When the generator begins, you will be asked a series of questions and select some options regarding what kind of
 component and tools you wish to create.
 
-* Name
-    * There are 3 questions related to your component name and type, prefix/type/name. This will aid in helping to
-    define the components name '[prefix]-[type]-[name]'.
-    * Selecting different component types will provide you with different configurations to match that type's
-    requirements.
-* Details
-    * There are 4 questions related to your components details, from description and version, to your name & email
-    for authoring the component.
-* Git
-    * You will be prompted for your github username, and whether or not you wish to have a git repo initialized for
-    your component as it's built.
-* Configuration:
-    * Sass processor: You are provide the option to choice to build this component with Compass (by default) or using
-     lib-sass if you so desire.
-    * Options: All of the optional tools to help you build your component are enabled by default, but you can freely
-    toggle them off to create a leaner component stack if you desire.
-    * Folder: The option to generate the component into a sub-folder (default) or in the current folder you're in.
-    * Packages: An option to install the needed npm/bower packages once the files are set up (default) or not.
+##### Name
+* Each component should have it's own unique name. The generator will guide you through the process of naming your component using the convention '[prefix]-[type]-[name]'.
+* *The Prefix* for your component will help to indentify the project where the component will existing
+* *The Name* is a descriptor for your component unique to your project
+* Selecting different component *Types* will provide you with different configurations to match that type's requirements.
+
+##### Details
+* There are 4 questions related to your components details, from description and version, to your name & email for authoring the component.
+
+##### Git
+* You will be prompted for your github username, and whether or not you wish to have a git repo initialized for
+your component as it's built.
+
+##### Configuration:
+* Sass processor: You are provide the option to choice to build this component with Compass (by default) or using
+lib-sass if you so desire.
+* Options: All of the optional tools to help you build your component are enabled by default, but you can freely
+toggle them off to create a leaner component stack if you desire.
+* Folder: The option to generate the component into a sub-folder (default) or in the current folder you're in.
+* Packages: An option to install the needed npm/bower packages once the files are set up (default) or not.
 
 #### Review You Component Structure
 Now that your component has been generated, navigate into it's folder and we will review it's structure.
 
 * ```/gulp```
-    * Contains all of the gulp tasks needed to support developing and building your component. With all
-    the tireless efforts put into building Hence, you should have no need to affect these at all, however advanced
-    users can certainly make adjustments as they see fit.
+* Contains all of the gulp tasks needed to support developing and building your component. With all
+the tireless efforts put into building Hence, you should have no need to affect these at all, however advanced
+users can certainly make adjustments as they see fit.
 * ```/test```
-    * Contains all of the behaviour and unit tests to run against your component.
+* Contains all of the behaviour and unit tests to run against your component.
 * ```/src```
-    * Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
-    couple files to support previewing and testing variations of your component in the browser in real time. More
-    details on each file are below
+* Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
+couple files to support previewing and testing variations of your component in the browser in real time. More
+details on each file are below
 
 ##### Component Files: HTML Template
 The HTML template holds the ```dom-module``` definition of the component. This is the main file where you craft your
@@ -168,7 +173,7 @@ compile the JS Docs when building your component for consumption.
 
 Polymer has as lot going on, and sometimes it's possible to add a method or property to your component which could
 cause conflicts. Hence checks your component for any such conflicts and highlights them to you in console so that you
- can address them before it becomes an issue.
+can address them before it becomes an issue.
 
 ##### Component Files: Scss Style
 The Scss encompasses the style specific to your component, and supporting style libraries. Through Compass and it's
