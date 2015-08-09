@@ -10,13 +10,14 @@ var options = {
 };
 
 var defaults = {
+  dependencies : dependencies,
   installOption: options.installOptions.quick
 };
 
 var step = function (generator) {
-  SlushHence.step({
+  return SlushHence.step({
     content: {
-      header: SlushHence.console.hence(
+      header: SlushHence.ascii.hence(
         " Welcome to the Hence Scaffolding Tool. Your component generation is about to be being. You have to option to\n" +
         " create a component with a quick install, or dive into a detailed installation shoul you desire."
       )
@@ -30,10 +31,8 @@ var step = function (generator) {
         "default": defaults.installOptions
       }
     ],
-    process: function (results) {
-      results.dependencies = dependencies;
-
-      return results;
+    process: function (answers) {
+      _.defaults(answers,defaults);
     }
   });
 };

@@ -10,7 +10,7 @@ var S = require('string');
 var inquirer = require('inquirer');
 var path = require('path');
 
-var isTruthy = require('./config').isTruthy;
+var isTruthy = require('../../../common').validation.isTruthy;
 
 function generateTemplate(files, answers, destDir) {
   _.templateSettings = {

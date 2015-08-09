@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var async = require('async');
-var console = require('./console');
+var ascii = require('./ascii');
 var validation = require('./validation');
 
 var generator = function (opts) {
@@ -11,20 +11,27 @@ var generator = function (opts) {
     }),
     validation: _.defaults(opts.validation || {}, validation),
     start: function () {
-      async.waterfall(_.pluck(self.steps, 'inquire'), function (err, anwsers) {
-        _.extend(self.answers, anwsers);
+      // pull the inquire functions together from the various steps, and remove any undefines
+      var questions = _.chain(self.steps)
+        .map('inquire')
+        .compact()
+        .value();
+
+      async.waterfall(questions, function (err, answers) {
+        _.extend(self.answers, answers);
+        //console.log('final answers', answers);
         self.complete();
       });
     },
     complete: function () {
       if (self.answers.aborted) {
-        headings.aborted(" We're sorry you decided to stop here, but hope to see you again soon!", true);
-      }
-
-      if (_.isFunction(opts.complete)) {
+        ascii.aborted(" We're sorry you decided to stop here, but hope to see you again soon!", true);
+        opts.done();
+      } else if (_.isFunction(opts.complete)) {
         opts.complete();
       } else {
-        headings.done(" Looks like you're all done here!", true);
+        ascii.done(" Looks like you're all done here!", true);
+        opts.done();
       }
     }
   };

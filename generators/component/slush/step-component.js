@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var S = require('string');
 var SlushHence = require('../../../common');
 
 var options = {
@@ -18,12 +19,9 @@ var defaults = {
 };
 
 var step = function (generator) {
-  SlushHence.step({
+  return SlushHence.step({
     content: {
-      header: SlushHence.console.hence(
-        " Welcome to the Hence Scaffolding Tool. Your component generation is about to be being. You have to option to\n" +
-        " create a component with a quick install, or dive into a detailed installation shoul you desire."
-      )
+      header: "COMPONENT DEFINITION: Identify your component"
     },
     prompts: [
       {
@@ -53,26 +51,26 @@ var step = function (generator) {
         when: generator.validation.detailedInstallOnly
       }
     ],
-    process: function (results) {
-      _.defaults(results, defaults);
-      var files = results.files || [];
-      var npm = results.dependencies.npm;
-      var bower = results.dependencies.bower;
+    process: function (answers) {
+      _.defaults(answers,defaults);
+      var files = answers.files || [];
+      var npm = answers.dependencies.npm;
+      var bower = answers.dependencies.bower;
 
-      results.compNameSlug = S(results.compName).slugify().s;
+      answers.compNameSlug = S(answers.compName).slugify().s;
 
-      results.compFullname = [results.compPrefix, results.compNameSlug].join('-');
-      results.compNameCamel = S(results.compFullname).camelize().s;
-      results.compNameCamel = results.compNameCamel[0].toUpperCase() + results.compNameCamel.slice(1); // Can't use .capitalize() as it will lowercase the camel humps
-      results.compName = results.compFullname;
+      answers.compFullname = [answers.compPrefix, answers.compNameSlug].join('-');
+      answers.compNameCamel = S(answers.compFullname).camelize().s;
+      answers.compNameCamel = answers.compNameCamel[0].toUpperCase() + answers.compNameCamel.slice(1); // Can't use .capitalize() as it will lowercase the camel humps
+      answers.compName = answers.compFullname;
 
       files.push(global.dirs.component.common + '**');
-      files.push(global.dirs.component.type + results.compType + '/**');
+      files.push(global.dirs.component.type + answers.compType + '/**');
 
-      switch (results.compType) {
+      switch (answers.compType) {
         case options.compTypes.schema:
           _.extend(npm.devDependencies, {
-            "schemas": "^1.0.0",
+            "schemas": "^1.0.0"
           });
           break;
         case options.compTypes.model:
@@ -83,9 +81,7 @@ var step = function (generator) {
           break;
       }
 
-      results.files = files;
-
-      return results;
+      answers.files = files;
     }
   });
 };

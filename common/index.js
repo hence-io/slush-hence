@@ -1,10 +1,10 @@
-var console = require('./console');
+var ascii = require('./ascii');
 var generator = require('./generator');
 var step = require('./step');
 var validation = require('./validation');
 
 module.exports = {
-  console: console,
+  ascii: ascii,
   generator: generator,
   step: step,
   validation: validation

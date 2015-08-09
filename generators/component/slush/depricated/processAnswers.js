@@ -28,8 +28,6 @@ function processAnswers(results) {
     files.push("!" + global.dirs.component.common + '_git/**/*');
   }
 
-  //console.log(answers.options);
-
   switch (results.cssProcessor) {
     case promptOptions.cssProcessors.compass:
       _.extend(npm.devDependencies, {
