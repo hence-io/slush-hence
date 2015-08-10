@@ -20,14 +20,14 @@ which work together all focused on their individual concerns. The Hence scaffold
 specific component types, custom tailored to give you the assets and ready to go code best suited to it's purpose.
 
 * UI
-* UI components have the most diverse controls and sections built in, as they encompass the full range of possible
+    * UI components have the most diverse controls and sections built in, as they encompass the full range of possible
 Polymer aspects when it comes to planning out and building what you need.
 * Model
-* Models come with some baked in model specific controls, and require less in the resulting component which you will
+    * Models come with some baked in model specific controls, and require less in the resulting component which you will
 build upon, yet you are in no way limited in what you can do with them (just adhere to is purpose). It also comes
 with copies of it's needed override function.
 * Schema
-* Schemas like models come with less fluff, largely focused on one purpose, overriding the executeQuery method,
+    * Schemas like models come with less fluff, largely focused on one purpose, overriding the executeQuery method,
 which feeds data out to any other components desiring to consume API data, yet again you're not limited in varying
 how you approach this.
 
@@ -35,23 +35,23 @@ how you approach this.
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
-* Hence Polymer Core
-* Polymer Web Components
-* ES6 / ES2015
-* Babel
-* Browserify
-* Sass
-* Compass
-* Gulp
-* BrowserSync
+    * Hence Polymer Core
+    * Polymer Web Components
+    * ES6 / ES2015
+        * Babel
+        * Browserify
+    * Sass
+        * Compass
+    * Gulp
+        * BrowserSync
 * Optional
-* ES Lint
-* Scss Lint
-* KSS Style Guide
-* SC5 Styleguide
-* Web Component Behavioural Testing
-* Karma Unit Testing
-* JS Doc Generation
+    * ES Lint
+    * Scss Lint
+    * KSS Style Guide
+        * SC5 Styleguide
+    * Web Component Behavioural Testing
+    * Karma Unit Testing
+    * JS Doc Generation
 
 >
 
@@ -144,13 +144,13 @@ toggle them off to create a leaner component stack if you desire.
 Now that your component has been generated, navigate into it's folder and we will review it's structure.
 
 * ```/gulp```
-* Contains all of the gulp tasks needed to support developing and building your component. With all
+    * Contains all of the gulp tasks needed to support developing and building your component. With all
 the tireless efforts put into building Hence, you should have no need to affect these at all, however advanced
 users can certainly make adjustments as they see fit.
 * ```/test```
-* Contains all of the behaviour and unit tests to run against your component.
+    * Contains all of the behaviour and unit tests to run against your component.
 * ```/src```
-* Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
+    * Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
 couple files to support previewing and testing variations of your component in the browser in real time. More
 details on each file are below
 
