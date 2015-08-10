@@ -73,7 +73,7 @@ Install locally:
 ```bash
 $ git clone git@github.com:hence-io/slush-hence.git
 $ cd slush-hence
-$ git checkout tags/v0.2.0 
+$ git checkout tags/v0.2.5
 $ npm install -g .
 ```
 ### Building Your First Component - Quick Start
