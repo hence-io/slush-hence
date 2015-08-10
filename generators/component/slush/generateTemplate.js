@@ -14,6 +14,11 @@ var sutils = require('slush-util');
 var isTruthy = sutils.validation.isTruthy;
 
 function generateTemplate(answers, destDir) {
+  if (!isTruthy(answers.git)) {
+    git.init({cwd: destDir}, function (err) {
+    });
+  }
+
   return gulp.src(answers.files)
     .pipe(template(_.omit(answers, 'files     '), {
       interpolate: /<%=(.+?)%>/g
@@ -36,11 +41,6 @@ function generateTemplate(answers, destDir) {
     .pipe(gulp.dest(destDir))
     .pipe(gulpif(isTruthy(answers.install), install()))
     .on('end', function () {
-      if (!isTruthy(answers.git)) {
-        git.init({cwd: destDir}, function (err) {
-        });
-      }
-
       console.log(sutils.ascii.done(" Thank you for using the Hence.io component scaffolding. Review the possible\n" +
         " gulp commands available to you on the project documentation, or type 'gulp help' at any time for the\n " +
         "list" +
