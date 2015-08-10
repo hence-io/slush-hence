@@ -136,8 +136,8 @@ var step = function (generator) {
           case projectConfigOptions.kss:
             files.push(global.dirs.component.optional + '_sassdocrc');
             _.extend(npm.devDependencies, {
-              "sc5-styleguide": "git://github.com/hence-io/sc5-styleguide"
-              //"sc5-styleguide": "^0.3.27"
+              //"sc5-styleguide": "git://github.com/hence-io/sc5-styleguide"
+              "sc5-styleguide": "^0.3.27"
             });
             break;
           case projectConfigOptions.karma:
