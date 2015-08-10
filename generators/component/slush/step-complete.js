@@ -1,31 +1,33 @@
 var _ = require('lodash');
-var SlushHence = require('../../../common');
+var sutils = require('slush-util');
 var dependencies = require('./dependencies.json');
 
-var options = {
-};
+var options = {};
 
-var defaults = {
-};
+var defaults = {};
 
 var step = function (generator) {
-  return SlushHence.step({
+  return sutils.step({
     content: {
-      header: "READY TO INSTALL"
+      header: {
+        title: 'Installation Ready',
+        details: sutils.chalk.bold("You've finished providing all of your installation details. ") +
+        " We're ready to configure and install your package."
+      }
     },
     prompts: [
       {
         type: 'confirm',
         name: 'start',
-        message: 'Everything is set, generate this component now?'
+        message: 'Everything is set, proceed to install your package now?'
       }
     ],
     process: function (answers) {
-      _.defaults(answers,defaults);
+      _.defaults(answers, defaults);
       var npm = answers.dependencies.npm;
       var bower = answers.dependencies.bower;
 
-      if (!SlushHence.validation.isTruthy(answers.start)) {
+      if (!sutils.validation.isTruthy(answers.start)) {
         answers.aborted = true;
       }
 

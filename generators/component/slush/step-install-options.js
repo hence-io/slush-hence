@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var SlushHence = require('../../../common');
+var sutils = require('slush-util');
 var dependencies = require('./dependencies.json');
 
 var options = {
@@ -10,15 +10,15 @@ var options = {
 };
 
 var defaults = {
-  dependencies : dependencies,
+  dependencies: dependencies,
   installOption: options.installOptions.quick
 };
 
 var step = function (generator) {
-  return SlushHence.step({
+  return sutils.step({
     content: {
-      header: SlushHence.ascii.hence(
-        " Welcome to the Hence Scaffolding Tool. Your component generation is about to be being. You have to option to\n" +
+      header: sutils.ascii.hence(
+        sutils.chalk.bold(" Welcome to the Hence Scaffolding Tool. ") + "Your component generation is about to be being. You have to option to\n" +
         " create a component with a quick install, or dive into a detailed installation shoul you desire."
       )
     },
@@ -26,13 +26,13 @@ var step = function (generator) {
       {
         type: 'list',
         name: 'installOption',
-        message: 'Quick set up or detailed?',
+        message: 'Preform a quick set up, or detailed?',
         choices: _.values(options.installOptions),
         "default": defaults.installOptions
       }
     ],
     process: function (answers) {
-      _.defaults(answers,defaults);
+      _.defaults(answers, defaults);
     }
   });
 };

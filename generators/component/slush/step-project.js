@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var inquirer = require('inquirer');
-var SlushHence = require('../../../common');
+var sutils = require('slush-util');
 
 var projectConfigOptions = {
   'eslint': 'eslint',
@@ -28,7 +28,7 @@ var options = {
     new inquirer.Separator(),
     {name: projectConfigOptions.editorconfig, checked: true}
   ],
-  folderOptionList: ['Make a subfolder "[prefix]-[name]" for it', 'Create it the current folder']
+  folderOptionList: ['Make a subfolder for it', 'Generate it in the current folder']
 };
 
 var defaults = {
@@ -38,9 +38,12 @@ var defaults = {
 };
 
 var step = function (generator) {
-  return SlushHence.step({
+  return sutils.step({
     content: {
-      header: "PROJECT CONFIGURATION"
+      header: {
+        title: "Project Details",
+        details: "Select the options and configuration you desire to have applied to your new package."
+      }
     },
     prompts: [
       {
@@ -74,12 +77,12 @@ var step = function (generator) {
       }
     ],
     process: function (answers) {
-      _.defaults(answers,defaults);
+      _.defaults(answers, defaults);
       var files = answers.files || [];
       var npm = answers.dependencies.npm;
       var bower = answers.dependencies.bower;
 
-      if (!SlushHence.validation.isTruthy(answers.git)) {
+      if (!sutils.validation.isTruthy(answers.git)) {
         files.push("!" + global.dirs.component.common + '_git/**/*');
       }
 

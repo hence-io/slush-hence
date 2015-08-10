@@ -41,7 +41,8 @@
     "lodash": "^3.10.0",
     "request": "^2.58.0",
     "slush": ">=1.0.0",
-    "string": "^3.3.0"
+    "string": "^3.3.0",
+    "slush-util": "git://github.com/hence-io/slush-util"
   },
   "keywords": [
     "slushgenerator"

@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var S = require('string');
-var SlushHence = require('../../../common');
+var sutils = require('slush-util');
 
 var options = {
   compTypes: {
@@ -12,31 +12,38 @@ var options = {
 
 var defaults = {
   compPrefix: 'hence',
-  compName: 'sample',
+  compName: 'demo',
   compType: options.compTypes.ui,
-  compDescription: 'An element providing a starting point for your own reusable Polymer elements.',
+  compDescription: '',
   compVersion: '0.1.0'
 };
 
 var step = function (generator) {
-  return SlushHence.step({
+  return sutils.step({
     content: {
-      header: "COMPONENT DEFINITION: Identify your component"
+      header: {
+        title: "Component Definition",
+        details: "The following questions will help you to identify, define and describe your component. Your component will\n" +
+        " be named using the convention " + sutils.chalk.dim("[namespace]-[name]") + "."
+      }
     },
     prompts: [
       {
         name: 'compPrefix',
-        message: 'What would you like to [prefix] the component with?',
-        "default": defaults.compPrefix
+        message: '[namespace] What is your component namespace or project name? ',
+        "default": defaults.compPrefix,
+        validate: sutils.validation.promptNotBlank
       },
       {
         name: 'compName',
-        message: 'What is the [name] of your new component?',
-        "default": defaults.compName
+        message: '[name] What do you want to name your new component?',
+        "default": defaults.compName,
+        validate: sutils.validation.promptNotBlank
       }, {
         type: 'list',
         name: 'compType',
-        message: 'What type of component do you want to create?',
+        message: "Select your new component's type from below. " +
+        sutils.chalk.reset.dim('\n  See project documentation to for more information on Hence component types.'),
         choices: _.keys(options.compTypes),
         "default": defaults.compType
       }, {
@@ -52,7 +59,7 @@ var step = function (generator) {
       }
     ],
     process: function (answers) {
-      _.defaults(answers,defaults);
+      _.defaults(answers, defaults);
       var files = answers.files || [];
       var npm = answers.dependencies.npm;
       var bower = answers.dependencies.bower;

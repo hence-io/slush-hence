@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var path = require('path');
-var SlushHence = require('../../../common');
+var sutils = require('slush-util');
 
 var options = {};
 
@@ -32,9 +32,12 @@ var defaults = (function () {
 })();
 
 var step = function (generator) {
-  return SlushHence.step({
+  return sutils.step({
     content: {
-      header: "PROJECT AUTHOR"
+      header: {
+        title: "Author Details",
+        details: "Provide your details as the package's primary author."
+      }
     },
     prompts: [
       {

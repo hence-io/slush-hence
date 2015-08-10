@@ -10,17 +10,6 @@
 
 var gulp = require('gulp');
 
-var componentTemplates = __dirname + '/generators/component/template/';
-
-global.dirs = {
-  component : {
-    common: componentTemplates + 'common/',
-    type: componentTemplates + 'type/',
-    fonts: componentTemplates + 'fonts/',
-    optional: componentTemplates + 'optional/'
-  }
-};
-
 // Run the component generator by default
 gulp.task('default', function (done) {
   require('./generators/component/slush')(done);

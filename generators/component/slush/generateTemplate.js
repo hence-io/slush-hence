@@ -10,15 +10,14 @@ var S = require('string');
 var inquirer = require('inquirer');
 var path = require('path');
 
-var isTruthy = require('../../../common').validation.isTruthy;
+var sutils = require('slush-util');
+var isTruthy = sutils.validation.isTruthy;
 
-function generateTemplate(files, answers, destDir) {
-  _.templateSettings = {
-    interpolate: /<%=(.+?)%>/g
-  };
-
-  return gulp.src(files)
-    .pipe(template(answers, _.templateSettings))
+function generateTemplate(answers, destDir) {
+  return gulp.src(answers.files)
+    .pipe(template(_.omit(answers, 'files     '), {
+      interpolate: /<%=(.+?)%>/g
+    }))
     .pipe(rename(function (filepath) {
       if (filepath.dirname[0] === '_') {
         filepath.dirname = '.' + filepath.dirname.slice(1);
@@ -35,7 +34,19 @@ function generateTemplate(files, answers, destDir) {
     }))
     .pipe(conflict(destDir))
     .pipe(gulp.dest(destDir))
-    .pipe(gulpif(isTruthy(answers.install), install()));
+    .pipe(gulpif(isTruthy(answers.install), install()))
+    .on('end', function () {
+      if (!isTruthy(answers.git)) {
+        git.init({cwd: destDir}, function (err) {
+        });
+      }
+
+      console.log(sutils.ascii.done(" Thank you for using the Hence.io component scaffolding. Review the possible\n" +
+        " gulp commands available to you on the project documentation, or type 'gulp help' at any time for the\n " +
+        "list" +
+        " of commands."));
+
+    });
 }
 
 module.exports = generateTemplate;
