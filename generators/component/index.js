@@ -41,7 +41,7 @@ var scaffold = glush.Scaffold({
     ),
     done: glush.colors.bold(" Thank you for using the Hence.io Scaffolding Tool!\n") +
     " Review the possible gulp commands available to you on the project documentation, or type '" +
-    glush.colors.bold.magenta('gulp help') + "' at any time."
+    glush.colors.bold('gulp help') + "' at any time."
   },
   validation: {
     detailedInstallOnly: function () {

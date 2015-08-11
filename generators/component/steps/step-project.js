@@ -3,14 +3,14 @@ var inquirer = require('inquirer');
 var glush = require('glush-util');
 
 var projectConfigOptions = {
-  'eslint': 'eslint',
-  'esdoc': 'es/js docs',
-  'scsslint': 'scsslint',
-  'sassdocs': 'sassdocs',
-  'kss': 'kss style guide',
-  'karma': 'karma unit testing',
-  'wct': 'wct component testing',
-  'editorconfig': 'include editorconfig'
+  'eslint': 'eslint - Providing ES6 JS linting as part of the dev/build process',
+  'esdoc': 'es/js docs -  Allows generating documentation from you JS comments',
+  'scsslint': 'scsslint - Providing SCSS linting as part of the dev/build process',
+  //'sassdocs': 'sassdocs -  Allows generating documentation from you SCSS comments',
+  'kss': 'kss style guide - Allows generating a KSS style guide as part of the build process',
+  'karma': 'karma unit testing - Provides access to ES6 JS unit testing',
+  'wct': 'wct component testing - Provides access to Web Component Test (WCT) behavioural testing',
+  'editorconfig': 'include editorconfig - Standardizes your projects IDE settings'
 };
 
 var options = {
@@ -27,7 +27,7 @@ var options = {
     {name: projectConfigOptions.esdoc, checked: true},
     new inquirer.Separator(),
     {name: projectConfigOptions.scsslint, checked: true},
-    {name: projectConfigOptions.sassdocs, checked: true},
+    //{name: projectConfigOptions.sassdocs, checked: true},
     {name: projectConfigOptions.kss, checked: true},
     new inquirer.Separator(),
     {name: projectConfigOptions.karma, checked: true},
