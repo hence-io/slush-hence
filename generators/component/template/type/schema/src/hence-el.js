@@ -8,10 +8,10 @@ import {HenceSchema} from 'hence-polycore';
 let is = '<%= compName %>';
 
 /**
- * <%= compNameCamel %> Component
+ * <%= compClassName %> Component
  * @constructor
  */
-let <%= compNameCamel %> = HenceSchema({
+let <%= compClassName %> = HenceSchema({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
@@ -61,4 +61,4 @@ let <%= compNameCamel %> = HenceSchema({
 });
 
 export {is};
-export default <%= compNameCamel %>;
+export default <%= compClassName %>;

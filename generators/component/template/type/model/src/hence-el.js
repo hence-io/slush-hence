@@ -9,10 +9,10 @@ import _each from 'lodash/collection/each';
 let is = '<%= compName %>';
 
 /**
- * <%= compNameCamel %> Component
+ * <%= compClassName %> Component
  * @constructor
  */
-let <%= compNameCamel %> = HenceModel({
+let <%= compClassName %> = HenceModel({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
@@ -41,4 +41,4 @@ let <%= compNameCamel %> = HenceModel({
 });
 
 export {is};
-export default <%= compNameCamel %>;
+export default <%= compClassName %>;

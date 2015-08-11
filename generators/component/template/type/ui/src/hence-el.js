@@ -8,10 +8,10 @@ import HenceComp from 'hence-polycore';
 let is = '<%= compName %>';
 
 /**
- * <%= compNameCamel %> Component
+ * <%= compClassName %> Component
   * @constructor
  */
-let <%= compNameCamel %> = HenceComp({
+let <%= compClassName %> = HenceComp({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
@@ -142,4 +142,4 @@ let <%= compNameCamel %> = HenceComp({
 });
 
 export {is};
-export default <%= compNameCamel %>;
+export default <%= compClassName %>;

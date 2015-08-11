@@ -1,6 +1,6 @@
 'use strict';
 
-import <%= compNameCamel %> from './<%= compName %>';
+import <%= compClassName %> from './<%= compName %>';
 import docReady from 'doc-ready';
 
 // Ensure we're waiting for the document to actually be loaded before interacting with it.
@@ -9,5 +9,5 @@ docReady(()=> {
   let componentPreviewBox = document.getElementById('component-previews');
 
   // Spawn various states of the component to preview them side by side
-  <%= compNameCamel %>.appendElementTo({}, componentPreviewBox);
+  <%= compClassName %>.appendElementTo({}, componentPreviewBox);
 });

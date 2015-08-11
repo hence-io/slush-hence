@@ -1,4 +1,4 @@
 'use strict';
 
-import <%= compNameCamel %> from './<%= compName %>';
-<%= compNameCamel %>.appendElementTo();
+import <%= compClassName %> from './<%= compName %>';
+<%= compClassName %>.appendElementTo();

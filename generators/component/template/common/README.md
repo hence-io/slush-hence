@@ -1,7 +1,7 @@
-# Hence.io Component Stack
-## <%= compFullname %>
+# Hence.io Component Framework
+## <%= compName %>
 
-> 
+>
 
 <%= compDescription %>
 
@@ -9,7 +9,7 @@
 
 Add this component to your polymer project with:
 
-    <link rel="import" href="bower_components/<%= compFullname %>.html" >
+    <link rel="import" href="bower_components/<%= compName %>.html" >
 
 # Development
 
@@ -34,13 +34,19 @@ Will compile assets, serve your web component with live reload, transpile es6, a
 ```$ gulp build```
 Will compile your component for consumption, exporting it to a /dist folder
 
+```$ gulp kss:build```
+Will generate your components style guide into the /dist folder
+
+```gulp kss```
+Will generate your components style guide and render it for you to review
+
 ```$ gulp test```
 Will execute the wct test tool to perform selenium tests on your web component
 
-```$ gulp test:karma```  
+```$ gulp karma```
 Will execute es6 unit testing on your web component's script files
 
-```$ gulp test:karma-watch```  
+```$ gulp karma:watch```
 Will execute the karma tests and set a watcher on the component and test script files
 
 ### Inspired By

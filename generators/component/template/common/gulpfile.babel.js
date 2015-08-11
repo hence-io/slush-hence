@@ -11,7 +11,7 @@ global.comp = {
   scss: '<%= compName %>.scss',
   css: '<%= compName %>.css',
   html: '<%= compName %>.html',
-  camel: '<%= compNameCamel %>'
+  camel: '<%= compClassName %>'
 };
 
 // Specify paths & globbing patterns for tasks.

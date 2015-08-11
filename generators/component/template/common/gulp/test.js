@@ -32,7 +32,7 @@ gulp.task('wct:sauce', ['build'], function (done) {
   webComponentTester({plugins: {local: false, sauce: {}}}, cleanDone(done));
 });
 
-// Slightly modified from wct's usage, using gulp-utils vs chalk, and reducing the error to the final count vs garble.
+// Slightly modified from wct's usage, using gulp-utils vs colors, and reducing the error to the final count vs garble.
 function cleanDone(done) {
   return function (error) {
     if (error) {

@@ -10,7 +10,7 @@
     "web-components",
     "polymer"
   ],
-  "main": "dist/<%= compFullname %>.html",
+  "main": "dist/<%= compName %>.html",
   "homepage": "https://github.com/<%= githubUser %>/<%= compName %>/",
   "ignore": [
     "/.*",
