@@ -12,7 +12,7 @@ var defaults = {
   installOption: options.installOptions.quick
 };
 
-var step = glush.step({
+var step = glush.ScaffoldStep({
   options: options,
   defaults: defaults,
   prompts: [

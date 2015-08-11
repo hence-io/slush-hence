@@ -7,7 +7,7 @@ var defaults = {
   beginInstall: true
 };
 
-var step = glush.step({
+var step = glush.ScaffoldStep({
   options: options,
   defaults: defaults,
   content: {

@@ -18,7 +18,7 @@ var defaults = {
   compVersion: '0.1.0'
 };
 
-var step = glush.step({
+var step = glush.ScaffoldStep({
   options: options,
   defaults: defaults,
   content: {

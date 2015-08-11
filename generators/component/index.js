@@ -20,7 +20,7 @@ var step2 = require('./steps/step-author');
 var step3 = require('./steps/step-project');
 var step4 = require('./steps/step-complete');
 
-var scaffold = glush.scaffold({
+var scaffold = glush.Scaffold({
   answers: {
     dependencies: require('./dependencies.json'),
     dirs: {
