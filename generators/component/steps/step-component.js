@@ -33,13 +33,13 @@ var step = glush.ScaffoldStep({
       name: 'compPrefix',
       message: '[namespace] What is your component namespace or project name? ',
       "default": defaults.compPrefix,
-      validate: glush.validation.promptNotBlank
+      validate: glush.inquirer.promptNotBlank
     },
     {
       name: 'compName',
       message: '[name] What do you want to name your new component?',
       "default": defaults.compName,
-      validate: glush.validation.promptNotBlank
+      validate: glush.inquirer.promptNotBlank
     }, {
       type: 'list',
       name: 'compType',
