@@ -51,12 +51,12 @@ var step = glush.ScaffoldStep({
       name: 'compDescription',
       message: 'Describe your new component:',
       "default": defaults.compDescription,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       name: 'compVersion',
       message: 'Starting version of your project?',
       "default": defaults.compVersion,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
   ],
   process: function (answers) {

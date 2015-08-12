@@ -60,31 +60,31 @@ var step = glush.ScaffoldStep({
       name: 'folderOption',
       message: 'Where do you want your package generated?',
       choices: _.values(options.folderOptionList),
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       type: 'confirm',
       name: 'git',
       message: 'Initialize an empty git repo with your author details?',
       "default": defaults.git,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       type: 'list',
       name: 'cssProcessor',
       message: 'Which css preprocessor do you wish to use?',
       choices: _.values(options.cssProcessors),
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       type: 'checkbox',
       name: 'options',
       message: 'Select your development options you wish to enabled',
       choices: options.optionList,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       type: 'confirm',
       name: 'installDependencies',
       message: 'Auto install npm & bower packages after your package is generated?',
       "default": defaults.installDependencies,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
   ],
   process: function (answers) {

@@ -21,7 +21,7 @@ var step3 = require('./steps/step-project');
 var step4 = require('./steps/step-complete');
 
 var scaffold = glush.Scaffold({
-  answers: {
+  defaults: {
     dependencies: require('./dependencies.json'),
     dirs: {
       template: {
@@ -43,13 +43,12 @@ var scaffold = glush.Scaffold({
     " Review the possible gulp commands available to you on the project documentation, or type '" +
     glush.colors.bold('gulp help') + "' at any time."
   },
-  validation: {
+  inquirer: {
     detailedInstallOnly: function () {
       return scaffold.answers.installOption === step0.options.installOptions.detailed;
     }
   },
-  install: function () {
-    var answers = scaffold.answers;
+  install: function (answers) {
     var destDir = answers.dirs.dest;
 
     // Due to the nature of font files, or any other future files that must not be parsed by the template

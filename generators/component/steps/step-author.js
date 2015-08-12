@@ -47,17 +47,17 @@ var step = glush.ScaffoldStep({
       name: 'authorName',
       message: 'What is your name?',
       "default": defaults.authorName,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       name: 'authorEmail',
       message: 'What is your email?',
       "default": defaults.authorEmail,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {
       name: 'githubUser',
       message: 'What is your github username?',
       "default": defaults.githubUser,
-      when: function () { return step.scaffold.validation.detailedInstallOnly(); }
+      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
   ],
   process: function (answers) {
