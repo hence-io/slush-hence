@@ -48,7 +48,7 @@ var scaffold = glush.Scaffold({
       return scaffold.answers.installOption === step0.options.installOptions.detailed;
     }
   },
-  install: function (answers) {
+  install: function (answers, finished) {
     var destDir = answers.dirs.dest;
 
     // Due to the nature of font files, or any other future files that must not be parsed by the template
@@ -61,11 +61,14 @@ var scaffold = glush.Scaffold({
     // Ensure we're initializing the git folder if requested, so the templated config can override it afterwards
     if (answers.git) {
       git.init({cwd: destDir}, function (err) {
+        if (err) {
+          return finished(err);
+        }
       });
     }
 
     // Start building the pipe for installing the package
-    var pipe = gulp.src(answers.files)
+    var stream = gulp.src(answers.files)
       .pipe(template(_.omit(answers, 'files'), {
         interpolate: /<%=(.+?)%>/g
       }))
@@ -88,10 +91,10 @@ var scaffold = glush.Scaffold({
 
     // Unable to perform this in a gulpif, or else the .on('end'... will not fire afterwards.
     if (answers.installDependencies) {
-      pipe.pipe(install());
+      stream.pipe(install());
     }
 
-    return pipe;
+    return finished(null, stream);
   }
 });
 
