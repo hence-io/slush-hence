@@ -10,6 +10,7 @@
     "no-cond-assign": 0,
     "no-console": 0,
     "no-inner-declarations": 0,
+    "spaced-line-comment": 0,
 
     // Best Practices
     "consistent-return": 0,
@@ -22,12 +23,16 @@
       2,
       "allow-null"
     ],
-
     // "no-lone-blocks": 0, // TODO check if there are real, valid use cases for this in ES 2015+
     "no-else-return": 2,
     "no-throw-literal": 2,
     "no-void": 2,
-    "new-cap": [2, {"capIsNew":false}],
+    "new-cap": [
+      2,
+      {
+        "capIsNew": false
+      }
+    ],
     "wrap-iife": [
       2,
       "inside"
@@ -38,7 +43,8 @@
     //		"strict": [2, "never"], // ES Modules are implicitly strict
 
     // Variables
-    "no-unused-vars": 1, // warning vs error
+    "no-unused-vars": 1,
+    // warning vs error
 
 
     // Node.js
@@ -110,15 +116,6 @@
     "space-in-parens": [
       2,
       "never"
-    ],
-    "spaced-line-comment": [
-      2,
-      "always",
-      {
-        "exceptions": [
-          "/"
-        ]
-      }
     ],
     // ECMAScript 2015
     "no-var": 2,

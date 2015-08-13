@@ -31,8 +31,8 @@
       "vinyl-source-stream": "^1.1.0"
     },
     "dependencies": {
-      "consoler": "git://github.com/blitzcodes/consoler",
-      "hence-polycore": "git://github.com/hence-io/hence-polycore",
+      "consoler": "blitzcodes/consoler",
+      "hence-polycore": "hence-io/hence-polycore",
       "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",
       "moment": "^2.10.3",
