@@ -1,7 +1,7 @@
 {
   "name": "slush-hence",
   "description": "",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "homepage": "https://github.com/hence-io/slush-hence",
   "author": "Sean 'Blitz' Homer <sean.homer@therefore.ca>",
   "repository": {
@@ -21,6 +21,7 @@
     "preinstall": "npm i -g slush"
   },
   "dependencies": {
+    "glush-util": "hence-io/glush-util#v0.1.0",
     "gulp": "^3.6.2",
     "gulp-conflict": "^0.1.1",
     "gulp-git": "^1.2.4",
