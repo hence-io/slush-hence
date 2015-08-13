@@ -1,5 +1,4 @@
 var _ = require('lodash');
-var inquirer = require('inquirer');
 var glush = require('glush-util');
 
 var projectConfigOptions = {
@@ -25,14 +24,14 @@ var options = {
   optionList: [
     {name: projectConfigOptions.eslint, checked: true},
     {name: projectConfigOptions.esdoc, checked: true},
-    new inquirer.Separator(),
+    glush.inquirer.separator,
     {name: projectConfigOptions.scsslint, checked: true},
     //{name: projectConfigOptions.sassdocs, checked: true},
     {name: projectConfigOptions.kss, checked: true},
-    new inquirer.Separator(),
+    glush.inquirer.separator,
     {name: projectConfigOptions.karma, checked: true},
     {name: projectConfigOptions.wct, checked: true},
-    new inquirer.Separator(),
+    glush.inquirer.separator,
     {name: projectConfigOptions.editorconfig, checked: true}
   ]
 };
