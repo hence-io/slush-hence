@@ -9,7 +9,7 @@ var projectConfigOptions = {
   'kss': 'kss style guide - Allows generating a KSS style guide as part of the build process',
   'karma': 'karma unit testing - Provides access to ES6 JS unit testing',
   'wct': 'wct component testing - Provides access to Web Component Test (WCT) behavioural testing',
-  'editorconfig': 'include editorconfig - Standardizes your projects IDE settings'
+  'editorconfig': 'editorconfig - Standardizes your projects IDE settings'
 };
 
 var options = {
@@ -24,14 +24,14 @@ var options = {
   optionList: [
     {name: projectConfigOptions.eslint, checked: true},
     {name: projectConfigOptions.esdoc, checked: true},
-    glush.inquirer.separator,
+    glush.inquirer.separator(),
     {name: projectConfigOptions.scsslint, checked: true},
     //{name: projectConfigOptions.sassdocs, checked: true},
     {name: projectConfigOptions.kss, checked: true},
-    glush.inquirer.separator,
+    glush.inquirer.separator(),
     {name: projectConfigOptions.karma, checked: true},
     {name: projectConfigOptions.wct, checked: true},
-    glush.inquirer.separator,
+    glush.inquirer.separator(),
     {name: projectConfigOptions.editorconfig, checked: true}
   ]
 };
