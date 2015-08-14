@@ -3,7 +3,7 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import HenceComp from 'hence-polycore';
+import {HenceUi} from 'hence-polycore';
 
 let is = '<%= compName %>';
 
@@ -11,7 +11,7 @@ let is = '<%= compName %>';
  * <%= compClassName %> Component
   * @constructor
  */
-let <%= compClassName %> = HenceComp({
+let <%= compClassName %> = HenceUi({
   is, // auto set as is : is, es6 laziness joy!
   /********************************************************************************************************************
    * Initialization
