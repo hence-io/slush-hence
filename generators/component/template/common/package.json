@@ -12,9 +12,7 @@
     "esdocs": "esdoc -c .esdoc.json",
     "sassdocs": "sassdoc src/scss",
     "jsdocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "preinstall": "npm i -g gulp karma-cli",<% if(cssProcessor === 'libSass') { %>
-    "postinstall": "gem update && gem install scss_lint"<% } %><% if(cssProcessor === 'compass') { %>
-    "postinstall": "gem update && gem install compass susy modular-scale breakpoint scss_lint font-awesome-sass"<% } %>
+    "install-deps" : "npm i -g gulp && gulp install-deps"
   },
   "browserify": {
     "transform": [

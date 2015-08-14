@@ -21,7 +21,7 @@
     "preinstall": "npm i -g slush"
   },
   "dependencies": {
-    "glush-util": "hence-io/glush-util#v0.1.2",
+    "glush-util": "hence-io/glush-util",
     "gulp": "^3.6.2",
     "gulp-conflict": "^0.1.1",
     "gulp-git": "^1.2.4",

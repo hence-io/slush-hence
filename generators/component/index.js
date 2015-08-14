@@ -8,6 +8,7 @@ var conflict = require('gulp-conflict');
 var template = require('gulp-template');
 var rename = require('gulp-rename');
 var path = require('path');
+var execSync = require('child_process').execSync;
 
 // glush-utils
 var glush = require('glush-util');
@@ -89,12 +90,11 @@ var scaffold = glush.Scaffold({
       .pipe(conflict(destDir))
       .pipe(gulp.dest(destDir));
 
-    // Unable to perform this in a gulpif, or else the .on('end'... will not fire afterwards.
-    if (answers.installDependencies) {
-      stream.pipe(install());
-    }
-
     return finished(null, stream);
+  },
+  postInstall: function () {
+    execSync('npm run install-deps', {cwd: scaffold.answers.dirs.dest, stdio: 'inherit'});
+    scaffold.finalize();
   }
 });
 
