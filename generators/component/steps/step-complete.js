@@ -24,7 +24,7 @@ var step = glush.ScaffoldStep({
       message: 'Everything is set, proceed to install your package now?'
     }
   ],
-  process: function (answers) {
+  process: function (answers, next) {
     var npm = answers.dependencies.npm;
     var bower = answers.dependencies.bower;
 
@@ -37,6 +37,8 @@ var step = glush.ScaffoldStep({
     answers.npmDevDependencies = JSON.stringify(npm.devDependencies);
     answers.npmDependencies = JSON.stringify(npm.dependencies);
     answers.bowerDependencies = JSON.stringify(bower.dependencies);
+
+    next();
   }
 });
 

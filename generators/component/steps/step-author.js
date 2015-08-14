@@ -59,9 +59,7 @@ var step = glush.ScaffoldStep({
       "default": defaults.githubUser,
       when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
-  ],
-  process: function (answers) {
-  }
+  ]
 });
 
 module.exports = step;

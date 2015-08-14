@@ -33,13 +33,13 @@ var step = glush.ScaffoldStep({
       name: 'compPrefix',
       message: '[namespace] What is your component namespace or project name? ',
       "default": defaults.compPrefix,
-      validate: glush.inquirer.promptNotBlank
+      validate: glush.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
     },
     {
       name: 'compName',
       message: '[name] What do you want to name your new component?',
       "default": defaults.compName,
-      validate: glush.inquirer.promptNotBlank
+      validate: glush.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
     }, {
       type: 'list',
       name: 'compType',
@@ -59,7 +59,7 @@ var step = glush.ScaffoldStep({
       when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
   ],
-  process: function (answers) {
+  process: function (answers, next) {
     // files
     var files = answers.files;
     // dependencies
@@ -91,6 +91,8 @@ var step = glush.ScaffoldStep({
         _.extend(bower.dependencies, {});
         break;
     }
+
+    next();
   }
 });
 

@@ -40,8 +40,7 @@ var defaults = {
   git: true,
   folderOption: options.folderOptionList.subFolder,
   cssProcessor: options.cssProcessors.compass,
-  options: _.values(projectConfigOptions),
-  installDependencies: true
+  options: _.values(projectConfigOptions)
 };
 
 var step = glush.ScaffoldStep({
@@ -78,15 +77,9 @@ var step = glush.ScaffoldStep({
       message: 'Select your development options you wish to enabled',
       choices: options.optionList,
       when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
-    }, {
-      type: 'confirm',
-      name: 'installDependencies',
-      message: 'Auto install npm & bower packages after your package is generated?',
-      "default": defaults.installDependencies,
-      when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }
   ],
-  process: function (answers) {
+  process: function (answers, next) {
     // files
     var files = answers.files;
     // dependencies
@@ -194,6 +187,8 @@ var step = glush.ScaffoldStep({
           break;
       }
     });
+
+    next();
   }
 });
 

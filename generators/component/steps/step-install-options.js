@@ -23,9 +23,7 @@ var step = glush.ScaffoldStep({
       choices: _.values(options.installOptions),
       "default": defaults.installOptions
     }
-  ],
-  process: function (answers) {
-  }
+  ]
 });
 
 module.exports = step;
