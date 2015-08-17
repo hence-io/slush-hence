@@ -10,9 +10,7 @@
 
 var gulp = require('gulp');
 
-var componentScaffold = function (done) {
-  require('./generators/component')(done);
-};
+var componentScaffold = require('./generators/component');
 
 // Run the component generator by default
 gulp.task('default', componentScaffold);

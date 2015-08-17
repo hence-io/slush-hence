@@ -93,7 +93,13 @@ var scaffold = glush.Scaffold({
     return finished(null, stream);
   },
   postInstall: function (answers, finalize) {
-    execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
+    if (answers.installDependencies) {
+      execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
+    } else {
+      scaffold.content.done += "\n You chose not to install this packages dependencies. Please ensure to do this" +
+        " before attempting to utilize it by running '" + glush.colors.bold('npm run install-deps') + "'."
+    }
+
     finalize();
   }
 });
