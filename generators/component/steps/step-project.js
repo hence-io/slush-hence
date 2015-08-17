@@ -2,14 +2,14 @@ var _ = require('lodash');
 var glush = require('glush-util');
 
 var projectConfigOptions = {
-  'eslint': 'eslint - Providing ES6 JS linting as part of the dev/build process',
-  'esdoc': 'es/js docs -  Allows generating documentation from you JS comments',
-  'scsslint': 'scsslint - Providing SCSS linting as part of the dev/build process',
+  'eslint': 'eslint',
+  'esdoc': 'es/js docs',
+  'scsslint': 'scsslint',
   //'sassdocs': 'sassdocs -  Allows generating documentation from you SCSS comments',
-  'kss': 'kss style guide - Allows generating a KSS style guide as part of the build process',
-  'karma': 'karma unit testing - Provides access to ES6 JS unit testing',
-  'wct': 'wct component testing - Provides access to Web Component Test (WCT) behavioural testing',
-  'editorconfig': 'editorconfig - Standardizes your projects IDE settings'
+  'kss': 'kss style guide',
+  'karma': 'karma unit testing',
+  'wct': 'wct component testing',
+  'editorconfig': 'editorconfig'
 };
 
 var options = {
@@ -75,7 +75,9 @@ var step = glush.ScaffoldStep({
     }, {
       type: 'checkbox',
       name: 'options',
-      message: 'Select your development options you wish to enabled',
+      message: 'Select your development options you wish to enabled:' +
+      glush.colors.reset.dim('\n  View option details on the site' +
+        ' documentation: https://github.com/hence-io/slush-hence#project-details'),
       choices: options.optionList,
       when: function () { return step.scaffold.inquirer.detailedInstallOnly(); }
     }, {

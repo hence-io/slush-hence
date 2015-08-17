@@ -35,23 +35,23 @@ how you approach this.
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
-    * Hence Polymer Core
-    * Polymer Web Components
-    * ES6 / ES2015
-        * Babel
-        * Browserify
-    * Sass
-        * Compass
-    * Gulp
-        * BrowserSync
+  * Hence Polymer Core
+  * Polymer Web Components
+  * ES6 / ES2015
+    * Babel
+    * Browserify
+  * Sass
+    * Compass
+  * Gulp
+    * BrowserSync
 * Optional
-    * ES Lint
-    * Scss Lint
-    * KSS Style Guide
-        * SC5 Styleguide
-    * Web Component Behavioural Testing
-    * Karma Unit Testing
-    * JS Doc Generation
+  * ES Lint
+  * Scss Lint
+  * KSS Style Guide
+    * SC5 Styleguide
+  * Web Component Behavioural Testing
+  * Karma Unit Testing
+  * JS Doc Generation
 
 >
 
@@ -138,6 +138,13 @@ your component as it's built.
 lib-sass if you so desire.
 * Options: All of the optional tools to help you build your component are enabled by default, but you can freely
 toggle them off to create a leaner component stack if you desire.
+  * eslint - Providing ES6 JS linting as part of the dev/build process
+  * es/js docs - Allows generating documentation from you JS comments
+  * scsslint - Providing SCSS linting as part of the dev/build process
+  * kss style guide - Allows generating a KSS style guide as part of the build process
+  * karma unit testing - Provides access to ES6 JS unit testing
+  * wct component testing - Provides access to Web Component Test (WCT) behavioural testing
+  * editorconfig - Standardizes your projects IDE settings
 * Folder: The option to generate the component into a sub-folder (default) or in the current folder you're in.
 * Packages: An option to install the needed npm/bower packages once the files are set up (default) or not.
 
@@ -145,13 +152,13 @@ toggle them off to create a leaner component stack if you desire.
 Now that your component has been generated, navigate into it's folder and we will review it's structure.
 
 * ```/gulp```
-    * Contains all of the gulp tasks needed to support developing and building your component. With all
+  * Contains all of the gulp tasks needed to support developing and building your component. With all
 the tireless efforts put into building Hence, you should have no need to affect these at all, however advanced
 users can certainly make adjustments as they see fit.
 * ```/test```
-    * Contains all of the behaviour and unit tests to run against your component.
+  * Contains all of the behaviour and unit tests to run against your component.
 * ```/src```
-    * Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
+  * Contains all of your source files used to build your component, with it's dedicated html/js/scss files, and a
 couple files to support previewing and testing variations of your component in the browser in real time. More
 details on each file are below
 

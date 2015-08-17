@@ -44,7 +44,7 @@ var step = glush.ScaffoldStep({
       type: 'list',
       name: 'compType',
       message: "Select your new component's type from below. " +
-      glush.colors.reset.dim('\n  See project documentation to for more information on Hence component types.'),
+      glush.colors.reset.dim('\n  See project documentation to for more information on Hence component types.\n'),
       choices: _.keys(options.compTypes),
       "default": defaults.compType
     }, {
