@@ -5,14 +5,12 @@
 import console from 'consoler';
 import {HenceUi} from 'hence-polycore';
 
-let is = '<%= compName %>';
-
 /**
  * <%= compClassName %> Component
   * @constructor
  */
 let <%= compClassName %> = HenceUi({
-  is, // auto set as is : is, es6 laziness joy!
+  is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization
    ********************************************************************************************************************/
@@ -120,8 +118,6 @@ let <%= compClassName %> = HenceUi({
    * Element Behaviour
    ********************************************************************************************************************/
 
-  behavior: [],
-
   /**
    * Does some secret magic!
    * @private
@@ -138,8 +134,9 @@ let <%= compClassName %> = HenceUi({
    */
   sayHello(greeting ='Hello World!') {
     return '<%= compName %> says, ' + greeting;
-  }
+  },
+
+  behaviors: []
 });
 
-export {is};
 export default <%= compClassName %>;

@@ -5,60 +5,45 @@
 import console from 'consoler';
 import {HenceSchema} from 'hence-polycore';
 
-let is = '<%= compName %>';
-
 /**
  * <%= compClassName %> Component
  * @constructor
  */
 let <%= compClassName %> = HenceSchema({
-  is, // auto set as is : is, es6 laziness joy!
+  is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization
    ********************************************************************************************************************/
   properties: {},
 
   /*********************************************************************************************************************
-   * Event Listeners
-   ********************************************************************************************************************/
-
-  /**
-   * When working with listeners, if their target element doesn’t exist on the DOM you get a very basic nonspecific
-   * error 'Uncaught TypeError: Invalid value used as weak map key’!  Make sure to review the listeners you set up
-   * against you DOM elements. By default listeners look for IDs on elements so ‘myButton.tap’ will watch click/touches
-   * on a #myButton element in the component
-   */
-  listeners: {},
-
-  /*********************************************************************************************************************
-   * Element DOM Hooks
-   ********************************************************************************************************************/
-
-    ready() {
-    this.async(()=> {
-      //console.log('attached::_executeQuery on', this.action);
-      this._executeQuery();
-    })
-  },
-
-
-  /*********************************************************************************************************************
    * Element Behaviour
    ********************************************************************************************************************/
 
-    _executeQuery() {
+  /**
+   * Determine the action and query passed in to handle the request and provide whatever state data is required along.
+   * Executed by the ```render()``` function
+   *
+   * @private
+   */
+  _executeQuery(done) {
     let self = this;
-    let query = self.query || {};
-    let results = self.results || [];
+    let {action,query} = self;
+    let results = [];
+    let err;
 
-    switch (this.action) {
+    switch (action) {
+      case 'someAction':
+        // do some api/ajax requests with the query requested
+
+        // send back the final results to allow the consuming component to leverage it
+        return done(err, results);
+      default:
+        return done(err, results);
     }
+  },
 
-    //console.log('_executeQuery ', query, results);
-
-    return results;
-  }
+  behaviors: []
 });
 
-export {is};
 export default <%= compClassName %>;

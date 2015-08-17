@@ -6,14 +6,12 @@ import console from 'consoler';
 import {HenceModel} from 'hence-polycore';
 import _each from 'lodash/collection/each';
 
-let is = '<%= compName %>';
-
 /**
  * <%= compClassName %> Component
  * @constructor
  */
 let <%= compClassName %> = HenceModel({
-  is, // auto set as is : is, es6 laziness joy!
+  is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization
    ********************************************************************************************************************/
@@ -40,5 +38,4 @@ let <%= compClassName %> = HenceModel({
   behaviors: []
 });
 
-export {is};
 export default <%= compClassName %>;
