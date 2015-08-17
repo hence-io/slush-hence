@@ -92,9 +92,9 @@ var scaffold = glush.Scaffold({
 
     return finished(null, stream);
   },
-  postInstall: function () {
-    execSync('npm run install-deps', {cwd: scaffold.answers.dirs.dest, stdio: 'inherit'});
-    scaffold.finalize();
+  postInstall: function (answers, finalize) {
+    execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
+    finalize();
   }
 });
 
