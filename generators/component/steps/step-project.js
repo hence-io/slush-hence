@@ -8,7 +8,7 @@ var projectConfigOptions = {
   //'sassdocs': 'sassdocs -  Allows generating documentation from you SCSS comments',
   'kss': 'kss style guide',
   'karma': 'karma unit testing',
-  'wct': 'wct component testing',
+  'wct': 'wct behavioural testing',
   'editorconfig': 'editorconfig'
 };
 
