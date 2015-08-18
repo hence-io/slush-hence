@@ -1,11 +1,11 @@
 /*
- * slush-slush-gen
- * https://github.com/Sean/slush-slush-gen
- *
- * Copyright (c) 2015, Sean Homer
- * Licensed under the MIT license.
- */
+  _   _ _____ _   _  ____ _____   _
+ | | | | ____| \ | |/ ___| ____| (_) ___
+ | |_| |  _| |  \| | |   |  _|   | |/ _ \
+ |  _  | |___| |\  | |___| |___ _| | (_) |
+ |_| |_|_____|_| \_|\____|_____(_)_|\___/
 
+*/
 'use strict';
 
 var gulp = require('gulp');
