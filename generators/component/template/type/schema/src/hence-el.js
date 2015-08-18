@@ -3,13 +3,13 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import {HenceSchema} from 'hence-polycore';
+import Hence from 'hence-component-framework';
 
 /**
  * <%= compClassName %> Component
  * @constructor
  */
-let <%= compClassName %> = HenceSchema({
+let <%= compClassName %> = Hence.Schema({
   is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization

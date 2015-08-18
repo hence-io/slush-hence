@@ -3,14 +3,14 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import {HenceModel} from 'hence-polycore';
+import Hence from 'hence-component-framework';
 import _each from 'lodash/collection/each';
 
 /**
  * <%= compClassName %> Component
  * @constructor
  */
-let <%= compClassName %> = HenceModel({
+let <%= compClassName %> = Hence.Model({
   is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization

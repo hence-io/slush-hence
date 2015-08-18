@@ -3,13 +3,13 @@
  * @module <%= compName %>
  */
 import console from 'consoler';
-import {HenceUi} from 'hence-polycore';
+import Hence from 'hence-component-framework';
 
 /**
  * <%= compClassName %> Component
   * @constructor
  */
-let <%= compClassName %> = HenceUi({
+let <%= compClassName %> = Hence.Ui({
   is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization

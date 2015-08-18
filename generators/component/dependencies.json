@@ -32,7 +32,7 @@
     },
     "dependencies": {
       "consoler": "blitzcodes/consoler",
-      "hence-polycore": "hence-io/hence-polycore",
+      "hence-component-framework": "hence-io/hence-component-framework",
       "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",
       "moment": "^2.10.3",
