@@ -1,4 +1,4 @@
-# Hence Component Framework
+# Hence Component Stack
 
 >
 
@@ -13,6 +13,12 @@ natively found in Polymer.
 
 Hence's aim is to provide you with a streamlined development & build processes today for the cutting edge technology
 of tomorrow. Build smaller, build smarter!
+
+## [Hence Component Framework](https://github.com/hence-io/hence-component-framework)
+
+To find out about all of these concepts in depth, and the full capabilities of the Hence Component Framework, detailed
+documentation is featured on it's project page:
+[Hence Component Framework](https://github.com/hence-io/hence-component-framework).
 
 ### Component Types
 When creating Hence, fully embracing the web component mindset, we set out to define a key set of component types
