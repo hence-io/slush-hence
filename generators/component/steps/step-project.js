@@ -188,7 +188,8 @@ var step = glush.ScaffoldStep({
         case projectConfigOptions.wct:
           files.push(optionalDir + 'wct.conf.js');
           _.extend(npm.devDependencies, {
-            "web-component-tester": "^3.2.0"
+            "web-component-tester": "^3.2.0",
+            "web-component-tester-istanbul": "^0.8.0"
           });
           break;
         case projectConfigOptions.editorconfig:
