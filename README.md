@@ -35,7 +35,7 @@ how you approach this.
 What's under the hood? Hence leverages up and coming tech supported by a solid foundation of dependable tools.
 
 * Included
-  * Hence Polymer Core
+  * Hence Component Framework
   * Polymer Web Components
   * ES6 / ES2015
     * Babel
