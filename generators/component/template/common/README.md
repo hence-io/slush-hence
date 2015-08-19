@@ -9,7 +9,7 @@
 
 Add this component to your polymer project with:
 
-    <link rel="import" href="bower_components/<%= compName %>.html" >
+    <link rel="import" href="bower_components/<%= compName %>/<%= compName %>.html" >
 
 # Development
 
@@ -17,14 +17,13 @@ All development takes place leveraging the files in the /src & /test folders.
 
 ## Dependencies
 
-Element dependencies are managed via NPM & [Bower](http://bower.io/). You can
-install that via:
+Element dependencies are managed via NPM & [Bower](http://bower.io/). You must have bower installed first:
 
     npm install -g bower
 
-Then, go ahead and download the element's dependencies:
+Then, go ahead and conveniently install the element's dependencies:
 
-    npm i && bower i
+    npm run install-deps
 
 ## Available Gulp Commands
 
