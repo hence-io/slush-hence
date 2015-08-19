@@ -64,24 +64,22 @@ What's under the hood? Hence leverages up and coming tech supported by a solid f
 ## Getting Started
 ### Installation
 #### Prerequisites
-You must have Nodejs installed, with the bower package installed globally. As well, should you choose to use the
-Sass Compass option, you also must have Ruby & Compass pre-installed.
+You must have Nodejs installed. As well, you also must have Ruby pre-installed if you wish to leverage Sass Compass
+or the Scss Linter (both are optional).
 
 #### Obtaining the Generator
-To install `slush-hence` globally with NPM. As a preinstall flag, this package will install slush for you globally
-should you not already have it.
+When installing `slush-hence` globally with NPM, as a preinstall flag, this package will automatically install slush &
+bower for you globally should you not already have them.
 
 ```bash
 $ npm i -g slush-hence
 ```
 
-Install locally:
+Installing through git:
 ```bash
-$ git clone git@github.com:hence-io/slush-hence.git
-$ cd slush-hence
-$ git checkout tags/v0.2.7
-$ npm install -g .
+$ npm install -g hence-io/slush-hence#v0.2.7
 ```
+
 ### Building Your First Component - Quick Start
 
 Generate a new component with the following command, and adjust your options at the prompts:

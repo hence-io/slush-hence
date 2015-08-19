@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "echo \"No tests\"",
-    "preinstall": "npm i -g slush"
+    "preinstall": "npm i -g slush bower"
   },
   "dependencies": {
     "glush-util": "hence-io/glush-util",
