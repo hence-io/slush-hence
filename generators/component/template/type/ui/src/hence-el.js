@@ -7,7 +7,7 @@ import Hence from 'hence-component-framework';
 
 /**
  * <%= compClassName %> Component
-  * @constructor
+ * @constructor
  */
 let <%= compClassName %> = Hence.Ui({
   is: '<%= compName %>',
