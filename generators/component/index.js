@@ -1,5 +1,6 @@
 // Plugins
 var _ = require('lodash');
+var async = require('async');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var git = require('gulp-git');
@@ -106,7 +107,47 @@ var scaffold = glush.Scaffold({
 });
 
 module.exports = function (done) {
-  scaffold.start([step0, step1, step2, step3, step4], done);
+  var steps = [step0, step1, step2, step3, step4];
 
-  return scaffold;
+  if (glush.env._.length > 1) {
+    var doneMessage = scaffold.defaults.done;
+    scaffold.defaults.done = ''
+
+
+    var installOptions = [];
+    var installs = _.chain(glush.env._)
+      .filter(function (arg) { return arg !== 'hence'; })
+      .map(function (arg) {
+        var splitName = arg.split(':');
+        var opts = {
+          defaults: {
+            skipToInstall: true,
+            compName: splitName[0],
+            compType: splitName[1]
+          }
+        };
+
+        if (_.isString(glush.env.pre) && glush.env.pre.length >= 1) {
+          opts.defaults.compPrefix = glush.env.pre;
+        }
+
+        installOptions.push(opts);
+
+        return _.once(function () {
+          scaffold.start(steps, opts);
+        });
+      })
+      .value();
+
+    console.log('installers', installs, installOptions, glush.env);
+    //return done();
+
+    async.parallel(installs, function(err) {
+      scaffold.defaults.done = doneMessage;
+      scaffold.finalize();
+      done();
+    });
+  } else {
+    return scaffold.start(steps, done);
+  }
 };
