@@ -36,7 +36,8 @@
       "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",
       "moment": "^2.10.3",
-      "string": "^3.3.0"
+      "string": "^3.3.0",
+      "inflection": "^1.7.1"
     }
   },
   "bower": {
