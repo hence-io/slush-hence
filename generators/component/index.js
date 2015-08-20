@@ -95,7 +95,11 @@ var scaffold = glush.Scaffold({
   },
   postInstall: function (answers, finalize) {
     if (answers.installDependencies) {
-      execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
+      try {
+        execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
+      } catch (err) {
+        finalize(err);
+      }
     } else {
       scaffold.content.done += "\n\n " + glush.colors.bold('Note:') + " You chose " + glush.colors.bold('not') +
         " to install this packages  dependencies at this time. Please ensure to do this before attempting\n to" +
@@ -110,41 +114,48 @@ module.exports = function (done) {
   var steps = [step0, step1, step2, step3, step4];
 
   if (glush.env._.length > 1) {
-    var doneMessage = scaffold.defaults.done;
-    scaffold.defaults.done = ''
+    var doneMessage = scaffold.content.done;
+    console.log(scaffold.content.intro);
+    scaffold.content.done = '';
+    scaffold.content.intro = '';
 
+    var opts = {
+      defaults: {
+        skipToInstall: true,
+        installDependencies: false
+      }
+    };
+
+    if (_.isString(glush.env.pre) && glush.env.pre.length >= 1) {
+      opts.defaults.compPrefix = glush.env.pre;
+    }
 
     var installOptions = [];
     var installs = _.chain(glush.env._)
       .filter(function (arg) { return arg !== 'hence'; })
       .map(function (arg) {
         var splitName = arg.split(':');
-        var opts = {
-          defaults: {
-            skipToInstall: true,
+        var compOpts = _.extend(opts, {
+          defaults: _.extend(opts.defaults, {
             compName: splitName[0],
             compType: splitName[1]
-          }
-        };
-
-        if (_.isString(glush.env.pre) && glush.env.pre.length >= 1) {
-          opts.defaults.compPrefix = glush.env.pre;
-        }
+          }),
+          finalize: function () {}
+        });
 
         installOptions.push(opts);
 
-        return _.once(function () {
-          scaffold.start(steps, opts);
-        });
+        return function (cb) {
+          _.cloneDeep(scaffold).start(steps, compOpts, cb);
+        };
       })
       .value();
 
     console.log('installers', installs, installOptions, glush.env);
     //return done();
 
-    async.parallel(installs, function(err) {
-      scaffold.defaults.done = doneMessage;
-      scaffold.finalize();
+    async.series(installs, function (err) {
+      console.log(doneMessage);
       done();
     });
   } else {
