@@ -129,14 +129,12 @@ module.exports = function (done) {
       .map(function (arg) {
         var splitName = arg.split(':');
         var compOpts = {
-          defaults: {
-            skipToInstall: true,
-            installDependencies: !!glush.env.deps,
-            gitInit: !!glush.env.gitinit,
-            compName: splitName[0],
-            compType: splitName[1],
-            compPrefix: glush.env.pre || 'hence'
-          }
+          skipToInstall: true,
+          installDependencies: !!glush.env.deps,
+          gitInit: !!glush.env.gitinit,
+          compName: splitName[0],
+          compType: splitName[1],
+          compPrefix: glush.env.pre || 'hence'
         };
 
         installOptions.push(compOpts);
