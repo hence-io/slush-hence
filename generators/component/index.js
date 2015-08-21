@@ -129,10 +129,6 @@ module.exports = function (done) {
       .map(function (arg) {
         var splitName = arg.split(':');
         var compOpts = {
-          content: {
-            intro: '',
-            done: ''
-          },
           defaults: {
             skipToInstall: true,
             installDependencies: !!glush.env.deps,
@@ -147,7 +143,7 @@ module.exports = function (done) {
       })
       .value();
 
-    console.log('installers', installs, installOptions, glush.env);
+    //console.log('installers', installs, installOptions, glush.env);
     //return done();
 
     scaffold.startMultiInstall(steps, installOptions, done);
