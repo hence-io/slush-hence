@@ -35,7 +35,7 @@ var scaffold = glush.Scaffold({
         fonts: __dirname + '/template/fonts/',
         optional: __dirname + '/template/optional/'
       },
-      dest: cwd
+      dest: './'
     }
   },
   content: {
@@ -129,7 +129,6 @@ module.exports = function (done) {
       .map(function (arg) {
         var splitName = arg.split(':');
         var compOpts = {
-          skipToInstall: true,
           installDependencies: !!glush.env.deps,
           gitInit: !!glush.env.gitinit,
           compName: splitName[0],
