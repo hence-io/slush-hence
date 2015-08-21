@@ -22,6 +22,9 @@ var step2 = require('./steps/step-author');
 var step3 = require('./steps/step-project');
 var step4 = require('./steps/step-complete');
 
+// Capture the initial folder this is ran in
+var cwd = process.cwd();
+
 var scaffold = glush.Scaffold({
   defaults: {
     dependencies: require('./dependencies.json'),
@@ -32,7 +35,7 @@ var scaffold = glush.Scaffold({
         fonts: __dirname + '/template/fonts/',
         optional: __dirname + '/template/optional/'
       },
-      dest: './'
+      dest: cwd
     }
   },
   content: {
@@ -53,6 +56,8 @@ var scaffold = glush.Scaffold({
   install: function (answers, finished) {
     var destDir = answers.dirs.dest;
 
+    console.log('>> Attempting install with:', JSON.stringify(_.omit(answers, 'dependencies')));
+
     // Due to the nature of font files, or any other future files that must not be parsed by the template
     // controls, they have to handled separately
     var fontDir = destDir + 'fonts';
@@ -61,10 +66,11 @@ var scaffold = glush.Scaffold({
       .pipe(gulp.dest(fontDir));
 
     // Ensure we're initializing the git folder if requested, so the templated config can override it afterwards
-    if (answers.git) {
+    if (answers.gitInit) {
+      console.log('>> Attempting git init on:', answers.dirs.dest);
       git.init({cwd: destDir}, function (err) {
         if (err) {
-          return finished(err);
+          return finished(['error', 'install', 'git init failure', err]);
         }
       });
     }
@@ -96,9 +102,10 @@ var scaffold = glush.Scaffold({
   postInstall: function (answers, finalize) {
     if (answers.installDependencies) {
       try {
+        console.log('>> Attempting install-deps on:', answers.dirs.dest);
         execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
       } catch (err) {
-        finalize(err);
+        return finalize(['error', 'postInstall', 'installDependencies failure', err]);
       }
     } else {
       scaffold.content.done += "\n\n " + glush.colors.bold('Note:') + " You chose " + glush.colors.bold('not') +
@@ -106,7 +113,7 @@ var scaffold = glush.Scaffold({
         " utilize it by running '" + glush.colors.bold('npm run install-deps') + "'."
     }
 
-    finalize();
+    return finalize();
   }
 });
 
@@ -114,51 +121,42 @@ module.exports = function (done) {
   var steps = [step0, step1, step2, step3, step4];
 
   if (glush.env._.length > 1) {
-    var doneMessage = scaffold.content.done;
-    console.log(scaffold.content.intro);
-    scaffold.content.done = '';
-    scaffold.content.intro = '';
-
-    var opts = {
-      defaults: {
-        skipToInstall: true,
-        installDependencies: false
-      }
-    };
-
-    if (_.isString(glush.env.pre) && glush.env.pre.length >= 1) {
-      opts.defaults.compPrefix = glush.env.pre;
-    }
-
     var installOptions = [];
     var installs = _.chain(glush.env._)
-      .filter(function (arg) { return arg !== 'hence'; })
+      .filter(function (arg) {
+        return arg !== 'hence';
+      })
       .map(function (arg) {
         var splitName = arg.split(':');
-        var compOpts = _.extend(opts, {
-          defaults: _.extend(opts.defaults, {
+        var compOpts = {
+          content: {
+            intro: '',
+            done: ''
+          },
+          defaults: {
+            skipToInstall: true,
+            installDependencies: !!glush.env.deps,
+            gitInit: !!glush.env.gitinit,
             compName: splitName[0],
-            compType: splitName[1]
-          }),
-          finalize: function () {}
-        });
-
-        installOptions.push(opts);
-
-        return function (cb) {
-          _.cloneDeep(scaffold).start(steps, compOpts, cb);
+            compType: splitName[1],
+            compPrefix: glush.env.pre || 'hence',
+            dirs: {
+              dest: cwd // ensure we're reseting to the actual cwd each install, else this causes major issues.
+            }
+          }
         };
+
+        installOptions.push(compOpts);
       })
       .value();
 
     console.log('installers', installs, installOptions, glush.env);
     //return done();
 
-    async.series(installs, function (err) {
-      console.log(doneMessage);
-      done();
-    });
-  } else {
+    scaffold.startMultiInstall(steps,installOptions,done);
+  }
+  else {
     return scaffold.start(steps, done);
   }
-};
+}
+;
