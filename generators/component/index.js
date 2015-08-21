@@ -56,7 +56,7 @@ var scaffold = glush.Scaffold({
   install: function (answers, finished) {
     var destDir = answers.dirs.dest;
 
-    console.log('>> Attempting install with:', JSON.stringify(_.omit(answers, 'dependencies')));
+    console.log('>> Attempting install with:', JSON.stringify(_.omit(answers, 'dependencies', 'files', 'npmDevDependencies', 'npmDependencies', 'bowerDependencies')));
 
     // Due to the nature of font files, or any other future files that must not be parsed by the template
     // controls, they have to handled separately
@@ -139,10 +139,7 @@ module.exports = function (done) {
             gitInit: !!glush.env.gitinit,
             compName: splitName[0],
             compType: splitName[1],
-            compPrefix: glush.env.pre || 'hence',
-            dirs: {
-              dest: cwd // ensure we're reseting to the actual cwd each install, else this causes major issues.
-            }
+            compPrefix: glush.env.pre || 'hence'
           }
         };
 
@@ -153,7 +150,7 @@ module.exports = function (done) {
     console.log('installers', installs, installOptions, glush.env);
     //return done();
 
-    scaffold.startMultiInstall(steps,installOptions,done);
+    scaffold.startMultiInstall(steps, installOptions, done);
   }
   else {
     return scaffold.start(steps, done);
