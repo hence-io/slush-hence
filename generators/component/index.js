@@ -54,7 +54,7 @@ var scaffold = glush.Scaffold({
   install: function (answers, finished) {
     var destDir = answers.dirs.dest;
 
-    if (this._debug) {
+    if (scaffold._debug) {
       console.log('>> Attempting install with:', _.omit(answers, 'dependencies', 'files', 'npmDevDependencies', 'npmDependencies', 'bowerDependencies'));
     }
 
@@ -64,16 +64,6 @@ var scaffold = glush.Scaffold({
     gulp.src(answers.dirs.fonts + '**')
       .pipe(conflict(fontDir))
       .pipe(gulp.dest(fontDir));
-
-    // Ensure we're initializing the git folder if requested, so the templated config can override it afterwards
-    if (answers.gitInit) {
-      console.log('>> Attempting git init on:', answers.dirs.dest);
-      git.init({cwd: destDir}, function (err) {
-        if (err) {
-          return finished(['error', 'install', 'git init failure', err]);
-        }
-      });
-    }
 
     // Start building the pipe for installing the package
     var stream = gulp.src(answers.files)
@@ -100,6 +90,17 @@ var scaffold = glush.Scaffold({
     return finished(null, stream);
   },
   postInstall: function (answers, finalize) {
+    var destDir = answers.dirs.dest;
+
+    if (answers.gitInit) {
+      console.log('>> Initializing Git Repository:', destDir);
+      git.init({cwd: destDir}, function (err) {
+        if (err) {
+          return finalize(['error', 'postInstall', 'git init failure', err]);
+        }
+      });
+    }
+
     if (answers.installDependencies) {
       try {
         console.log(glush.ascii.heading('Installing Dependencies') + ' On:', answers.dirs.dest);
