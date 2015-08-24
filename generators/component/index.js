@@ -13,6 +13,7 @@ var execSync = require('child_process').execSync;
 
 // glush-utils
 var glush = require('glush-util');
+var hence = require('hence-util');
 
 // The step order isn't locked down, it can be swapped out as long as higher steps don't require answers from lower
 // steps, you're aok!
@@ -36,7 +37,7 @@ var scaffold = glush.Scaffold({
     }
   },
   content: {
-    intro: glush.ascii.hence(
+    intro: hence.ascii.hence(
       glush.colors.bold(" Welcome to the Hence.io Scaffolding Tool. ") + "Your component generation is about to be" +
       " being. You have to option to\n create a component with a quick install, or dive into a detailed installation" +
       " should you desire."
