@@ -20,7 +20,7 @@ var step = glush.ScaffoldStep({
     }
   ],
   process: function(answers,next){
-    answers.files.push(answers.dirs.template.root);
+    answers.files.push(answers.dirs.template.root + '*');
     answers.dirs.dest = path.join(answers.dirs.dest, answers.scaffoldName);
 
     next();
