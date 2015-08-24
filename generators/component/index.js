@@ -93,7 +93,7 @@ var scaffold = glush.Scaffold({
           filepath.basename = basename.replace('hence-el', answers.compName);
         }
       }))
-      .pipe(conflict(destDir, { defaultChoice: 'n'}))
+      .pipe(conflict(destDir, {defaultChoice: 'n'}))
       .pipe(gulp.dest(destDir));
 
     return finished(null, stream);
@@ -119,30 +119,31 @@ var scaffold = glush.Scaffold({
 module.exports = function (done) {
   var steps = [step0, step1, step2, step3, step4];
 
+  var cli = {
+    installDependencies: !glush.env['ignore-deps'],
+    gitInit: !!glush.env.git,
+    compPrefix: glush.env.pre || 'hence'
+  };
+
   // The first _ arg is always the generator name, so only run the multi-install on 2 args passed or more
   // This don't count actual flags set '--falg', just normal args on the cli
   if (glush.env._.length > 1) {
     var installOptions = _.chain(glush.env._)
-      .filter(function (arg) {
-        return arg !== 'hence';
-      })
+      .drop() // drop the first arg (generator name)
       .map(function (arg) {
         var splitName = arg.split(':');
-        var prefix = glush.env.pre || 'hence';
+
         return {
           content: {
             intro: glush.ascii.heading('Component Installation') +
-            glush.colors.bold(' Name: ') + prefix + '-' + splitName[0] +
+            glush.colors.bold(' Name: ') + cli.compPrefix + '-' + splitName[0] +
             glush.colors.bold('\n Type: ') + splitName[1],
             done: glush.ascii.spacer()
           },
-          defaults: {
-            installDependencies: !glush.env['ignore-deps'],
-            gitInit: !!glush.env.git,
+          defaults: _.extend({
             compName: splitName[0],
-            compType: splitName[1],
-            compPrefix: prefix
-          }
+            compType: splitName[1]
+          }, cli)
         };
       })
       .value();
@@ -152,6 +153,8 @@ module.exports = function (done) {
     scaffold.startMultiInstall(steps, installOptions, done);
   }
   else {
-    return scaffold.start(steps, done);
+    return scaffold.start(steps, {
+      defaults: _.extend({}, cli)
+    }, done);
   }
 };

@@ -61,7 +61,7 @@ var step = glush.ScaffoldStep({
       message: 'Where do you want your package generated?',
       choices: _.values(options.folderOptionList),
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }, {
       type: 'confirm',
@@ -69,7 +69,7 @@ var step = glush.ScaffoldStep({
       message: 'Initialize an empty git repo with your author details?',
       "default": defaults.gitInit,
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }, {
       type: 'list',
@@ -77,7 +77,7 @@ var step = glush.ScaffoldStep({
       message: 'Which css preprocessor do you wish to use?',
       choices: _.values(options.cssProcessors),
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }, {
       type: 'checkbox',
@@ -87,7 +87,7 @@ var step = glush.ScaffoldStep({
         ' documentation: https://github.com/hence-io/slush-hence#project-details'),
       choices: options.optionList,
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }, {
       type: 'confirm',
@@ -95,7 +95,7 @@ var step = glush.ScaffoldStep({
       message: 'Auto install npm & bower packages after your package is generated?',
       "default": defaults.installDependencies,
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }
   ],

@@ -52,14 +52,14 @@ var step = glush.ScaffoldStep({
       message: 'Describe your new component:',
       "default": defaults.compDescription,
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }, {
       name: 'compVersion',
       message: 'Starting version of your project?',
       "default": defaults.compVersion,
       when: function () {
-        return this.validation.detailedInstallOnly();
+        return step.scaffold.inquirer.detailedInstallOnly();
       }
     }
   ],
