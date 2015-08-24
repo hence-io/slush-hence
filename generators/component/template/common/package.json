@@ -12,7 +12,7 @@
     "esdocs": "esdoc -c .esdoc.json",
     "sassdocs": "sassdoc src/scss",
     "jsdocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "install-deps": "npm i -g gulp && gulp install-deps"
+    "install-deps": "npm i -g gulp karma-cli && npm i && gulp install-deps"
   },
   "browserify": {
     "transform": [

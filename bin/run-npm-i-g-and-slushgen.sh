@@ -2,5 +2,6 @@
 
 cd ../
 npm i -g slush-hence/
+cd ../samples/
 slush hence
-cd slush-hence
+cd ../libs/slush-hence

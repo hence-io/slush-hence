@@ -22,9 +22,6 @@ var step2 = require('./steps/step-author');
 var step3 = require('./steps/step-project');
 var step4 = require('./steps/step-complete');
 
-// Capture the initial folder this is ran in
-var cwd = process.cwd();
-
 var scaffold = glush.Scaffold({
   defaults: {
     dependencies: require('./dependencies.json'),
@@ -104,7 +101,7 @@ var scaffold = glush.Scaffold({
   postInstall: function (answers, finalize) {
     if (answers.installDependencies) {
       try {
-        console.log('>> Attempting install-deps on:', answers.dirs.dest);
+        console.log(glush.ascii.heading('Installing Dependencies') + ' On:', answers.dirs.dest);
         execSync('npm run install-deps', {cwd: answers.dirs.dest, stdio: 'inherit'});
       } catch (err) {
         return finalize(['error', 'postInstall', 'installDependencies failure', err]);
@@ -124,7 +121,7 @@ module.exports = function (done) {
 
   if (glush.env._.length > 1) {
     var installOptions = [];
-    var installs = _.chain(glush.env._)
+    _.chain(glush.env._)
       .filter(function (arg) {
         return arg !== 'hence';
       })
@@ -133,11 +130,14 @@ module.exports = function (done) {
         var prefix = glush.env.pre || 'hence';
         var compOpts = {
           content: {
-            intro: 'Starting component installation on: ' + prefix + '-' + splitName[1]+ ', type:' + splitName[1]
+            intro: glush.ascii.heading('Component Installation') +
+            glush.colors.bold(' Name: ') + prefix + '-' + splitName[0] +
+            glush.colors.bold('\n Type: ') + splitName[1],
+            done: glush.ascii.spacer()
           },
           defaults: {
-            installDependencies: !!glush.env.deps,
-            gitInit: !!glush.env.gitinit,
+            installDependencies: !glush.env.deps,
+            gitInit: !glush.env.gitinit,
             compName: splitName[0],
             compType: splitName[1],
             compPrefix: prefix
