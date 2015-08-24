@@ -24,7 +24,7 @@
     "async": "^1.4.2",
     "glush-util": "hence-io/glush-util",
     "gulp": "^3.6.2",
-    "gulp-conflict": "^0.1.1",
+    "gulp-conflict": "hence-io/gulp-conflict",
     "gulp-git": "^1.2.4",
     "gulp-if": "^1.2.5",
     "gulp-install": "^0.1.4",

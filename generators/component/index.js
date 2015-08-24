@@ -93,7 +93,7 @@ var scaffold = glush.Scaffold({
           filepath.basename = basename.replace('hence-el', answers.compName);
         }
       }))
-      .pipe(conflict(destDir))
+      .pipe(conflict(destDir, { defaultChoice: 'n'}))
       .pipe(gulp.dest(destDir));
 
     return finished(null, stream);
@@ -119,16 +119,17 @@ var scaffold = glush.Scaffold({
 module.exports = function (done) {
   var steps = [step0, step1, step2, step3, step4];
 
+  // The first _ arg is always the generator name, so only run the multi-install on 2 args passed or more
+  // This don't count actual flags set '--falg', just normal args on the cli
   if (glush.env._.length > 1) {
-    var installOptions = [];
-    _.chain(glush.env._)
+    var installOptions = _.chain(glush.env._)
       .filter(function (arg) {
         return arg !== 'hence';
       })
       .map(function (arg) {
         var splitName = arg.split(':');
         var prefix = glush.env.pre || 'hence';
-        var compOpts = {
+        return {
           content: {
             intro: glush.ascii.heading('Component Installation') +
             glush.colors.bold(' Name: ') + prefix + '-' + splitName[0] +
@@ -136,21 +137,17 @@ module.exports = function (done) {
             done: glush.ascii.spacer()
           },
           defaults: {
-            installDependencies: !glush.env.deps,
-            gitInit: !glush.env.gitinit,
+            installDependencies: !glush.env['ignore-deps'],
+            gitInit: !!glush.env.git,
             compName: splitName[0],
             compType: splitName[1],
             compPrefix: prefix
           }
         };
-
-        installOptions.push(compOpts);
       })
       .value();
 
-    //console.log('installers', installs, installOptions, glush.env);
-    //return done();
-
+    //console.log('installers', installOptions, glush.env);
     //scaffold._debug = true;
     scaffold.startMultiInstall(steps, installOptions, done);
   }
