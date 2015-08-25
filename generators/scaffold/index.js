@@ -1,6 +1,5 @@
 // Plugins
 var _ = require('lodash');
-var async = require('async');
 var gulp = require('gulp');
 var conflict = require('gulp-conflict');
 var template = require('gulp-template');
