@@ -36,7 +36,7 @@ htmlCompilation({taskName: 'buildhtml', dist: true});
 
 // One build task to rule them all.
 gulp.task('build', (done)=> {
-  runSeq('clean', ['buildsass', 'buildimg', 'buildjs', 'kss:build'], 'buildhtml', done);
+  runSeq('clean', ['buildsass', 'buildimg', 'buildjs'], 'buildhtml', done);
 });
 
 gulp.task('build:serve', (done)=> {

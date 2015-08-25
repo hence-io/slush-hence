@@ -35,15 +35,10 @@ var scaffold = glush.Scaffold({
     var files = answers.files;
     var destDir = answers.dirs.dest;
 
-    if (scaffold._debug) {
-      console.log('>> Installing: ', files, '\n>> To: ', destDir);
-    }
+    console.log('>> Installing: ', files, '\n>> To: ', destDir);
 
     // Start building the pipe for installing the package
     var stream = gulp.src(files)
-      .pipe(template(_.omit(answers, 'files'), {
-        interpolate: /<%=(.+?)%>/g
-      }))
       .pipe(conflict(destDir, {defaultChoice: 'n'}))
       .pipe(gulp.dest(destDir));
 
@@ -54,8 +49,10 @@ var scaffold = glush.Scaffold({
 module.exports = function (done) {
   var steps = [step0];
 
+  var scaffoldName = glush.env._[1] || glush.env.name || '';
   var cliArgs = {
-    scaffoldName: glush.env._[1] || glush.env.name || ''
+    scaffoldName: scaffoldName,
+    skipToInstall: !!scaffoldName
   };
 
   return scaffold.start(steps, {

@@ -22,20 +22,22 @@ gulp.task('karma:watch', function () {
  **********************************************************************************************************************/
   // Re-purposed tasks from the web-component-test library; required to build the component in it's final form for wct testing
 gulp.task('test', ['wct:local'], function (done) {
+  done();
+});
+
+gulp.task('test:watch', ['wct:local'], function (done) {
   gulp.watch([global.paths.js, global.paths.sass, global.paths.html, global.paths.testBehaviour], ['wct:local']);
 });
 
 let wctIstanbul = {
   //"web-component-tester-istanbul": {
-  //
   //  dir: "./coverage",
-  //
   //  reporters: ["text-summary", "lcov"],
-  //
   //  include: [
-  //    `dist/js/${global.comp.name}.js`,
-  //    "test/behaviour/*.js"
-  //  ]
+  //    `**/dist/js/${global.comp.name}.min.js`,
+  //    `**/test/behaviour/*.js`
+  //  ],
+  //  workingDir: `/components/${global.comp.name}/`
   //}
 };
 
