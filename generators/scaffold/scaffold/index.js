@@ -8,7 +8,7 @@ var template = require('gulp-template');
 var glush = require('glush-util');
 var hence = require('hence-util');
 
-var tplDir = __dirname + '/../template/';
+var tplDir = __dirname + '/../';
 
 var scaffold = glush.Scaffold({
   defaults: {
