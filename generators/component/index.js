@@ -5,8 +5,10 @@ var _ = require('lodash');
 var glush = require('glush-util');
 var hence = require('hence-util');
 
+// scaffold
 var scaffold = require('./scaffold');
 
+// steps
 // The step order isn't locked down, it can be swapped out as long as higher steps don't require answers from lower
 // steps, you're aok!
 var steps = [
@@ -25,11 +27,10 @@ var defaults = {
 
 // Because glush leverages gulp-util, the .env for cli args is available
 // We must always drop the first non-flagged arg, as it's always your generator's name
+// This doesn't count actual flags set '--flag', just normal args on the cli
 var cliArgs = _.drop(glush.env._);
 
 module.exports = function (done) {
-  // The first _ arg is always the generator name, so only run the multi-install on 2 args passed or more
-  // This don't count actual flags set '--falg', just normal args on the cli
   if (cliArgs.length) {
     var installOptions = _.map(cliArgs, function (arg) {
       var splitName = arg.split(':');
