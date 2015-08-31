@@ -48,21 +48,21 @@ var step = glush.ScaffoldStep({
       message: 'What is your name?',
       "default": defaults.authorName,
       when: function () {
-        return step.inquirer.detailedInstallOnly();
+        return this.inquirer.detailedInstallOnly();
       }
     }, {
       name: 'authorEmail',
       message: 'What is your email?',
       "default": defaults.authorEmail,
       when: function () {
-        return step.inquirer.detailedInstallOnly();
+        return this.inquirer.detailedInstallOnly();
       }
     }, {
       name: 'githubUser',
       message: 'What is your github username?',
       "default": defaults.githubUser,
       when: function () {
-        return step.inquirer.detailedInstallOnly();
+        return this.inquirer.detailedInstallOnly();
       }
     }
   ]
