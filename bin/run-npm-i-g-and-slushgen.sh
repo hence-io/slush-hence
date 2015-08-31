@@ -2,5 +2,5 @@
 
 npm i -g .
 cd ../../samples/
-slush hence
+slush hence --debug
 cd ../libs/slush-hence
