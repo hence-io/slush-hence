@@ -12,9 +12,9 @@ var execSync = require('child_process').execSync;
 var glush = require('glush-util');
 var hence = require('hence-util');
 
-var installOptions = require('./step-install-options').options.installOptions;
+var installOptions = require('./scaffold/step-install-options').options.installOptions;
 
-var tplDir = __dirname + '/../template/';
+var tplDir = __dirname + '/template/';
 
 var scaffold = glush.Scaffold({
   // The step order isn't locked down, it can be swapped out as long as higher steps don't require answers from lower

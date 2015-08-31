@@ -1,39 +1,61 @@
 // Plugins
 var _ = require('lodash');
+var gulp = require('gulp');
+var conflict = require('gulp-conflict');
+var template = require('gulp-template');
+
+// glush-utils
 var glush = require('glush-util');
+var hence = require('hence-util');
 
-// scaffold
-var scaffold = require('./scaffold');
+var tplDir = __dirname + '/template/';
 
-var defaults = {
-  debug: !!glush.env.debug
-};
+var scaffold = glush.Scaffold({
+  steps: [
+    require('./scaffold/step-install-options')
+  ],
+  defaults: {
+    dirs: {
+      template: {
+        root: tplDir
+      },
+      dest: './generators'
+    }
+  },
+  content: {
+    intro: hence.ascii.hence(
+      glush.colors.bold(" Welcome to the Hence.io Scaffolding Sub-generator. ") + "This installer is designed to" +
+      " generate a skeleton scaffold installer for you to build sub-generators from."
+    ),
+    done: glush.colors.bold(" Thank you for using the Hence.io Scaffolding Tool!\n") +
+    " Review the possible gulp commands available to you on the project documentation, or type '" +
+    glush.colors.bold('gulp help') + "' at any time."
+  },
+  cliArg: function (arg) {
+    return {
+      content: {
+        intro: glush.ascii.heading('Scaffold Installation') +
+        glush.colors.bold(' Name: ') + arg,
+        done: glush.ascii.spacer()
+      },
+      defaults: {
+        scaffoldName: arg
+      }
+    };
+  },
+  install: function (answers, finished) {
+    var files = answers.files;
+    var destDir = answers.dirs.dest;
 
-// Because glush leverages gulp-util, the .env for cli args is available
-// We must always drop the first non-flagged arg, as it's always your generator's name
-// This doesn't count actual flags set '--flag', just normal args on the cli
-var cliArgs = _.drop(glush.env._);
+    console.log('>> Installing: ', files, '\n>> To: ', destDir);
 
-module.exports = function (done) {
-  if (cliArgs.length) {
-    var installOptions = _.map(cliArgs, function (arg) {
-      return _.defaultsDeep({
-        content: {
-          intro: glush.ascii.heading('Scaffold Installation') +
-          glush.colors.bold(' Name: ') + arg,
-          done: glush.ascii.spacer()
-        },
-        defaults: {
-          scaffoldName: arg
-        }
-      }, defaults);
-    });
+    // Start building the pipe for installing the package
+    var stream = gulp.src(files)
+      .pipe(conflict(destDir, {defaultChoice: 'n'}))
+      .pipe(gulp.dest(destDir));
 
-    scaffold.startMultiInstall(installOptions, done);
+    return finished(null, stream);
   }
-  else {
-    scaffold.start(_.defaultsDeep({
-      //
-    }, defaults), done);
-  }
-};
+});
+
+module.exports = scaffold;
