@@ -10,7 +10,7 @@
 
 var gulp = require('gulp');
 
-var componentScaffold = require('./generators/component');
+var componentScaffold = require('./generators/component').run;
 var scaffoldScaffold = require('./generators/scaffold');
 
 // Run the component generator by default

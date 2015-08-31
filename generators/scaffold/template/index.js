@@ -5,7 +5,7 @@ var glush = require('glush-util');
 // scaffold
 var scaffold = require('./scaffold');
 
-var defaults = {
+var cliFlags = {
   debug: !!glush.env.debug
 };
 
@@ -19,14 +19,12 @@ module.exports = function (done) {
     var installOptions = _.map(cliArgs, function (arg) {
       return _.defaultsDeep({
         content: {
-          intro: glush.ascii.heading('Scaffold Installation') +
-          glush.colors.bold(' Name: ') + arg,
-          done: glush.ascii.spacer()
+          intro: glush.ascii.heading('Scaffold Installation') + glush.colors.bold(' Name: ') + arg
         },
         defaults: {
           scaffoldName: arg
         }
-      }, defaults);
+      }, cliFlags);
     });
 
     scaffold.startMultiInstall(installOptions, done);
@@ -34,6 +32,6 @@ module.exports = function (done) {
   else {
     scaffold.start(_.defaultsDeep({
       //
-    }, defaults), done);
+    }, cliFlags), done);
   }
 };
