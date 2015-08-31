@@ -9,7 +9,6 @@
 'use strict';
 
 var gulp = require('gulp');
-
 var generators = require('./generators');
 
 // Run the component generator by default
