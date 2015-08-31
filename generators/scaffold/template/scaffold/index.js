@@ -19,7 +19,7 @@ var scaffold = glush.Scaffold({
       template: {
         root: tplDir
       },
-      dest: './generators'
+      dest: './'
     }
   },
   content: {
