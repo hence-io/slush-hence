@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var glush = require('glush-util');
+var inquisitor = require('glush-util');
 var path = require('path');
 
 var projectConfigOptions = {
@@ -25,14 +25,14 @@ var options = {
   optionList: [
     {name: projectConfigOptions.eslint, checked: true},
     {name: projectConfigOptions.esdoc, checked: true},
-    glush.inquirer.separator(),
+    inquisitor.inquirer.separator(),
     {name: projectConfigOptions.scsslint, checked: true},
     //{name: projectConfigOptions.sassdocs, checked: true},
     {name: projectConfigOptions.kss, checked: true},
-    glush.inquirer.separator(),
+    inquisitor.inquirer.separator(),
     {name: projectConfigOptions.karma, checked: true},
     {name: projectConfigOptions.wct, checked: true},
-    glush.inquirer.separator(),
+    inquisitor.inquirer.separator(),
     {name: projectConfigOptions.editorconfig, checked: true}
   ]
 };
@@ -45,7 +45,7 @@ var defaults = {
   installDependencies: true
 };
 
-var step = glush.ScaffoldStep({
+var step = inquisitor.ScaffoldStep({
   options: options,
   defaults: defaults,
   content: {
@@ -83,7 +83,7 @@ var step = glush.ScaffoldStep({
       type: 'checkbox',
       name: 'options',
       message: 'Select your development options you wish to enabled:' +
-      glush.colors.reset.dim('\n  View option details on the site' +
+      inquisitor.colors.reset.dim('\n  View option details on the site' +
         ' documentation: https://github.com/hence-io/slush-hence#project-details'),
       choices: options.optionList,
       when: function () {

@@ -1,37 +1,52 @@
-// Plugins
+// Libraries
 var _ = require('lodash');
-var glush = require('glush-util');
+var path = require('path');
 
-// scaffold
-var scaffold = require('./scaffold');
+// Utils
+var inquisitor = require('glush-util');
+var hence = require('hence-util');
 
-var cliFlags = {
-  debug: !!glush.env.debug
-};
+// Paths
+var cwd = process.cwd();
+var tplDir = __dirname + '/template/';
 
-// Because glush leverages gulp-util, the .env for cli args is available
-// We must always drop the first non-flagged arg, as it's always your generator's name
-// This doesn't count actual flags set '--flag', just normal args on the cli
-var cliArgs = _.drop(glush.env._);
 
-module.exports = function (done) {
-  if (cliArgs.length) {
-    var installOptions = _.map(cliArgs, function (arg) {
-      return _.defaultsDeep({
-        content: {
-          intro: glush.ascii.heading('Scaffold Installation') + glush.colors.bold(' Name: ') + arg
-        },
-        defaults: {
-          scaffoldName: arg
-        }
-      }, cliFlags);
-    });
+var scaffold = inquisitor.Scaffold({
+  steps: [
+    require('./scaffold/step-install-options')
+  ],
+  defaults: {
+    dirs: {
+      template: {
+        root: tplDir,
+        common: path.join(tplDir, 'common'),
+        optional: path.join(tplDir, 'optional')
+      },
+      dest: path.join(cwd, 'generators')
+    }
+  },
+  content: {
+    intro: hence.ascii.hence(
+      inquisitor.colors.bold(" Welcome to the Hence.io Scaffolding Sub-generator. ") + "This installer is designed to" +
+      " generate a skeleton scaffold installer for you to build sub-generators from."
+    ),
+    done: inquisitor.colors.bold(" Thank you for using the Hence.io Scaffolding Tool!\n") +
+    " Review the possible gulp commands available to you on the project documentation, or type '" +
+    inquisitor.colors.bold('gulp help') + "' at any time."
+  },
+  cliArg: function (arg) {
+    return {
+      content: {
+        intro: inquisitor.ascii.heading('Scaffold Installation') +
+        inquisitor.colors.bold(' Name: ') + arg,
+        done: inquisitor.ascii.spacer()
+      },
+      defaults: {
+        scaffoldName: arg
+      }
+    };
+  },
+  install: require('./scaffold/install')
+});
 
-    scaffold.startMultiInstall(installOptions, done);
-  }
-  else {
-    scaffold.start(_.defaultsDeep({
-      //
-    }, cliFlags), done);
-  }
-};
+module.exports = scaffold;

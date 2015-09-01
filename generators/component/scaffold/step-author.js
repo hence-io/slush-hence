@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var S = require('string');
 var path = require('path');
-var glush = require('glush-util');
+var inquisitor = require('glush-util');
 
 var options = {};
 
@@ -33,7 +33,7 @@ var defaults = (function () {
   };
 })();
 
-var step = glush.ScaffoldStep({
+var step = inquisitor.ScaffoldStep({
   options: options,
   defaults: defaults,
   content: {

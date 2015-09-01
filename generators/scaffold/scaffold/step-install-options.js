@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var glush = require('glush-util');
+var inquisitor = require('glush-util');
 var path = require('path');
 var S = require('string');
 
@@ -10,14 +10,14 @@ var defaults = {
   scaffoldName: ''
 };
 
-var step = glush.ScaffoldStep({
+var step = inquisitor.ScaffoldStep({
   options: options,
   defaults: defaults,
   prompts: [
     {
       name: 'scaffoldName',
       message: 'What is the name of your new scaffolding installer?',
-      validate: glush.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
+      validate: inquisitor.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
     }
   ],
   process: function(answers,next){

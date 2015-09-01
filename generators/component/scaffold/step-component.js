@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var S = require('string');
-var glush = require('glush-util');
+var inquisitor = require('glush-util');
 
 var options = {
   compTypes: {
@@ -18,14 +18,14 @@ var defaults = {
   compVersion: '0.1.0'
 };
 
-var step = glush.ScaffoldStep({
+var step = inquisitor.ScaffoldStep({
   options: options,
   defaults: defaults,
   content: {
     header: {
       title: "Component Definition",
       details: "The following questions will help you to identify, define and describe your component. Your component will\n" +
-      " be named using the convention " + glush.colors.dim("[namespace]-[name]") + "."
+      " be named using the convention " + inquisitor.colors.dim("[namespace]-[name]") + "."
     }
   },
   prompts: [
@@ -33,18 +33,18 @@ var step = glush.ScaffoldStep({
       name: 'compPrefix',
       message: '[namespace] What is your component namespace or project name? ',
       "default": defaults.compPrefix,
-      validate: glush.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
+      validate: inquisitor.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
     },
     {
       name: 'compName',
       message: '[name] What do you want to name your new component?',
       "default": defaults.compName,
-      validate: glush.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
+      validate: inquisitor.inquirer.validatePrompt('isNull', 'You must enter a value.', true)
     }, {
       type: 'list',
       name: 'compType',
       message: "Select your new component's type from below. " +
-      glush.colors.reset.dim('\n  See project documentation to for more information on Hence component types.\n'),
+      inquisitor.colors.reset.dim('\n  See project documentation to for more information on Hence component types.\n'),
       choices: _.keys(options.compTypes),
       "default": defaults.compType
     }, {
@@ -52,15 +52,14 @@ var step = glush.ScaffoldStep({
       message: 'Describe your new component:',
       "default": defaults.compDescription,
       when: function () {
-        console.log('wtf when', step);
-        return step.inquirer.detailedInstallOnly();
+        return this.inquirer.detailedInstallOnly();
       }
     }, {
       name: 'compVersion',
       message: 'Starting version of your project?',
       "default": defaults.compVersion,
       when: function () {
-        return step.inquirer.detailedInstallOnly();
+        return this.inquirer.detailedInstallOnly();
       }
     }
   ],
