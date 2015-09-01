@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var install = function (answers, finished) {
   var destDir = answers.dirs.dest;
 
-  if (scaffold._debug) {
+  if (this.debug) {
     console.log('>> Attempting install with:', _.omit(answers, 'dependencies', 'files', 'npmDevDependencies', 'npmDependencies', 'bowerDependencies'));
   }
 

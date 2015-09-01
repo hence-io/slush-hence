@@ -61,10 +61,10 @@ var scaffold = inquisitor.Scaffold({
         inquisitor.colors.bold('\n Type: ') + splitName[1],
         done: inquisitor.ascii.spacer()
       },
-      defaults: _.extend({
+      defaults: {
         compName: splitName[0],
         compType: splitName[1]
-      }, defaults)
+      }
     };
   },
   install: require('./scaffold/install'),
