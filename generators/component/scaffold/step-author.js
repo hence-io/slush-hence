@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var S = require('string');
 var path = require('path');
-var inquisitor = require('glush-util');
+var inquisitor = require('hence-inquisitor');
 
 var options = {};
 

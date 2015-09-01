@@ -1,8 +1,8 @@
 // Plugins
 var _ = require('lodash');
 
-// glush-utils
-var inquisitor = require('glush-util');
+// hence-inquisitors
+var inquisitor = require('hence-inquisitor');
 var hence = require('hence-util');
 
 

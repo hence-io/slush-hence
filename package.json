@@ -21,7 +21,7 @@
     "preinstall": "npm i -g slush bower"
   },
   "dependencies": {
-    "glush-util": "hence-io/glush-util",
+    "hence-inquisitor": "hence-io/hence-inquisitor",
     "gulp": "^3.6.2",
     "gulp-conflict": "hence-io/gulp-conflict",
     "gulp-git": "^1.2.4",

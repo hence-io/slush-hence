@@ -3,8 +3,8 @@ var _ = require('lodash');
 var git = require('gulp-git');
 var execSync = require('child_process').execSync;
 
-// glush-utils
-var inquisitor = require('glush-util');
+// hence-inquisitors
+var inquisitor = require('hence-inquisitor');
 
 var postInstall = function (answers, finalize) {
   var destDir = answers.dirs.dest;

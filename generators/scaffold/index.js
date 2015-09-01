@@ -3,7 +3,7 @@ var _ = require('lodash');
 var path = require('path');
 
 // Utils
-var inquisitor = require('glush-util');
+var inquisitor = require('hence-inquisitor');
 var hence = require('hence-util');
 
 // Paths

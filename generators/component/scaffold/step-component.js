@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var S = require('string');
-var inquisitor = require('glush-util');
+var inquisitor = require('hence-inquisitor');
 
 var options = {
   compTypes: {

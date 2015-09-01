@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var inquisitor = require('glush-util');
+var inquisitor = require('hence-inquisitor');
 var path = require('path');
 
 var projectConfigOptions = {
