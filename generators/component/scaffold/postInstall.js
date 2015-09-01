@@ -25,7 +25,7 @@ var postInstall = function (answers, finalize) {
     } catch (err) {
       return finalize(['error', 'postInstall', 'installDependencies failure', err]);
     }
-  } else if(this.content.done != inquisitor.ascii.spacer()) {
+  } else if (this.content.done != inquisitor.ascii.spacer()) {
     this.content.done += "\n\n " + inquisitor.colors.bold('Note:') + " You chose " + inquisitor.colors.bold('not') +
       " to install this packages  dependencies at this time. Please ensure to do this before attempting\n to" +
       " utilize it by running '" + inquisitor.colors.bold('npm run install-deps') + "'."
