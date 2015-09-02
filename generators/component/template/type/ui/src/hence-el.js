@@ -10,10 +10,10 @@ import Hence from 'hence-component-framework';
  * @constructor
  */
 let <%= compClassName %> = Hence.Ui({
-  is: '<%= compName %>',
   /********************************************************************************************************************
    * Initialization
    ********************************************************************************************************************/
+  is: '<%= compName %>',
   properties: {
     greeting: {
       type: String,
