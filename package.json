@@ -6,10 +6,10 @@
   "author": "Sean 'Blitz' Homer <sean.homer@therefore.ca>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Sean/slush-slush-gen.git"
+    "url": "git://github.com/hence-io/slush-hence.git"
   },
   "bugs": {
-    "url": "https://github.com/Sean/slush-slush-gen/issues"
+    "url": "https://github.com/hence-io/slush-hence/issues"
   },
   "main": "slushfile.js",
   "engines": {
