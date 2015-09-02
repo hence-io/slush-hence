@@ -1,6 +1,6 @@
 # Hence Component Stack
 
->
+---
 
 ## About
 Hence is a shift in modern development methodology, focused intently on build web components at it's core utilizing
@@ -59,7 +59,7 @@ What's under the hood? Hence leverages up and coming tech supported by a solid f
   * Karma Unit Testing
   * JS Doc Generation
 
->
+---
 
 ## Getting Started
 ### Installation
