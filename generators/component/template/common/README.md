@@ -1,7 +1,7 @@
 # Hence.io Component Framework
 ## <%= compName %>
 
->
+---
 
 <%= compDescription %>
 
@@ -9,7 +9,9 @@
 
 Add this component to your polymer project with:
 
-    <link rel="import" href="bower_components/<%= compName %>/<%= compName %>.html" >
+```html
+<link rel="import" href="bower_components/<%= compName %>/<%= compName %>.html" >
+```
 
 # Development
 
@@ -19,11 +21,15 @@ All development takes place leveraging the files in the /src & /test folders.
 
 Element dependencies are managed via NPM & [Bower](http://bower.io/). You must have bower installed first:
 
-    npm install -g bower
+```bash
+npm install -g bower
+```
 
 Then, go ahead and conveniently install the element's dependencies:
 
-    npm run install-deps
+```bash
+npm run install-deps
+```
 
 ## Available Gulp Commands
 
