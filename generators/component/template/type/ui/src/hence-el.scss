@@ -54,6 +54,14 @@ Styleguide 2.1
   $ms-ratio: $minor-second; // define the modular-scale for this component; DO NO REMOVE, you've been warned. (¬_¬)ﾉ
 }
 
+%fullWidthContainer {
+  @include clearfix;
+  @include container(97%);
+  @include span(1 of 1);
+  font-size: ms(.25);
+  padding: ms(.25);
+}
+
 /***************************
 Typography
 

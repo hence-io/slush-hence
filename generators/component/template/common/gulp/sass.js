@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import gulp from 'gulp';
+import util from 'gulp-util';
 import plumber from 'gulp-plumber';
 import autoprefixer from 'gulp-autoprefixer';
 import rename from 'gulp-rename';
@@ -12,10 +13,6 @@ import compass from 'gulp-compass';<% } %>
 import sourcemaps from 'gulp-sourcemaps';
 import minifyCss from 'gulp-minify-css';
 import gulpif from 'gulp-if';
-
-// Fall back include
-import browserSyncConstructor from 'browser-sync';
-let browserSync = browserSyncConstructor.create();
 <% if(cssProcessor === 'libSass') { %>
 let styleOptions = {
   errLogToConsole: true,
@@ -48,7 +45,7 @@ let sassCompilation = function (opts) {
     replace: false,
     concat: false,
     bypassSourcemap: false,
-    browserSync: browserSync // fall back to prevent issues with live injection
+    browserSync: {stream: util.noop} // fall back to prevent issues with live injection
   });
 
   // Compile SASS with sourcemaps + livereload.
