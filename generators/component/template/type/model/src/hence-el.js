@@ -2,7 +2,7 @@
 /**
  * @module <%= compName %>
  */
-import console from 'consoler';
+
 import Hence from 'hence-component-framework';
 import _each from 'lodash/collection/each';
 

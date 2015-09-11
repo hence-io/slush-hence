@@ -38,7 +38,7 @@ gulp.task('serve', ['clean-tmp', 'js', 'sass', 'html'], function () {
 });
 
 gulp.task('sass-watch', ['sass']);
-gulp.task('js-watch', ['lintjs', 'js'], function () {
+gulp.task('js-watch', ['js'], function () {
   return browserSync.reload();
 });
 gulp.task('html-watch', ['html'], htmlInjector);

@@ -31,7 +31,6 @@
       "vinyl-source-stream": "^1.1.0"
     },
     "dependencies": {
-      "consoler": "blitzcodes/consoler",
       "hence-component-framework": "hence-io/hence-component-framework",
       "doc-ready": "^1.0.3",
       "lodash": "^3.10.0",

@@ -26,7 +26,8 @@ let jsCompilation = function (opts) {
     dist: false,
     sourcemap: true,
     browserify: {
-      debug: true
+      debug: true,
+      standalone: global.comp.camel
     }
   });
 
