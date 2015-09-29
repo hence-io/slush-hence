@@ -14,7 +14,16 @@ let htmlCompile = function (opts) {
 
   // Build HTML for distribution.
   gulp.task(taskName, ()=> {
-    gulp.src(global.paths.src + global.comp.html)
+    gulp.src([
+      `${global.paths.src}*.html`,
+      `!${global.paths.src}${global.comp.html}`,
+      `!${global.paths.src}index.html`
+    ])
+      .pipe(plumber())
+      .pipe(gulpif(dist, replace('/bower_components', '../..')))
+      .pipe(gulp.dest(dest));
+
+    gulp.src(`${global.paths.src}${global.comp.html}`)
       .pipe(plumber())
       .pipe(replace('</dom-module>',
         `<link rel="import" type="css" href="css/${global.comp.name}.css\">
@@ -25,7 +34,7 @@ let htmlCompile = function (opts) {
       .pipe(gulpif(dist, replace(global.comp.name + '.css', global.comp.name + '.min.css')))
       .pipe(gulp.dest(dest));
 
-    gulp.src([global.paths.src + 'index.html'])
+    gulp.src(`${global.paths.src}index.html`)
       .pipe(plumber())
       .pipe(gulpif(dist, replace('webcomponents-lite.js', 'webcomponents-lite.min.js')))
       .pipe(gulpif(dist, replace('/bower_components', '../..')))
