@@ -4,12 +4,14 @@ import fs from 'fs';
 import util from 'gulp-util';
 import {execSync} from 'child_process';
 
+let oldVersion = '';
 let version = util.env.version;
 
 let updateConfig = (file, done)=> {
   let data = fs.readFileSync(`./${file}.json`, 'utf8');
 
   var config = JSON.parse(data);
+  oldVersion = config.version;
   config.version = version;
   var string = JSON.stringify(config, null, '\t');
 
@@ -30,7 +32,9 @@ gulp.task('deploy', ['build'], function (done) {
 
   setTimeout(()=> {
     console.log(`version updated to ${version}. Committing and tagging now...`);
-    execSync(`git status && git add --all && git status && git commit -m "- version bump" && git tag v${version} && git push && git push --tags`, {stdio: 'inherit'});
+    execSync(`git status && git add --all && git status`, {stdio: 'inherit'});
+    execSync(`git commit -m "v${oldVersion}->v${version}"`, {stdio: 'inherit'});
+    execSync(`git tag v${version} && git push && git push --tags`, {stdio: 'inherit'});
 
     done();
   }, 1000);
