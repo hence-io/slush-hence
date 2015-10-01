@@ -20,8 +20,7 @@ let updateConfig = (file, done)=> {
   console.log(`updated ${file} to ${version}`);
 };
 
-gulp.task('deploy', ['build'], (done)=> {
-  updateConfig('bower');
+gulp.task('deploy', (done)=> {
   updateConfig('package');
 
   setTimeout(()=> {
