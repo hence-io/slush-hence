@@ -16,6 +16,7 @@ var steps = [
   require('./scaffold/step-complete')
 ];
 var installOptions = steps[0].options.installOptions;
+var compTypes = steps[1].options.compTypes;
 
 var scaffold = inquisitor.Scaffold({
   // The step order isn't locked down, it can be swapped out as long as higher steps don't require answers from lower
@@ -53,17 +54,18 @@ var scaffold = inquisitor.Scaffold({
   },
   cliArg: function (arg) {
     var splitName = arg.split(':');
+    var compType = splitName[1] || compTypes.ui;
 
     return {
       content: {
         intro: inquisitor.ascii.heading('Component Installation') +
         inquisitor.colors.bold(' Name: ') + this.defaults.compPrefix + '-' + splitName[0] +
-        inquisitor.colors.bold('\n Type: ') + splitName[1],
+        inquisitor.colors.bold('\n Type: ') + compType,
         done: inquisitor.ascii.spacer()
       },
       defaults: {
         compName: splitName[0],
-        compType: splitName[1]
+        compType: compType
       }
     };
   },
