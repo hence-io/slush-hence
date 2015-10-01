@@ -29,6 +29,7 @@ gulp.task('deploy', ['build'], (done)=> {
     execSync(`git status && git add --all && git status`, {stdio: 'inherit'});
     execSync(`git commit -m "v${oldVersion}->v${version}"`, {stdio: 'inherit'});
     execSync(`git tag v${version} && git push && git push --tags`, {stdio: 'inherit'});
+    execSync(`npm publish`, {stdio: 'inherit'});
 
     done();
   }, 1000);
